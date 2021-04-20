@@ -33,7 +33,7 @@ export class ExportService {
     }
     const separator = ',';
     const keys = Object.keys(rows[0]).filter(k => {
-      if (columns?.length) {
+      if (columns ? (columns.length > 0) : false) {
         return columns.includes(k);
       } else {
         return true;
