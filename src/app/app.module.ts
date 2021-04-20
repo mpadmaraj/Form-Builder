@@ -7,15 +7,19 @@ import { AppComponent } from './app.component';
 import { EditAppComponent } from './edit-app/edit-app.component';
 import { DndModule } from 'ngx-drag-drop';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { PageConfigComponent } from './page-config/page-config.component';
+import { AllPageConfigsComponent } from './all-page-configs/all-page-configs.component';
 
 const appRoutes: Routes = [
-  { path: '', component: EditAppComponent },
+  { path: '', component: PageConfigComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditAppComponent
+    EditAppComponent,
+    PageConfigComponent,
+    AllPageConfigsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

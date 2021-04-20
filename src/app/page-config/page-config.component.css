@@ -1,0 +1,10 @@
+.page-config-component {
+  width: 100%;
+}
+
+.draggable-elements {
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-around;
+  align-content: flex-start;
+}

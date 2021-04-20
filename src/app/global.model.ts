@@ -1,4 +1,5 @@
 export class field{
+  notes?:any;
   _id?:any;
   name?:any;
   type?:any;
