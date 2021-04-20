@@ -7,7 +7,7 @@
     <div class="col-6">
       <label for="">Page Type</label>
       <select class="form-control" [(ngModel)]="model.pageType">
-        <option value="opt" *ngFor="let opt of pageTypes">{{opt}}</option>
+        <option [value]="opt" *ngFor="let opt of pageTypes">{{opt}}</option>
       </select>
     </div>
   </div>
@@ -353,13 +353,22 @@
             <label>Regex</label>
             <input class="form-control" type="text" [(ngModel)]="item2.regex" />
           </div>
-          <div *ngIf="item2.regex" class="form-group">
+          <div class="form-group" *ngIf=" item2.type !== 'paragraph' ">
+            <label>API Name</label>
+            <select class="form-control" *ngIf="model.pageType === 'Custom'" [(ngModel)]="item2.apiName">
+              <option [value]="field.APIName" *ngFor="let field of applicationFields">{{field.FieldLabel}} ({{field.Type}})</option>
+            </select>
+            <select class="form-control" *ngIf="model.pageType === 'List' " [(ngModel)]="item2.apiName">
+              <option [value]="field.APIName" *ngFor="let field of listFields">{{field.FieldLabel}} ({{field.Type}})</option>
+            </select>
+          </div>
+          <!-- <div *ngIf="item2.regex" class="form-group">
             <label>Error text</label>
             <input class="form-control" type="text" [(ngModel)]="item2.errorText" />
-          </div>
+          </div> -->
   
           <!-- number -->
-          <div *ngIf="item2.type=='number'" class="row">
+          <!-- <div *ngIf="item2.type=='number'" class="row">
             <div class="col-6">
               <div class="form-group">
                 <label>Min</label>
@@ -372,10 +381,10 @@
                 <input class="form-control" type="text" [(ngModel)]="item2.max" />
               </div>
             </div>
-          </div>
+          </div> -->
   
           <!-- radio || checkbox || autocomplete -->
-          <div *ngIf="item2.type=='radio'|| item2.type=='checkbox' || item2.type=='autocomplete'">
+          <!-- <div *ngIf="item2.type=='radio'|| item2.type=='checkbox' || item2.type=='autocomplete'">
             <div class="row">
               <div class="col-5">
                 <div class="form-group">
@@ -427,11 +436,8 @@
                 </div>
               </div>
             </div>
-          </div>
-  
-  
-  
-  
+          </div> -->
+
         </div>
       </div>
       <!--optional placeholder element for dropzone-->
@@ -443,4 +449,6 @@
   </div>
 </div>
 
-<button class="btn btn-primary" (click)="savePage(model)">Save this page</button>
+<div class="mt-2">
+  <button class="btn btn-primary" (click)="savePage(model)">Save this page</button>
+</div>

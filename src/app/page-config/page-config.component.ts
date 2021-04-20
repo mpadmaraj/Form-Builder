@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { field, value } from '../global.model';
 import swal from 'sweetalert2';
+import {DataStoreService} from '../data-store.service';
+import { studentOnlineApplicationFields, studentOnlineApplicationListFields } from '../../environments/environment';
 
 @Component({
   selector: 'app-page-config',
@@ -10,6 +12,8 @@ import swal from 'sweetalert2';
 })
 export class PageConfigComponent implements OnInit {
 
+  applicationFields = studentOnlineApplicationFields;
+  listFields = studentOnlineApplicationListFields;
   value:value={
     label:"",
     value:""
@@ -18,6 +22,7 @@ export class PageConfigComponent implements OnInit {
 
   fieldModels:Array<field>=[
     {
+      "apiName": "",
       "notes": "",
       "type": "text",
       "icon": "fa-font",
@@ -30,6 +35,7 @@ export class PageConfigComponent implements OnInit {
       "handle":true
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "email",
       "icon": "fa-envelope",
@@ -44,6 +50,7 @@ export class PageConfigComponent implements OnInit {
       "handle":true
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "phone",
       "icon": "fa-phone",
@@ -57,6 +64,7 @@ export class PageConfigComponent implements OnInit {
       "handle":true
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "number",
       "label": "Number",
@@ -69,6 +77,7 @@ export class PageConfigComponent implements OnInit {
       "max": 90
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "date",
       "icon":"fa-calendar",
@@ -77,12 +86,14 @@ export class PageConfigComponent implements OnInit {
       "className": "form-control"
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "textarea",
       "icon":"fa-text-width",
       "label": "Textarea" 
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "paragraph",
       "icon": "fa-paragraph",
@@ -90,6 +101,7 @@ export class PageConfigComponent implements OnInit {
       "placeholder": "Type your text to display here only" 
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "checkbox",
       "required": true,
@@ -109,6 +121,7 @@ export class PageConfigComponent implements OnInit {
       ]
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "radio",
       "icon":"fa-list-ul",
@@ -126,6 +139,7 @@ export class PageConfigComponent implements OnInit {
       ]
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "autocomplete",
       "icon":"fa-bars",
@@ -149,6 +163,7 @@ export class PageConfigComponent implements OnInit {
       ]
     },
     {
+      "apiName": "",
       "notes": "",
       "type": "file",
       "icon":"fa-file",
@@ -177,7 +192,7 @@ export class PageConfigComponent implements OnInit {
     'References'
   ]
 
-  constructor() { }
+  constructor(private dataStoreService: DataStoreService) { }
 
   ngOnInit() {
   }
@@ -254,14 +269,29 @@ export class PageConfigComponent implements OnInit {
     pageConfig.pageOrder = page.pageOrder;
     pageConfig.minTime = page.minTime;
     pageConfig.maxTime = page.maxTime;
+    this.dataStoreService.addToPageCongifgs(pageConfig);
 
-    let fieldConfigs:any = [];
     let fieldConfig:any = {};
     page.leftPanel.forEach(element => {
       fieldConfig.name = element.name;
       fieldConfig.label = element.label;
       fieldConfig.regex = element.regex;
       fieldConfig.notes = element.notes;
+      fieldConfig.apiName = element.apiName;
+      fieldConfig.displayOrder = 'Left Panel';
+      this.dataStoreService.addToFieldCongifgs(fieldConfig);
+      fieldConfig = {};
+    });
+
+    page.rightPanel.forEach(element => {
+      fieldConfig.name = element.name;
+      fieldConfig.label = element.label;
+      fieldConfig.regex = element.regex;
+      fieldConfig.notes = element.notes;
+      fieldConfig.apiName = element.apiName;
+      fieldConfig.displayOrder = 'Right Panel';
+      this.dataStoreService.addToFieldCongifgs(fieldConfig);
+      fieldConfig = {};
     });
   }
 }

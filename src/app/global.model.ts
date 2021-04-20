@@ -19,6 +19,7 @@ export class field{
   inline?:any;
   value?:any;
   values?:Array<value>;
+  apiName?:any;
 }
 
 export class value{
