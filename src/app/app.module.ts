@@ -11,7 +11,7 @@ import { PageConfigComponent } from './page-config/page-config.component';
 import { AllPageConfigsComponent } from './all-page-configs/all-page-configs.component';
 
 const appRoutes: Routes = [
-  { path: '', component: PageConfigComponent },
+  { path: '', component: AllPageConfigsComponent },
 ];
 
 @NgModule({
