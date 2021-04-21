@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-6" >
       <label for="">Page Name</label>
-      <input class="form-control" type="text" [(ngModel)]="model.name" />
+      <input class="form-control" type="text" [(ngModel)]="model.name" (ngModelChange)="updatePageName(model.name)"/>
     </div>
     <div class="col-6">
       <label for="">Page Type</label>
@@ -52,9 +52,6 @@
         <div class="row form-group">
           <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
           <div class="col-7">
-            <!-- <i [ngClass]="item.icon" class="fa pull-left"></i>
-          <h5>{{item.label}}
-          <span *ngIf="item.required" class="red">*</span></h5> -->
             <div *ngIf="item.type=='text'">
               <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
               <input type="text" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}">
@@ -153,13 +150,13 @@
             <label>Regex</label>
             <input class="form-control" type="text" [(ngModel)]="item.regex" />
           </div>
-          <div *ngIf="item.regex" class="form-group">
+          <!-- <div *ngIf="item.regex" class="form-group">
             <label>Error text</label>
             <input class="form-control" type="text" [(ngModel)]="item.errorText" />
-          </div>
+          </div> -->
   
           <!-- number -->
-          <div *ngIf="item.type=='number'" class="row">
+          <!-- <div *ngIf="item.type=='number'" class="row">
             <div class="col-6">
               <div class="form-group">
                 <label>Min</label>
@@ -172,10 +169,10 @@
                 <input class="form-control" type="text" [(ngModel)]="item.max" />
               </div>
             </div>
-          </div>
+          </div> -->
   
           <!-- radio || checkbox || autocomplete -->
-          <div *ngIf="item.type=='radio'|| item.type=='checkbox' || item.type=='autocomplete'">
+          <!-- <div *ngIf="item.type=='radio'|| item.type=='checkbox' || item.type=='autocomplete'">
             <div class="row">
               <div class="col-5">
                 <div class="form-group">
@@ -227,7 +224,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
   
   
   
@@ -246,16 +243,13 @@
     <section [dndDropzone]="['right-panel']" (dndDragover)="onDragover($event)" (dndDrop)="onDrop($event,model.rightPanel)"
       class="dndDropArea" [ngClass]="{'empty':model.rightPanel.length == 0}">
   
-      <div class="field" *ngFor="let item2 of model.rightPanel;let i= index;" (dndStart)="onDragStart($event)"
+      <div class="field" *ngFor="let item2 of model.rightPanel;let i= index;let itemIndex=index;" (dndStart)="onDragStart($event)"
         (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(item2, model.rightPanel, 'move')"
         [dndEffectAllowed]="'all'" [dndDraggable]="item2">
-        <div class="row form-group">
+        <div class="row form-group" [ngClass]="item2.className">
           <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
           <div class="col-7">
-            <!-- <i [ngClass]="item2.icon" class="fa pull-left"></i>
-          <h5>{{item2.label}}
-          <span *ngIf="item2.required" class="red">*</span></h5> -->
-            <div *ngIf="item2.type=='text'">
+            <div *ngIf="item2.type=='text'" >
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
               <input type="text" class="form-control" id="{{item2.name}}" placeholder="{{item2.placeholder}}">
             </div>
@@ -293,6 +287,9 @@
             </div>
             <div *ngIf="item2.type=='paragraph'">
               <p class="form-text">{{item2.placeholder}}</p>
+            </div>
+            <div *ngIf="item2.type=='header'">
+              <h4><p class="form-text">{{item2.label}}</p></h4>
             </div>
             <div *ngIf="item2.type=='autocomplete'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
@@ -345,21 +342,31 @@
             <label>Name</label>
             <input class="form-control" type="text" [(ngModel)]="item2.name" />
           </div>
-          <div class="form-group">
+          <div class="form-group" *ngIf=" item2.type !== 'header' ">
             <label>Placeholder</label>
             <input class="form-control" type="text" [(ngModel)]="item2.placeholder" />
           </div>
-          <div class="form-group">
+          <div class="form-group" *ngIf=" item2.type !== 'header' ">
             <label>Regex</label>
             <input class="form-control" type="text" [(ngModel)]="item2.regex" />
           </div>
-          <div class="form-group" *ngIf=" item2.type !== 'paragraph' ">
+          <div class="form-group">
+            <label>Notes</label>
+            <input class="form-control" type="text" [(ngModel)]="item2.notes" />
+          </div>
+          <div class="form-group" *ngIf=" item2.type !== 'paragraph' && item2.type !== 'header' && item2.type !== 'file' ">
             <label>API Name</label>
-            <select class="form-control" *ngIf="model.pageType === 'Custom'" [(ngModel)]="item2.apiName">
+            <select class="form-control" *ngIf="model.pageType === 'Custom'" [(ngModel)]="item2.apiName" (ngModelChange)="mandatoryUpdated(itemIndex)">
               <option [value]="field.APIName" *ngFor="let field of applicationFields">{{field.FieldLabel}} ({{field.Type}})</option>
             </select>
-            <select class="form-control" *ngIf="model.pageType === 'List' " [(ngModel)]="item2.apiName">
+            <select class="form-control" *ngIf="model.pageType === 'List' " [(ngModel)]="item2.apiName" (ngModelChange)="mandatoryUpdated(itemIndex)">
               <option [value]="field.APIName" *ngFor="let field of listFields">{{field.FieldLabel}} ({{field.Type}})</option>
+            </select>
+          </div>
+          <div class="form-group" *ngIf=" item2.type === 'header' ">
+            <label>Heading Type</label>
+            <select class="form-control" [(ngModel)]="item2.headingType" (ngModelChange)="mandatoryUpdated(itemIndex)">
+              <option [value]="field" *ngFor="let field of headingTypes">{{field}}</option>
             </select>
           </div>
           <!-- <div *ngIf="item2.regex" class="form-group">
@@ -450,5 +457,5 @@
 </div>
 
 <div class="mt-2">
-  <button class="btn btn-primary" (click)="savePage(model)">Save this page</button>
+  <button class="btn btn-primary" (click)="savePage(model)" [disabled]="!enableSaveButton">Save this page</button>
 </div>

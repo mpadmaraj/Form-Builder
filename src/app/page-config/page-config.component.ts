@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { field, value } from '../global.model';
 import swal from 'sweetalert2';
@@ -11,6 +11,8 @@ import { studentOnlineApplicationFields, studentOnlineApplicationListFields } fr
   styleUrls: ['./page-config.component.css']
 })
 export class PageConfigComponent implements OnInit {
+
+  @Output() pageNameChangeEvent = new EventEmitter<string>();
 
   applicationFields = studentOnlineApplicationFields;
   listFields = studentOnlineApplicationListFields;
@@ -29,21 +31,20 @@ export class PageConfigComponent implements OnInit {
       "label": "Text",
       "description": "Enter your name",
       "placeholder": "Enter your name",
-      "className": "form-control",
+      "className": "red-border",
       "subtype": "text",
       "regex" : "",
-      "handle":true
+      "handle":true,
     },
     {
       "apiName": "",
       "notes": "",
       "type": "email",
       "icon": "fa-envelope",
-      "required": true,
       "label": "Email",
       "description": "Enter your email",
       "placeholder": "Enter your email",
-      "className": "form-control",
+      "className": "red-border",
       "subtype": "text",
       "regex" : "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)\.([a-zA-Z]{2,5})$",
       "errorText": "Please enter a valid email",
@@ -57,7 +58,7 @@ export class PageConfigComponent implements OnInit {
       "label": "Phone",
       "description": "Enter your phone",
       "placeholder": "Enter your phone",
-      "className": "form-control",
+      "className": "red-border",
       "subtype": "text",
       "regex" : "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$",
       "errorText": "Please enter a valid phone number",
@@ -71,7 +72,7 @@ export class PageConfigComponent implements OnInit {
       "icon": "fa-html5",
       "description": "Age",
       "placeholder": "Enter your age",
-      "className": "form-control",
+      "className": "red-border",
       "value": "20",
       "min": 12,
       "max": 90
@@ -83,15 +84,15 @@ export class PageConfigComponent implements OnInit {
       "icon":"fa-calendar",
       "label": "Date",
       "placeholder": "Date",
-      "className": "form-control"
+      "className": "red-border"
     },
-    {
-      "apiName": "",
-      "notes": "",
-      "type": "textarea",
-      "icon":"fa-text-width",
-      "label": "Textarea" 
-    },
+    // {
+    //   "apiName": "",
+    //   "notes": "",
+    //   "type": "textarea",
+    //   "icon":"fa-text-width",
+    //   "label": "Textarea" 
+    // },
     {
       "apiName": "",
       "notes": "",
@@ -104,19 +105,15 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "checkbox",
-      "required": true,
       "label": "Checkbox",
       "icon":"fa-list",
       "description": "Checkbox",
       "inline": true,
+      "className": "red-border",
       "values": [
         {
-          "label": "Option 1",
-          "value": "option-1"
-        },
-        {
-          "label": "Option 2",
-          "value": "option-2"
+          "label": "Option",
+          "value": "option"
         }
       ]
     },
@@ -126,6 +123,7 @@ export class PageConfigComponent implements OnInit {
       "type": "radio",
       "icon":"fa-list-ul",
       "label": "Radio",
+      "className": "red-border",
       "description": "Radio boxes",
       "values": [
         {
@@ -146,7 +144,7 @@ export class PageConfigComponent implements OnInit {
       "label": "Select",
       "description": "Select",
       "placeholder": "Select",
-      "className": "form-control",
+      "className": "red-border",
       "values": [
         {
           "label": "Option 1",
@@ -168,8 +166,15 @@ export class PageConfigComponent implements OnInit {
       "type": "file",
       "icon":"fa-file",
       "label": "File Upload",
-      "className": "form-control",
       "subtype": "file"
+    },
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "header",
+      "icon":"fa-header",
+      "label": "Header",
+      "className": "red-border"
     }
   ];
 
@@ -190,7 +195,11 @@ export class PageConfigComponent implements OnInit {
     'List',
     'Statement',
     'References'
-  ]
+  ];
+
+  headingTypes = ['H1','H2','H3','H4','H5','H6'];
+
+  enableSaveButton = false;
 
   constructor(private dataStoreService: DataStoreService) { }
 
@@ -289,9 +298,32 @@ export class PageConfigComponent implements OnInit {
       fieldConfig.regex = element.regex;
       fieldConfig.notes = element.notes;
       fieldConfig.apiName = element.apiName;
+      fieldConfig.headingType = element.headingType;
       fieldConfig.displayOrder = 'Right Panel';
       this.dataStoreService.addToFieldCongifgs(fieldConfig);
       fieldConfig = {};
     });
   }
+
+  updatePageName (name) {
+    this.pageNameChangeEvent.emit(name);
+  }
+
+  mandatoryUpdated (i) {
+    let count = 0;
+    this.model.rightPanel.forEach((element, index) => {
+      if (index === i) {
+        element.className = 'green-border';
+      }
+
+      if (element.className === 'green-border') {
+        count ++;
+      }
+    });
+
+    if (count === this.model.rightPanel.length) {
+      this.enableSaveButton = true;
+    }
+  }
+
 }
