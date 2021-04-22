@@ -21,6 +21,7 @@ export class PageConfigComponent implements OnInit {
     value:""
   };
   success = false;
+  showPreview = false;
 
   fieldModels:Array<field>=[
     {
@@ -30,7 +31,6 @@ export class PageConfigComponent implements OnInit {
       "icon": "fa-font",
       "label": "Text",
       "description": "Enter your name",
-      "placeholder": "Enter your name",
       "className": "red-border",
       "subtype": "text",
       "regex" : "",
@@ -43,7 +43,6 @@ export class PageConfigComponent implements OnInit {
       "icon": "fa-envelope",
       "label": "Email",
       "description": "Enter your email",
-      "placeholder": "Enter your email",
       "className": "red-border",
       "subtype": "text",
       "regex" : "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)\.([a-zA-Z]{2,5})$",
@@ -57,7 +56,6 @@ export class PageConfigComponent implements OnInit {
       "icon": "fa-phone",
       "label": "Phone",
       "description": "Enter your phone",
-      "placeholder": "Enter your phone",
       "className": "red-border",
       "subtype": "text",
       "regex" : "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$",
@@ -71,7 +69,6 @@ export class PageConfigComponent implements OnInit {
       "label": "Number",
       "icon": "fa-html5",
       "description": "Age",
-      "placeholder": "Enter your age",
       "className": "red-border",
       "value": "20",
       "min": 12,
@@ -83,7 +80,6 @@ export class PageConfigComponent implements OnInit {
       "type": "date",
       "icon":"fa-calendar",
       "label": "Date",
-      "placeholder": "Date",
       "className": "red-border"
     },
     // {
@@ -99,7 +95,7 @@ export class PageConfigComponent implements OnInit {
       "type": "paragraph",
       "icon": "fa-paragraph",
       "label": "Paragraph",
-      "placeholder": "Type your text to display here only" 
+      "description": "Type your text to display here only" 
     },
     {
       "apiName": "",
@@ -143,7 +139,6 @@ export class PageConfigComponent implements OnInit {
       "icon":"fa-bars",
       "label": "Select",
       "description": "Select",
-      "placeholder": "Select",
       "className": "red-border",
       "values": [
         {
@@ -186,6 +181,7 @@ export class PageConfigComponent implements OnInit {
     pageOrder: '',
     minTime: '',
     maxTime: '',
+    minMaxTimeUnit: '',
     leftPanel: this.leftPanelModelFields,
     rightPanel: this.rightPanelModelFields
   };
@@ -195,6 +191,13 @@ export class PageConfigComponent implements OnInit {
     'List',
     'Statement',
     'References'
+  ];
+
+  timeUnits = [
+    'Seconds',
+    'Minutes',
+    'Hours',
+    'Days'
   ];
 
   headingTypes = ['H1','H2','H3','H4','H5','H6'];
@@ -282,8 +285,8 @@ export class PageConfigComponent implements OnInit {
 
     let fieldConfig:any = {};
     page.leftPanel.forEach(element => {
-      fieldConfig.name = element.name;
-      fieldConfig.label = element.label;
+      fieldConfig.name = element.label;
+      fieldConfig.description = element.description;
       fieldConfig.regex = element.regex;
       fieldConfig.notes = element.notes;
       fieldConfig.apiName = element.apiName;
@@ -324,6 +327,14 @@ export class PageConfigComponent implements OnInit {
     if (count === this.model.rightPanel.length) {
       this.enableSaveButton = true;
     }
+  }
+
+  preview () {
+    this.showPreview = true;
+  }
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
   }
 
 }
