@@ -95,6 +95,7 @@ export class PageConfigComponent implements OnInit {
       "type": "paragraph",
       "icon": "fa-paragraph",
       "label": "Paragraph",
+      "className": "green-border",
       "description": "Type your text to display here only" 
     },
     {
@@ -161,7 +162,8 @@ export class PageConfigComponent implements OnInit {
       "type": "file",
       "icon":"fa-file",
       "label": "File Upload",
-      "subtype": "file"
+      "subtype": "file",
+      "className": "green-border"
     },
     {
       "apiName": "",
@@ -281,6 +283,7 @@ export class PageConfigComponent implements OnInit {
     pageConfig.pageOrder = page.pageOrder;
     pageConfig.minTime = page.minTime;
     pageConfig.maxTime = page.maxTime;
+    pageConfig.minMaxTimeUnit = page.minMaxTimeUnit;
     this.dataStoreService.addToPageCongifgs(pageConfig);
 
     let fieldConfig:any = {};
@@ -291,13 +294,14 @@ export class PageConfigComponent implements OnInit {
       fieldConfig.notes = element.notes;
       fieldConfig.apiName = element.apiName;
       fieldConfig.displayOrder = 'Left Panel';
+      fieldConfig.pageName = page.name;
       this.dataStoreService.addToFieldCongifgs(fieldConfig);
       fieldConfig = {};
     });
 
     page.rightPanel.forEach(element => {
-      fieldConfig.name = element.name;
-      fieldConfig.label = element.label;
+      fieldConfig.pageName = page.name;
+      fieldConfig.name = element.label;
       fieldConfig.regex = element.regex;
       fieldConfig.notes = element.notes;
       fieldConfig.apiName = element.apiName;
