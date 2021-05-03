@@ -146,6 +146,12 @@
             <input class="form-control" type="text" [(ngModel)]="item.description" />
           </div>
           <div class="form-group">
+            <label>Left Panel Styles</label>
+            <select class="form-control" [(ngModel)]="item.leftPanelStyles">
+              <option [value]="opt" *ngFor="let opt of leftPanelStyles">{{opt}}</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label>Regex</label>
             <input class="form-control" type="text" [(ngModel)]="item.regex" />
           </div>
@@ -267,13 +273,13 @@
               <span class="red font-weight-bold">*</span>
             </label>
             <select class="form-control" *ngIf="model.pageType === 'Custom'" [(ngModel)]="item2.apiName"
-              (ngModelChange)="mandatoryUpdated(itemIndex)">
-              <option [value]="field.APIName" *ngFor="let field of applicationFields">{{field.FieldLabel}}
+              (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
+              <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.used" >{{field.FieldLabel}}
                 ({{field.Type}})</option>
             </select>
             <select class="form-control" *ngIf="model.pageType === 'List' " [(ngModel)]="item2.apiName"
-              (ngModelChange)="mandatoryUpdated(itemIndex)">
-              <option [value]="field.APIName" *ngFor="let field of listFields">{{field.FieldLabel}} ({{field.Type}})
+              (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
+              <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.used">{{field.FieldLabel}} ({{field.Type}})
               </option>
             </select>
           </div>
@@ -312,6 +318,11 @@
   <button class="btn btn-primary pull-right" (click)="preview();scroll(previewPage);" [disabled]="!enableSaveButton">Preview this page</button>
 </div>
 
+<pre>
+  {{model | json}}
+</pre>
+
+<!-- Preview starts from here -->
 <div #previewPage style="margin-top: 1000px;">
   <div class="row" style="padding:30px;min-height:500px;">
     <div class="col-11" style="background-color: black;color:white;padding:5px 5px;height:50px;">

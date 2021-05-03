@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { studentOnlineApplicationFields, studentOnlineApplicationListFields } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ export class DataStoreService {
 
   allPageConfigs:any = [];
   allFieldConfigs:any = [];
+  soaFields = JSON.parse(JSON.stringify(studentOnlineApplicationFields));
+  listFields = JSON.parse(JSON.stringify(studentOnlineApplicationListFields));
 
   constructor() { }
 
@@ -25,4 +28,11 @@ export class DataStoreService {
   getPageConfigs () {
     return this.allPageConfigs;
   }
+
+  // updateAPINames (name, apiName, pageType) {
+  //   if (pageType === 'Custom') {
+  //     this.soaFields
+  //   }
+  // }
+
 }

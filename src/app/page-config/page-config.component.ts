@@ -3,7 +3,7 @@ import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { field, value } from '../global.model';
 import swal from 'sweetalert2';
 import {DataStoreService} from '../data-store.service';
-import { studentOnlineApplicationFields, studentOnlineApplicationListFields } from '../../environments/environment';
+import { StaticPagesService } from '../static-pages.service';
 
 @Component({
   selector: 'app-page-config',
@@ -14,8 +14,6 @@ export class PageConfigComponent implements OnInit {
 
   @Output() pageNameChangeEvent = new EventEmitter<string>();
 
-  applicationFields = studentOnlineApplicationFields;
-  listFields = studentOnlineApplicationListFields;
   value:value={
     label:"",
     value:""
@@ -203,12 +201,16 @@ export class PageConfigComponent implements OnInit {
   ];
 
   headingTypes = ['H1','H2','H3','H4','H5','H6'];
+  leftPanelStyles = ['Left-Panel-Desc-Large', 'Left-Panel-Desc-Large', 'Left-Panel-Desc-Large'];
 
   enableSaveButton = false;
 
-  constructor(private dataStoreService: DataStoreService) { }
-
+  constructor(private dataStoreService: DataStoreService, private staticPagesService: StaticPagesService) { }
+  applicationFields = this.dataStoreService.soaFields;
+  listFields = this.dataStoreService.listFields;
+  // model = this.staticPagesService.basicInfoPage;
   ngOnInit() {
+
   }
 
   onDragStart(event:DragEvent) {
@@ -295,6 +297,9 @@ export class PageConfigComponent implements OnInit {
       fieldConfig.apiName = element.apiName;
       fieldConfig.displayOrder = 'Left Panel';
       fieldConfig.pageName = page.name;
+      fieldConfig.leftPanelStyles = element.leftPanelStyles;
+      fieldConfig.Hide_on_Finalize = true;
+      fieldConfig.Do_not_show_on_PDF = true;
       this.dataStoreService.addToFieldCongifgs(fieldConfig);
       fieldConfig = {};
     });
@@ -316,7 +321,7 @@ export class PageConfigComponent implements OnInit {
     this.pageNameChangeEvent.emit(name);
   }
 
-  mandatoryUpdated (i) {
+  mandatoryUpdated (i, name, apiName) {
     let count = 0;
     this.model.rightPanel.forEach((element, index) => {
       if (index === i) {
@@ -331,6 +336,8 @@ export class PageConfigComponent implements OnInit {
     if (count === this.model.rightPanel.length) {
       this.enableSaveButton = true;
     }
+
+    // this.dataStoreService.updateAPINames(name, apiName, pageType);
   }
 
   preview () {
