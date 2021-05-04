@@ -31,7 +31,7 @@
   </ul>
 
   <div *ngFor="let page of allPages;let i=index" class="border-left border-right">
-    <app-page-config [hidden]="!page.show" (pageNameChangeEvent)="pageNameUpdated($event, i)"></app-page-config>
+    <app-page-config [hidden]="!page.show" (pageOrderUpdatedEvent)="pageOrderUpdated($event, i)" (pageNameChangeEvent)="pageNameUpdated($event, i)"></app-page-config>
   </div>
 
 </div>

@@ -62,6 +62,15 @@ export class AllPageConfigsComponent implements OnInit {
     });
   }
 
+  pageOrderUpdated (pageOrder, i) {
+    this.allPages.forEach((element, index) => {
+      if (index === i) {
+        element.pageOrder = parseInt(pageOrder);
+      }
+    });
+    this.allPages.sort(this.compare);
+  }
+
   /**
  * Saves the file on the client's machine via FileSaver library.
  *
@@ -111,4 +120,13 @@ export class AllPageConfigsComponent implements OnInit {
     this.saveAsFile(csvContent, `${fileName}.csv`, 'csv');
   }
 
+  compare( a, b ) {
+    if ( a.pageOrder < b.pageOrder ){
+      return -1;
+    }
+    if ( a.pageOrder > b.pageOrder ){
+      return 1;
+    }
+    return 0;
+  }
 }

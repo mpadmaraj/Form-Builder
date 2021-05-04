@@ -13,6 +13,7 @@ import { StaticPagesService } from '../static-pages.service';
 export class PageConfigComponent implements OnInit {
 
   @Output() pageNameChangeEvent = new EventEmitter<string>();
+  @Output() pageOrderUpdatedEvent = new EventEmitter<string>();
 
   value:value={
     label:"",
@@ -346,6 +347,10 @@ export class PageConfigComponent implements OnInit {
 
   scroll(el: HTMLElement) {
     el.scrollIntoView();
+  }
+
+  pageOrderUpdate (pageOrder) {
+    this.pageOrderUpdatedEvent.emit(pageOrder);
   }
 
 }

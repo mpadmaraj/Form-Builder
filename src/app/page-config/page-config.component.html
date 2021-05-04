@@ -12,7 +12,7 @@
     </div>
     <div class="col-4">
       <label for="">Page Order</label>
-      <input class="form-control" type="text" [(ngModel)]="model.pageOrder" />
+      <input class="form-control" type="text" [(ngModel)]="model.pageOrder" (focusout)="pageOrderUpdate(model.pageOrder)" />
     </div>
   </div>
   <div class="row mt-2">
@@ -38,7 +38,7 @@
   <div class="fields" *ngFor="let item of fieldModels">
     <div class="field pointer shadow-bg" [dndDraggable]="item" [dndEffectAllowed]="'copy'" (dndEnd)="onDragEnd($event)">
       <i [ngClass]="item.icon" class="fa pull-left"></i>
-      <h5>{{item.label}}</h5>
+      <h6>{{item.label}}</h6>
     </div>
   </div>
 </div>
@@ -48,7 +48,7 @@
     <!--a dropzone-->
     <!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
     <section [dndDropzone]="['left-panel']" (dndDragover)="onDragover($event)"
-      (dndDrop)="onDrop($event,model.leftPanel)" class="dndDropArea" [ngClass]="{'empty':model.leftPanel.length == 0}">
+      (dndDrop)="onDrop($event, model.leftPanel)" class="dndDropArea" [ngClass]="{'empty':model.leftPanel.length == 0}">
 
       <div class="field" *ngFor="let item of model.leftPanel;let i= index;" (dndStart)="onDragStart($event)"
         (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(item, model.leftPanel, 'move')"
@@ -167,7 +167,7 @@
     <!--a dropzone-->
     <!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
     <section [dndDropzone]="['right-panel']" (dndDragover)="onDragover($event)"
-      (dndDrop)="onDrop($event,model.rightPanel)" class="dndDropArea"
+      (dndDrop)="onDrop($event, model.rightPanel)" class="dndDropArea"
       [ngClass]="{'empty':model.rightPanel.length == 0}">
 
       <div class="field" *ngFor="let item2 of model.rightPanel;let i= index;let itemIndex=index;"
