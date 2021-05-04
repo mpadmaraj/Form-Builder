@@ -171,7 +171,62 @@ export class PageConfigComponent implements OnInit {
       "icon":"fa-header",
       "label": "Header",
       "className": "red-border"
-    }
+    },
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "2in1row",
+      "icon": "fa-font",
+      "label": "2in1row",
+      "description": "Enter your name",
+      "className": "red-border",
+      "subtype": "text",
+      "regex" : "",
+      "handle":true,
+      "subClassName": "col-6",
+      "subFields": [
+        {
+          label: 'Text',
+          apiName: '',
+          required: false
+        },
+        {
+          label: 'Text',
+          apiName: '',
+          required: false
+        }
+      ]
+    },
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "3in1row",
+      "icon": "fa-font",
+      "label": "3in1row",
+      "description": "Enter your name",
+      "className": "red-border",
+      "subClassName": "col-4",
+      "subtype": "text",
+      "regex" : "",
+      "handle":true,
+      "subFields": [
+        {
+          label: 'Text',
+          apiName: '',
+          required: false
+        },
+        {
+          label: 'Text',
+          apiName: '',
+          required: false
+        },
+        {
+          label: 'Text',
+          apiName: '',
+          required: false
+        }
+      ]
+    },
   ];
 
   leftPanelModelFields:Array<field>=[];
@@ -306,15 +361,29 @@ export class PageConfigComponent implements OnInit {
     });
 
     page.rightPanel.forEach(element => {
-      fieldConfig.pageName = page.name;
-      fieldConfig.name = element.label;
-      fieldConfig.regex = element.regex;
-      fieldConfig.notes = element.notes;
-      fieldConfig.apiName = element.apiName;
-      fieldConfig.headingType = element.headingType;
-      fieldConfig.displayOrder = 'Right Panel';
-      this.dataStoreService.addToFieldCongifgs(fieldConfig);
-      fieldConfig = {};
+      if ((element.type === '2in1row') || (element.type === '3in1row')) {
+        element.subFields.forEach(subElement => {
+          fieldConfig.pageName = page.name;
+          fieldConfig.name = subElement.label;
+          fieldConfig.notes = subElement.notes;
+          fieldConfig.apiName = subElement.apiName;
+          fieldConfig.displayOrder = 'Right Panel';
+          this.dataStoreService.addToFieldCongifgs(fieldConfig);
+          fieldConfig = {};
+        });
+      } else {
+        fieldConfig.pageName = page.name;
+        fieldConfig.order = element.order;
+        fieldConfig.columnOrder = element.columnOrder;
+        fieldConfig.name = element.label;
+        fieldConfig.regex = element.regex;
+        fieldConfig.notes = element.notes;
+        fieldConfig.apiName = element.apiName;
+        fieldConfig.headingType = element.headingType;
+        fieldConfig.displayOrder = 'Right Panel';
+        this.dataStoreService.addToFieldCongifgs(fieldConfig);
+        fieldConfig = {};
+      }
     });
   }
 

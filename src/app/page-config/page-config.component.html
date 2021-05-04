@@ -175,7 +175,15 @@
         (dndMoved)="onDragged(item2, model.rightPanel, 'move')" [dndEffectAllowed]="'all'" [dndDraggable]="item2">
         <div class="row form-group" [ngClass]="item2.className">
           <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
-          <div class="col-7">
+          <div class="col-8">
+            <div *ngIf="item2.type=='2in1row' || item2.type=='3in1row'">
+              <div class="row">
+                <div [ngClass]="item2.subClassName" *ngFor="let subField of item2.subFields">
+                  <label>{{subField.label}}</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+            </div>
             <div *ngIf="item2.type=='text'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
               <input type="text" class="form-control" id="{{item2.name}}">
@@ -249,58 +257,109 @@
                 id="{{item2.name}}">
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <i *ngIf="item2.toggle" (click)="item2.toggle=false" class="fa fa-chevron-up pull-right"></i>
             <i *ngIf="!item2.toggle" (click)="item2.toggle=true" class="fa fa-chevron-down pull-right"></i>
             <i (click)="removeField(i, 'rightPanel')" class="fa fa-trash pull-right"></i>
           </div>
         </div>
         <div *ngIf="item2.toggle" class="toggle-Wrapper">
-          <div class="form-group">
-            <label>Required</label>
-            <i *ngIf="item2.required" (click)="item2.required=false" class="fa fa-toggle-on red"></i>
-            <i *ngIf="!item2.required" (click)="item2.required=true" class="fa fa-toggle-off"></i>
-            <span class="pull-right ucfirst">{{item2.type}}</span>
+          <div *ngIf=" item2.type === '2in1row' || item2.type === '3in1row' ">
+            <div class="row">
+              <div [ngClass]="item2.subClassName" *ngFor="let subField of item2.subFields">
+                <div class="form-group">
+                  <label>Required</label>
+                  <i *ngIf="subField.required" (click)="subField.required=false" class="fa fa-toggle-on red"></i>
+                  <i *ngIf="!subField.required" (click)="subField.required=true" class="fa fa-toggle-off"></i>
+                  <span class="pull-right ucfirst">{{item2.type}}</span>
+                </div>
+                <div class="form-group">
+                  <label>Label</label>
+                  <input class="form-control" type="text" [(ngModel)]="subField.label" />
+                </div>
+                <div class="form-group">
+                  <label>
+                    API Name
+                    <span class="red font-weight-bold">*</span>
+                  </label>
+                  <select class="form-control" *ngIf="model.pageType === 'Custom'" [(ngModel)]="subField.apiName"
+                    (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
+                    <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.used" >{{field.FieldLabel}}
+                      ({{field.Type}})</option>
+                  </select>
+                  <select class="form-control" *ngIf="model.pageType === 'List' " [(ngModel)]="subField.apiName"
+                    (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
+                    <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.used">{{field.FieldLabel}} ({{field.Type}})
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Notes</label>
+                  <textarea class="form-control" [(ngModel)]="subField.notes" autocomplete="off">
+                  </textarea>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Label</label>
-            <input class="form-control" type="text" [(ngModel)]="item2.label" />
-          </div>
-          <div class="form-group"
-            *ngIf=" item2.type !== 'paragraph' && item2.type !== 'header' && item2.type !== 'file' ">
-            <label>
-              API Name
-              <span class="red font-weight-bold">*</span>
-            </label>
-            <select class="form-control" *ngIf="model.pageType === 'Custom'" [(ngModel)]="item2.apiName"
-              (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
-              <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.used" >{{field.FieldLabel}}
-                ({{field.Type}})</option>
-            </select>
-            <select class="form-control" *ngIf="model.pageType === 'List' " [(ngModel)]="item2.apiName"
-              (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
-              <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.used">{{field.FieldLabel}} ({{field.Type}})
-              </option>
-            </select>
-          </div>
-          <div class="form-group" *ngIf=" item2.type === 'header' ">
-            <label>Heading Type</label>
-            <select class="form-control" [(ngModel)]="item2.headingType" (ngModelChange)="mandatoryUpdated(itemIndex)">
-              <option [value]="field" *ngFor="let field of headingTypes">{{field}}</option>
-            </select>
-          </div>
-          <div class="form-group" *ngIf=" item2.type !== 'header' ">
-            <label>Description</label>
-            <input class="form-control" type="text" [(ngModel)]="item2.description" />
-          </div>
-          <div class="form-group" *ngIf=" item2.type !== 'header' ">
-            <label>Regex</label>
-            <input class="form-control" type="text" [(ngModel)]="item2.regex" />
-          </div>
-          <div class="form-group">
-            <label>Notes</label>
-            <textarea class="form-control" [(ngModel)]="item2.notes" autocomplete="off">
-          </textarea>
+          <div *ngIf=" item2.type !== '3in1row' && item2.type !== '2in1row' ">
+            <div class="form-group">
+              <label>Required</label>
+              <i *ngIf="item2.required" (click)="item2.required=false" class="fa fa-toggle-on red"></i>
+              <i *ngIf="!item2.required" (click)="item2.required=true" class="fa fa-toggle-off"></i>
+              <span class="pull-right ucfirst">{{item2.type}}</span>
+            </div>
+            <div class="form-group">
+              <label>Label</label>
+              <input class="form-control" type="text" [(ngModel)]="item2.label" />
+            </div>
+            <div class="form-group"
+              *ngIf=" item2.type !== 'paragraph' && item2.type !== 'header' && item2.type !== 'file' ">
+              <label>
+                API Name
+                <span class="red font-weight-bold">*</span>
+              </label>
+              <select class="form-control" *ngIf="model.pageType === 'Custom'" [(ngModel)]="item2.apiName"
+                (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
+                <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.used" >{{field.FieldLabel}}
+                  ({{field.Type}})</option>
+              </select>
+              <select class="form-control" *ngIf="model.pageType === 'List' " [(ngModel)]="item2.apiName"
+                (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, model.pageType)">
+                <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.used">{{field.FieldLabel}} ({{field.Type}})
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-6">
+                  <label>Order</label>
+                  <input class="form-control" type="text" [(ngModel)]="item2.order" />
+                </div>
+                <div class="col-6">
+                  <label>Column Order</label>
+                  <input class="form-control" type="text" [(ngModel)]="item2.columnOrder" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf=" item2.type === 'header' ">
+              <label>Heading Type</label>
+              <select class="form-control" [(ngModel)]="item2.headingType" (ngModelChange)="mandatoryUpdated(itemIndex)">
+                <option [value]="field" *ngFor="let field of headingTypes">{{field}}</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf=" item2.type !== 'header' ">
+              <label>Description</label>
+              <input class="form-control" type="text" [(ngModel)]="item2.description" />
+            </div>
+            <div class="form-group" *ngIf=" item2.type !== 'header' ">
+              <label>Regex</label>
+              <input class="form-control" type="text" [(ngModel)]="item2.regex" />
+            </div>
+            <div class="form-group">
+              <label>Notes</label>
+              <textarea class="form-control" [(ngModel)]="item2.notes" autocomplete="off">
+              </textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -415,6 +474,15 @@
     </div>
     <div class="col-8">
       <div *ngFor="let item of model.rightPanel" class="form-group">
+        <div *ngIf="item.type=='2in1row' || item.type=='3in1row'">
+          <div class="row">
+            <div [ngClass]="item.subClassName" *ngFor="let subField of item.subFields">
+              <label>{{subField.label}}</label> <label *ngIf="subField.required" class="text-danger">*</label>
+              <input type="text" class="form-control" [(ngModel)]="subField.value" [required]="subField.required"
+              [ngModelOptions]="{standalone: true}" autocomplete="off">
+            </div>
+          </div>
+        </div>
         <div *ngIf="item.type=='text'">
           <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
           <input type="text" class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [required]="item.required"

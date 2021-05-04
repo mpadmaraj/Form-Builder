@@ -20,6 +20,8 @@ export class field{
   value?:any;
   values?:Array<value>;
   apiName?:any;
+  subFields?:any;
+  subClassName?:any;
 }
 
 export class value{
