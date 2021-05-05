@@ -9,6 +9,9 @@ import { DndModule } from 'ngx-drag-drop';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { PageConfigComponent } from './page-config/page-config.component';
 import { AllPageConfigsComponent } from './all-page-configs/all-page-configs.component';
+import { ModalComponent } from './modal/modal.component';
+import { PageDetailComponent } from './page-detail/page-detail.component';
+import { PreviewPagesComponent } from './preview-pages/preview-pages.component';
 
 const appRoutes: Routes = [
   { path: '', component: AllPageConfigsComponent },
@@ -19,7 +22,10 @@ const appRoutes: Routes = [
     AppComponent,
     EditAppComponent,
     PageConfigComponent,
-    AllPageConfigsComponent
+    AllPageConfigsComponent,
+    ModalComponent,
+    PageDetailComponent,
+    PreviewPagesComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

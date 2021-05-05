@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 // import { ExportService } from '../export.service';
-import { DataStoreService } from '../data-store.service';
+import {DataStoreService} from '../data-store.service';
 import * as FileSaver from 'file-saver';
+import {PageDetail} from '../global.model';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-all-page-configs',
@@ -10,25 +12,100 @@ import * as FileSaver from 'file-saver';
 })
 export class AllPageConfigsComponent implements OnInit {
 
-  page: any = {
+  page: PageDetail = {
     name: 'Page Name...',
     pageType: '',
-    pageOrder: '',
-    minTime: '',
-    maxTime: '',
+    pageOrder: null,
+    minTime: null,
+    maxTime: null,
+    minMaxTimeUnit: null,
     show: false,
     activeStatus: 'inactive'
   };
+
+  updatePageDetail: PageDetail;
+
+  allPages: PageDetail[] = [];
+
+  isPageUpdate = false;
+  showAddPageModal = false;
+  modalTitle = "";
+
   constructor(private dataStoreService: DataStoreService) { }
-  allPages: any = [];
+
   ngOnInit() {
-    // this.allPages = this.dataStoreService.getPageConfigs();
+    this.dataStoreService.allPages.subscribe((pages: PageDetail[]) => {
+      this.allPages = pages || [];
+    });
+  }
+
+  onModalClose() {
+    this.showAddPageModal = false;
+    this.modalTitle = "";
   }
 
   addPage() {
     // this.dataStoreService.addToPageCongifgs(JSON.parse(JSON.stringify(this.page)));
     // this.allPages = this.dataStoreService.getPageConfigs();
-    this.allPages.push(JSON.parse(JSON.stringify(this.page)));
+    this.showAddPageModal = true;
+    this.modalTitle = "Add New Page";
+    this.isPageUpdate = false;
+    // this.allPages.push(JSON.parse(JSON.stringify(this.page)));
+  }
+
+  savePageDetails(page: PageDetail) {
+    if (this.isPageUpdate) {
+      for (let p in this.allPages) {
+        if (this.allPages[p].id === page.id) {
+          this.allPages[p] = page;
+          break;
+        }
+      }
+    } else {
+      page.id = Math.floor(Date.now() / 1000);
+      this.allPages.push(page);
+    }
+    this.allPages.sort(this.compare);
+    this.dataStoreService.allPages.next(this.allPages);
+  }
+
+  editPage(page: PageDetail) {
+    this.showAddPageModal = true;
+    this.modalTitle = "Update Page";
+    this.updatePageDetail = page;
+    this.isPageUpdate = true;
+  }
+
+  removePageDetail() {
+    swal({
+      title: 'Are you sure?',
+      text: "Do you want to remove page?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove!'
+    }).then((result) => {
+      if (result.value) {
+        this.allPages = this.allPages.filter(page => page.id !== this.updatePageDetail.id);
+        this.dataStoreService.allPages.next(this.allPages);
+        this.updatePageDetail = null;
+        this.showAddPageModal = false;
+        this.modalTitle = "";
+      }
+    });
+  }
+
+  savePage(page) {
+    this.allPages = this.allPages.filter(p => page.id === p.id ? page : p);
+    this.dataStoreService.allPages.next(this.allPages);
+    swal({
+      title: 'Success',
+      text: "Successfully Saved !!",
+      type: 'success',
+      confirmButtonColor: '#00B96F',
+      confirmButtonText: 'OK'
+    });
   }
 
   exportFieldConfigs() {
@@ -62,7 +139,7 @@ export class AllPageConfigsComponent implements OnInit {
     });
   }
 
-  pageOrderUpdated (pageOrder, i) {
+  pageOrderUpdated(pageOrder, i) {
     this.allPages.forEach((element, index) => {
       if (index === i) {
         element.pageOrder = parseInt(pageOrder);
@@ -79,7 +156,7 @@ export class AllPageConfigsComponent implements OnInit {
  * @param fileType File type to save as.
  */
   private saveAsFile(buffer: any, fileName: string, fileType: string): void {
-    const data: Blob = new Blob([buffer], { type: fileType });
+    const data: Blob = new Blob([buffer], {type: fileType});
     FileSaver.saveAs(data, fileName);
   }
 
@@ -120,11 +197,11 @@ export class AllPageConfigsComponent implements OnInit {
     this.saveAsFile(csvContent, `${fileName}.csv`, 'csv');
   }
 
-  compare( a, b ) {
-    if ( a.pageOrder < b.pageOrder ){
+  compare(a, b) {
+    if (a.pageOrder < b.pageOrder) {
       return -1;
     }
-    if ( a.pageOrder > b.pageOrder ){
+    if (a.pageOrder > b.pageOrder) {
       return 1;
     }
     return 0;

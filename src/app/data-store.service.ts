@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import { studentOnlineApplicationFields, studentOnlineApplicationListFields } from '../environments/environment';
+import {PageDetail} from './global.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,14 @@ export class DataStoreService {
   soaFields:any = [];
   listFields:any = [];
 
-  constructor() {
+  allPages = new BehaviorSubject<PageDetail[]>([]);
+
+  constructor() { 
+    this.allPages.next(JSON.parse(localStorage.getItem("allPages")))
+    this.allPages.subscribe(pages=> {
+      localStorage.setItem("allPages", JSON.stringify(pages));
+    });
+
     let temp1 = JSON.parse(JSON.stringify(studentOnlineApplicationFields));
     let temp2 = JSON.parse(JSON.stringify(studentOnlineApplicationListFields));
 
@@ -43,10 +52,5 @@ export class DataStoreService {
     return this.allPageConfigs;
   }
 
-  // updateAPINames (name, apiName, pageType) {
-  //   if (pageType === 'Custom') {
-  //     this.soaFields
-  //   }
-  // }
-
+  
 }
