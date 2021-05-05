@@ -332,17 +332,24 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-6">
-                  <label>Order</label>
-                  <input class="form-control" type="text" [(ngModel)]="item2.order" />
+                  <label class="cust-check-bx">
+                    <input type="checkbox" [(ngModel)]="item2.doNotShowOnPdf"> Do Not Show in Print
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
                 <div class="col-6">
-                  <label>Column Order</label>
-                  <input class="form-control" type="text" [(ngModel)]="item2.columnOrder" />
+                  <label class="cust-check-bx">
+                    <input type="checkbox" [(ngModel)]="item2.hideOnFinalize"> Hide on Finalize
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
               </div>
             </div>
             <div class="form-group" *ngIf=" item2.type === 'header' ">
-              <label>Heading Type</label>
+              <label>
+                Heading Type
+                <span class="red font-weight-bold">*</span>
+              </label>
               <select class="form-control" [(ngModel)]="item2.headingType" (ngModelChange)="mandatoryUpdated(itemIndex)">
                 <option [value]="field" *ngFor="let field of headingTypes">{{field}}</option>
               </select>

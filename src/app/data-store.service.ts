@@ -8,10 +8,24 @@ export class DataStoreService {
 
   allPageConfigs:any = [];
   allFieldConfigs:any = [];
-  soaFields = JSON.parse(JSON.stringify(studentOnlineApplicationFields));
-  listFields = JSON.parse(JSON.stringify(studentOnlineApplicationListFields));
+  soaFields:any = [];
+  listFields:any = [];
 
-  constructor() { }
+  constructor() {
+    let temp1 = JSON.parse(JSON.stringify(studentOnlineApplicationFields));
+    let temp2 = JSON.parse(JSON.stringify(studentOnlineApplicationListFields));
+
+    temp1.forEach(element => {
+      if (element.Type !== 'Formula') {
+        this.soaFields.push(element);
+      }
+    });
+    temp2.forEach(element => {
+      if (element.Type !== 'Formula') {
+        this.listFields.push(element);
+      }
+    });
+  }
 
   addToFieldCongifgs (fieldConfig) {
     this.allFieldConfigs.push(fieldConfig);
