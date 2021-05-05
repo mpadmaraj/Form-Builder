@@ -6,32 +6,20 @@
   </div>
 </div>
 
+<app-modal *ngIf="showAddPageModal" [title]="modalTitle" (close)="onModalClose()" size="md">
+  <app-page-detail (modalClose)="onModalClose()" (pageDetails)="savePageDetails($event)" (removePageDetail)="removePageDetail()" [updatePageDetail]="updatePageDetail"></app-page-detail>
+</app-modal>
+
 <div>
-  <!-- <div class="accordion" id="accordionExample">
-    <div class="card" *ngFor="let page of allPages;let i=index;">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            {{page.name}}
-          </button>
-        </h5>
-      </div>
-  
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
-          <app-page-config (pageNameChangeEvent)="pageNameUpdated($event, i)"></app-page-config>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <ul class="nav nav-tabs mt-2">
-    <li class="nav-item" *ngFor="let page of allPages;let i=index" >
-      <a class="nav-link" [ngClass]="page.activeStatus" href="#" (click)="showThisPage(i)">{{page.name}}</a>
+    <li class="nav-item" *ngFor="let page of allPages;let i=index">
+      <a class="nav-link" [ngClass]="page.activeStatus" href="#" (click)="showThisPage(i)">{{page.name}}
+        <i class="fa fa-pencil" (click)="editPage(page)"></i>
+      </a>
     </li>
   </ul>
-
   <div *ngFor="let page of allPages;let i=index" class="border-left border-right">
-    <app-page-config [hidden]="!page.show" (pageOrderUpdatedEvent)="pageOrderUpdated($event, i)" (pageNameChangeEvent)="pageNameUpdated($event, i)"></app-page-config>
+    <app-page-config [hidden]="!page.show" [pageDetail]="page" (pageOrderUpdatedEvent)="pageOrderUpdated($event, i)"
+      (pageNameChangeEvent)="pageNameUpdated($event, i)" (savePageEvent)="savePage(page)"></app-page-config>
   </div>
-
 </div>

@@ -1,0 +1,45 @@
+<form class="form-group" #pageDetailForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-6">
+      <label for="name">Page Name</label>
+      <input id="name" name="name" class="form-control" type="text" [(ngModel)]="page.name" required />
+    </div>
+    <div class="col-6">
+      <label for="order">Page Order</label>
+      <input id="order" name="order" class="form-control" type="number" [(ngModel)]="page.pageOrder" required />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <label for="minTime">Min Time</label>
+      <input id="minTime" name="minTime" class="form-control" type="number" [(ngModel)]="page.minTime" required />
+    </div>
+    <div class="col-6">
+      <label for="maxTime">Max Time</label>
+      <input id="maxTime" name="maxTime" class="form-control" type="number" [(ngModel)]="page.maxTime" required />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <label for="timeUnit">Min Max Time Unit</label>
+      <select id="timeUnit" name="timeUnit" class="form-control" [(ngModel)]="page.minMaxTimeUnit"> required
+        <option [value]="opt" *ngFor="let opt of timeUnits">{{opt}}</option>
+      </select>
+    </div>
+    <div class="col-6">
+      <label for="type">Page Type</label>
+      <select id="type" name="type" class="form-control" [(ngModel)]="page.pageType"> required
+        <option [value]="opt" *ngFor="let opt of pageTypes">{{opt}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="btn-container">
+        <button type="submit" [ngClass]="btnSaveClass" [disabled]="pageDetailForm.invalid">{{saveButton}}</button>
+        <button type="button" class="btn btn-danger remove-btn" *ngIf="saveButton == 'Update Page'"
+          (click)="removePage()">Remove Page</button>
+      </div>
+    </div>
+  </div>
+</form>

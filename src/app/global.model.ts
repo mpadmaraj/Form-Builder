@@ -1,32 +1,32 @@
-export class field{
-  notes?:any;
-  _id?:any;
-  name?:any;
-  type?:any;
-  icon?:any;
-  toggle?:any;
-  required?:any;
-  regex?:any;
-  errorText?:any;
-  label?:any;
-  description?:any;
-  placeholder?:any;
-  className?:any;
-  subtype?:any;
-  handle?:any;
-  min?:number;
-  max?:number;
-  inline?:any;
-  value?:any;
-  values?:Array<value>;
-  apiName?:any;
-  subFields?:any;
-  subClassName?:any;
+export class field {
+  notes?: any;
+  _id?: any;
+  name?: any;
+  type?: any;
+  icon?: any;
+  toggle?: any;
+  required?: any;
+  regex?: any;
+  errorText?: any;
+  label?: any;
+  description?: any;
+  placeholder?: any;
+  className?: any;
+  subtype?: any;
+  handle?: any;
+  min?: number;
+  max?: number;
+  inline?: any;
+  value?: any;
+  values?: Array<value>;
+  apiName?: any;
+  subFields?: any;
+  subClassName?: any;
 }
 
-export class value{
-  label?:any="";
-  value?:any="";
+export class value {
+  label?: any = "";
+  value?: any = "";
 }
 
 export interface IProperty {
@@ -118,8 +118,22 @@ export interface IProperty {
   flag?: number;
   page?: number;
   property_for?: any;
-  status_id?:any;
-  type_id?:any;
-  post_type?:any;
-  developer_id?:any;
+  status_id?: any;
+  type_id?: any;
+  post_type?: any;
+  developer_id?: any;
+}
+
+export interface PageDetail {
+  id?: Number;
+  name: String;
+  pageType: String;
+  pageOrder: Number;
+  minTime: Number;
+  maxTime: Number;
+  minMaxTimeUnit: String;
+  show?: boolean;
+  activeStatus?: String;
+  leftPanel?: any;
+  rightPanel?: any;
 }

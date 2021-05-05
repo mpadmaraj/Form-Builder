@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
-import { field, value } from '../global.model';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {DndDropEvent, DropEffect} from 'ngx-drag-drop';
+import {field, PageDetail, value} from '../global.model';
 import swal from 'sweetalert2';
 import {DataStoreService} from '../data-store.service';
-import { StaticPagesService } from '../static-pages.service';
+import {StaticPagesService} from '../static-pages.service';
 
 @Component({
   selector: 'app-page-config',
@@ -12,17 +12,20 @@ import { StaticPagesService } from '../static-pages.service';
 })
 export class PageConfigComponent implements OnInit {
 
+  @Input() pageDetail: PageDetail;
+
   @Output() pageNameChangeEvent = new EventEmitter<string>();
   @Output() pageOrderUpdatedEvent = new EventEmitter<string>();
+  @Output() savePageEvent = new EventEmitter<any>();
 
-  value:value={
-    label:"",
-    value:""
+  value: value = {
+    label: "",
+    value: ""
   };
   success = false;
   showPreview = false;
 
-  fieldModels:Array<field>=[
+  fieldModels: Array<field> = [
     {
       "apiName": "",
       "notes": "",
@@ -32,8 +35,8 @@ export class PageConfigComponent implements OnInit {
       "description": "Enter your name",
       "className": "red-border",
       "subtype": "text",
-      "regex" : "",
-      "handle":true,
+      "regex": "",
+      "handle": true,
     },
     {
       "apiName": "",
@@ -44,9 +47,9 @@ export class PageConfigComponent implements OnInit {
       "description": "Enter your email",
       "className": "red-border",
       "subtype": "text",
-      "regex" : "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)\.([a-zA-Z]{2,5})$",
+      "regex": "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)\.([a-zA-Z]{2,5})$",
       "errorText": "Please enter a valid email",
-      "handle":true
+      "handle": true
     },
     {
       "apiName": "",
@@ -57,9 +60,9 @@ export class PageConfigComponent implements OnInit {
       "description": "Enter your phone",
       "className": "red-border",
       "subtype": "text",
-      "regex" : "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$",
+      "regex": "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$",
       "errorText": "Please enter a valid phone number",
-      "handle":true
+      "handle": true
     },
     {
       "apiName": "",
@@ -77,7 +80,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "date",
-      "icon":"fa-calendar",
+      "icon": "fa-calendar",
       "label": "Date",
       "className": "red-border"
     },
@@ -95,14 +98,14 @@ export class PageConfigComponent implements OnInit {
       "icon": "fa-paragraph",
       "label": "Paragraph",
       "className": "green-border",
-      "description": "Type your text to display here only" 
+      "description": "Type your text to display here only"
     },
     {
       "apiName": "",
       "notes": "",
       "type": "checkbox",
       "label": "Checkbox",
-      "icon":"fa-list",
+      "icon": "fa-list",
       "description": "Checkbox",
       "inline": true,
       "className": "red-border",
@@ -117,7 +120,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "radio",
-      "icon":"fa-list-ul",
+      "icon": "fa-list-ul",
       "label": "Radio",
       "className": "red-border",
       "description": "Radio boxes",
@@ -136,7 +139,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "autocomplete",
-      "icon":"fa-bars",
+      "icon": "fa-bars",
       "label": "Select",
       "description": "Select",
       "className": "red-border",
@@ -159,7 +162,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "file",
-      "icon":"fa-file",
+      "icon": "fa-file",
       "label": "File Upload",
       "subtype": "file",
       "className": "green-border"
@@ -168,7 +171,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "header",
-      "icon":"fa-header",
+      "icon": "fa-header",
       "label": "Header",
       "className": "red-border"
     },
@@ -181,8 +184,8 @@ export class PageConfigComponent implements OnInit {
       "description": "Enter your name",
       "className": "red-border",
       "subtype": "text",
-      "regex" : "",
-      "handle":true,
+      "regex": "",
+      "handle": true,
       "subClassName": "col-6",
       "subFields": [
         {
@@ -207,8 +210,8 @@ export class PageConfigComponent implements OnInit {
       "className": "red-border",
       "subClassName": "col-4",
       "subtype": "text",
-      "regex" : "",
-      "handle":true,
+      "regex": "",
+      "handle": true,
       "subFields": [
         {
           label: 'Text',
@@ -229,18 +232,10 @@ export class PageConfigComponent implements OnInit {
     },
   ];
 
-  leftPanelModelFields:Array<field>=[];
-  rightPanelModelFields:Array<field>=[];
-  model:any = {
-    name:'',
-    pageType:'',
-    pageOrder: '',
-    minTime: '',
-    maxTime: '',
-    minMaxTimeUnit: '',
-    leftPanel: this.leftPanelModelFields,
-    rightPanel: this.rightPanelModelFields
-  };
+  leftPanelModelFields: Array<field> = [];
+  rightPanelModelFields: Array<field> = [];
+
+
 
   pageTypes = [
     'Custom',
@@ -256,10 +251,8 @@ export class PageConfigComponent implements OnInit {
     'Days'
   ];
 
-  headingTypes = ['H1','H2','H3','H4','H5','H6'];
+  headingTypes = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
   leftPanelStyles = ['Left-Panel-Desc-Large', 'Left-Panel-Desc-Large', 'Left-Panel-Desc-Large'];
-
-  enableSaveButton = false;
 
   constructor(private dataStoreService: DataStoreService, private staticPagesService: StaticPagesService) { }
   applicationFields = this.dataStoreService.soaFields;
@@ -269,51 +262,51 @@ export class PageConfigComponent implements OnInit {
 
   }
 
-  onDragStart(event:DragEvent) {
+  onDragStart(event: DragEvent) {
     console.log("drag started", JSON.stringify(event, null, 2));
   }
-  
-  onDragEnd(event:DragEvent) {
+
+  onDragEnd(event: DragEvent) {
     console.log("drag ended", JSON.stringify(event, null, 2));
   }
-  
-  onDraggableCopied(event:DragEvent) {
+
+  onDraggableCopied(event: DragEvent) {
     console.log("draggable copied", JSON.stringify(event, null, 2));
   }
-  
-  onDraggableLinked(event:DragEvent) {
+
+  onDraggableLinked(event: DragEvent) {
     console.log("draggable linked", JSON.stringify(event, null, 2));
   }
-    
-   onDragged( item:any, list:any[], effect:DropEffect ) {
-    if( effect === "move" ) {
-      const index = list.indexOf( item );
-      list.splice( index, 1 );
-    }
-  }
-      
-  onDragCanceled(event:DragEvent) {
-    console.log("drag cancelled", JSON.stringify(event, null, 2));
-  }
-  
-  onDragover(event:DragEvent) {
-    console.log("dragover", JSON.stringify(event, null, 2));
-  }
-  
-  onDrop( event:DndDropEvent, list?:any[] ) {
-    if( list && (event.dropEffect === "copy" || event.dropEffect === "move") ) {
-      
-      if(event.dropEffect === "copy")
-      event.data.name = event.data.type+'-'+new Date().getTime();
-      let index = event.index;
-      if( typeof index === "undefined" ) {
-        index = list.length;
-      }
-      list.splice( index, 0, event.data );
+
+  onDragged(item: any, list: any[], effect: DropEffect) {
+    if (effect === "move") {
+      const index = list.indexOf(item);
+      list.splice(index, 1);
     }
   }
 
-  removeField(i, displayOrder){
+  onDragCanceled(event: DragEvent) {
+    console.log("drag cancelled", JSON.stringify(event, null, 2));
+  }
+
+  onDragover(event: DragEvent) {
+    console.log("dragover", JSON.stringify(event, null, 2));
+  }
+
+  onDrop(event: DndDropEvent, list?: any[]) {
+    if (list && (event.dropEffect === "copy" || event.dropEffect === "move")) {
+
+      if (event.dropEffect === "copy")
+        event.data.name = event.data.type + '-' + new Date().getTime();
+      let index = event.index;
+      if (typeof index === "undefined") {
+        index = list.length;
+      }
+      list.splice(index, 0, event.data);
+    }
+  }
+
+  removeField(i, displayOrder) {
     swal({
       title: 'Are you sure?',
       text: "Do you want to remove this field?",
@@ -324,13 +317,13 @@ export class PageConfigComponent implements OnInit {
       confirmButtonText: 'Yes, remove!'
     }).then((result) => {
       if (result.value) {
-        this.model[displayOrder].splice(i,1);
+        this.pageDetail[displayOrder].splice(i, 1);
       }
     });
 
   }
 
-  toggleValue(item){
+  toggleValue(item) {
     item.selected = !item.selected;
   }
 
@@ -385,32 +378,28 @@ export class PageConfigComponent implements OnInit {
         fieldConfig = {};
       }
     });
+    this.savePageEvent.emit();
   }
 
-  updatePageName (name) {
+  updatePageName(name) {
     this.pageNameChangeEvent.emit(name);
   }
 
-  mandatoryUpdated (i, name, apiName) {
+  mandatoryUpdated(i, name, apiName) {
     let count = 0;
-    this.model.rightPanel.forEach((element, index) => {
+    this.pageDetail.rightPanel.forEach((element, index) => {
       if (index === i) {
         element.className = 'green-border';
       }
 
       if (element.className === 'green-border') {
-        count ++;
+        count++;
       }
     });
-
-    if (count === this.model.rightPanel.length) {
-      this.enableSaveButton = true;
-    }
-
     // this.dataStoreService.updateAPINames(name, apiName, pageType);
   }
 
-  preview () {
+  preview() {
     this.showPreview = true;
   }
 
@@ -418,7 +407,7 @@ export class PageConfigComponent implements OnInit {
     el.scrollIntoView();
   }
 
-  pageOrderUpdate (pageOrder) {
+  pageOrderUpdate(pageOrder) {
     this.pageOrderUpdatedEvent.emit(pageOrder);
   }
 
