@@ -23,7 +23,6 @@ export class PageConfigComponent implements OnInit {
     value: ""
   };
   success = false;
-  showPreview = false;
 
   fieldModels: Array<field> = [
     {
@@ -340,7 +339,7 @@ export class PageConfigComponent implements OnInit {
     pageConfig.minMaxTimeUnit = page.minMaxTimeUnit;
     this.dataStoreService.addToPageCongifgs(pageConfig);
 
-    let fieldConfig:any = {};
+    let fieldConfig: any = {};
     page.leftPanel.forEach(element => {
       fieldConfig.name = element.label;
       fieldConfig.description = element.description;
@@ -417,14 +416,6 @@ export class PageConfigComponent implements OnInit {
 
     // this.fieldNameApiMapping[pageType][name] = apiName;
     // this.dataStoreService.updateAPINames(name, apiName, pageType);
-  }
-
-  preview() {
-    this.showPreview = true;
-  }
-
-  scroll(el: HTMLElement) {
-    el.scrollIntoView();
   }
 
   pageOrderUpdate(pageOrder) {

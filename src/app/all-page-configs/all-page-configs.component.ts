@@ -28,6 +28,7 @@ export class AllPageConfigsComponent implements OnInit {
   allPages: PageDetail[] = [];
 
   isPageUpdate = false;
+  showPreview = false;
   showAddPageModal = false;
   modalTitle = "";
 
@@ -40,8 +41,13 @@ export class AllPageConfigsComponent implements OnInit {
   }
 
   onModalClose() {
+    this.showPreview = false;
     this.showAddPageModal = false;
     this.modalTitle = "";
+  }
+
+  preview() {
+    this.showPreview = true;
   }
 
   addPage() {
@@ -50,6 +56,7 @@ export class AllPageConfigsComponent implements OnInit {
     this.showAddPageModal = true;
     this.modalTitle = "Add New Page";
     this.isPageUpdate = false;
+    this.updatePageDetail = null;
     // this.allPages.push(JSON.parse(JSON.stringify(this.page)));
   }
 
@@ -67,6 +74,7 @@ export class AllPageConfigsComponent implements OnInit {
     }
     this.allPages.sort(this.compare);
     this.dataStoreService.allPages.next(this.allPages);
+    this.updatePageDetail = null;
   }
 
   editPage(page: PageDetail) {
@@ -110,6 +118,7 @@ export class AllPageConfigsComponent implements OnInit {
 
   exportFieldConfigs() {
     let fieldConfigs = this.dataStoreService.getFieldConfigs();
+    console.log("fieldConfigs = ", fieldConfigs)
     this.exportToCsv(fieldConfigs, 'FieldConfig');
   }
 

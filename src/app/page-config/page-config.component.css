@@ -22,3 +22,7 @@
 .light-blue-backdrop {
   background-color: #5cb3fd;
 }
+
+.save-btn {
+  display: flow-root;
+}

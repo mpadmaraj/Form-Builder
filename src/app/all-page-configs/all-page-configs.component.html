@@ -7,10 +7,11 @@
 </div>
 
 <app-modal *ngIf="showAddPageModal" [title]="modalTitle" (close)="onModalClose()" size="md">
-  <app-page-detail (modalClose)="onModalClose()" (pageDetails)="savePageDetails($event)" (removePageDetail)="removePageDetail()" [updatePageDetail]="updatePageDetail"></app-page-detail>
+  <app-page-detail (modalClose)="onModalClose()" (pageDetails)="savePageDetails($event)"
+    (removePageDetail)="removePageDetail()" [updatePageDetail]="updatePageDetail"></app-page-detail>
 </app-modal>
 
-<div>
+<div style="padding-bottom: 2rem;">
   <ul class="nav nav-tabs mt-2">
     <li class="nav-item" *ngFor="let page of allPages;let i=index">
       <a class="nav-link" [ngClass]="page.activeStatus" href="#" (click)="showThisPage(i)">{{page.name}}
@@ -18,8 +19,14 @@
       </a>
     </li>
   </ul>
-  <div *ngFor="let page of allPages;let i=index" class="border-left border-right">
+  <div *ngFor="let page of allPages;let i=index" class="border-left border-right border-bottom">
     <app-page-config [hidden]="!page.show" [pageDetail]="page" (pageOrderUpdatedEvent)="pageOrderUpdated($event, i)"
       (pageNameChangeEvent)="pageNameUpdated($event, i)" (savePageEvent)="savePage(page)"></app-page-config>
   </div>
 </div>
+
+<button class="btn btn-warning" (click)="preview()">Preview pages</button>
+
+<app-modal *ngIf="showPreview" (close)="onModalClose()">
+  <app-preview-pages></app-preview-pages>
+</app-modal>

@@ -1,194 +1,198 @@
-<p>
-  preview-pages works!
-</p>
+<ul class="nav">
+  <div class="d-flex" *ngFor="let page of allPages;let i=index">
+    <li class="nav-item">
+      <button class="nav-link" (click)="showThisPage(page.id)">
+        <div class="page-name">
+          {{page.name}}
+        </div>
+        <span class="page-time" *ngIf="page.minTime">{{page.minTime}}-{{page.maxTime}} {{page.minMaxTimeUnit}}</span>
+      </button>
+    </li>
+    <span aria-hidden="true" class="separator"><span class="arrow"></span></span>
+  </div>
+</ul>
 
-<!-- Preview starts from here -->
-<div #previewPage style="margin-top: 1000px;">
-  <div class="row" style="padding:30px;min-height:500px;">
-    <div class="col-11" style="background-color: black;color:white;padding:5px 5px;height:50px;">
-      <div class="col-10">
-        <div style="font-weight: bold;font-size: 16px;">{{model.name}}</div>
-        <div style="font-size: 12px;">{{model.minTime}}-{{model.maxTime}} {{model.minMaxTimeUnit}}</div>
+
+<div class="row">
+  <div class="col-12 mt-3">
+    <h4>{{pageDetail.name}}</h4>
+  </div>
+  <div class="col-5">
+    <div *ngFor="let item of pageDetail.leftPanel" class="form-group">
+      <div *ngIf="item.type=='text'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="text" class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [required]="item.required"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
       </div>
-    </div>
-    <div class="col-1" style="background-color: rgb(236, 186, 20);color:white;padding:10px 5px;height:50px;">
-      <div style="font-weight: bold;font-size: 16px;">Finalize</div>
-    </div>
-    <div class="col-12 mt-3">
-      <h4>{{model.name}}</h4>
-    </div>
-    <div class="col-4">
-      <div *ngFor="let item of model.leftPanel" class="form-group">
-        <div *ngIf="item.type=='text'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="text" class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [required]="item.required"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='email'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='phone'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='number'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="number" class="form-control" id="{{item.name}}" min="{{item.min}}" max="{{item.max}}"
-            [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='date'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="date" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='datetime-local'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="datetime-local" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='textarea'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <textarea class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
+      <div *ngIf="item.type=='email'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='phone'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='number'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="number" class="form-control" id="{{item.name}}" min="{{item.min}}" max="{{item.max}}"
+          [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='date'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="date" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='datetime-local'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="datetime-local" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='textarea'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <textarea class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}"
+          autocomplete="off">
         </textarea>
+      </div>
+      <div *ngIf="item.type=='file'">
+        <label>{{item.label}} (File can't be uploaded right now)</label> <label *ngIf="item.required"
+          class="text-danger">*</label>
+        <input type="file" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+        <small class="form-text text-danger">(File can't be uploaded right now)</small>
+      </div>
+      <div *ngIf="item.type=='paragraph'">
+        <p class="form-text">{{item.description}}</p>
+      </div>
+      <div *ngIf="item.type=='autocomplete'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <select class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
+        </select>
+      </div>
+      <div *ngIf="item.type=='checkbox'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <div *ngFor="let v of item.values" class="inline-form-group">
+          <label class="cust-check-bx">
+            <input type="checkbox" [value]="v.value" name="{{item.name}}" (click)="toggleValue(v)"> {{v.label}}
+            <span class="checkmark"></span>
+          </label>
         </div>
-        <div *ngIf="item.type=='file'">
-          <label>{{item.label}} (File can't be uploaded right now)</label> <label *ngIf="item.required"
-            class="text-danger">*</label>
-          <input type="file" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-          <small class="form-text text-danger">(File can't be uploaded right now)</small>
-        </div>
-        <div *ngIf="item.type=='paragraph'">
-          <p class="form-text">{{item.description}}</p>
-        </div>
-        <div *ngIf="item.type=='autocomplete'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <select class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
-          </select>
-        </div>
-        <div *ngIf="item.type=='checkbox'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <div *ngFor="let v of item.values" class="inline-form-group">
-            <label class="cust-check-bx">
-              <input type="checkbox" [value]="v.value" name="{{item.name}}" (click)="toggleValue(v)"> {{v.label}}
-              <span class="checkmark"></span>
-            </label>
-          </div>
-        </div>
-        <div *ngIf="item.type=='radio'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <div *ngFor="let v of item.values" class="inline-form-group">
-            <label class="cust-check-bx">
-              <input type="radio" [value]="v.value" name="{{item.name}}" [(ngModel)]="item.value"
-                [ngModelOptions]="{standalone: true}"> {{v.label}}
-              <span class="checkmark"></span>
-            </label>
-          </div>
+      </div>
+      <div *ngIf="item.type=='radio'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <div *ngFor="let v of item.values" class="inline-form-group">
+          <label class="cust-check-bx">
+            <input type="radio" [value]="v.value" name="{{item.name}}" [(ngModel)]="item.value"
+              [ngModelOptions]="{standalone: true}"> {{v.label}}
+            <span class="checkmark"></span>
+          </label>
         </div>
       </div>
     </div>
-    <div class="col-8">
-      <div *ngFor="let item of model.rightPanel" class="form-group">
-        <div *ngIf="item.type=='2in1row' || item.type=='3in1row'">
-          <div class="row">
-            <div [ngClass]="item.subClassName" *ngFor="let subField of item.subFields">
-              <label>{{subField.label}}</label> <label *ngIf="subField.required" class="text-danger">*</label>
-              <input type="text" class="form-control" [(ngModel)]="subField.value" [required]="subField.required"
+  </div>
+  <div class="col-6">
+    <div *ngFor="let item of pageDetail.rightPanel" class="form-group">
+      <div *ngIf="item.type=='2in1row' || item.type=='3in1row'">
+        <div class="row">
+          <div [ngClass]="item.subClassName" *ngFor="let subField of item.subFields">
+            <label>{{subField.label}}</label> <label *ngIf="subField.required" class="text-danger">*</label>
+            <input type="text" class="form-control" [(ngModel)]="subField.value" [required]="subField.required"
               [ngModelOptions]="{standalone: true}" autocomplete="off">
-            </div>
           </div>
         </div>
-        <div *ngIf="item.type=='text'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="text" class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [required]="item.required"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='email'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='phone'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='number'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="number" class="form-control" id="{{item.name}}" min="{{item.min}}" max="{{item.max}}"
-            [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='date'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="date" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='datetime-local'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <input type="datetime-local" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-        </div>
-        <div *ngIf="item.type=='textarea'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <textarea class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='header'">
+        <h1 *ngIf="item.headingType=='H1'">{{item.label}}</h1>
+        <h2 *ngIf="item.headingType=='H2'">{{item.label}}</h2>
+        <h3 *ngIf="item.headingType=='H3'">{{item.label}}</h3>
+        <h4 *ngIf="item.headingType=='H4'">{{item.label}}</h4>
+        <h5 *ngIf="item.headingType=='H5'">{{item.label}}</h5>
+        <h6 *ngIf="item.headingType=='H6'">{{item.label}}</h6>
+      </div>
+      <div *ngIf="item.type=='text'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="text" class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [required]="item.required"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='email'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='phone'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="email" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='number'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="number" class="form-control" id="{{item.name}}" min="{{item.min}}" max="{{item.max}}"
+          [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='date'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="date" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='datetime-local'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <input type="datetime-local" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+      </div>
+      <div *ngIf="item.type=='textarea'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <textarea class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}"
+          autocomplete="off">
         </textarea>
-        </div>
-        <div *ngIf="item.type=='file'">
-          <label>{{item.label}} (File can't be uploaded right now)</label> <label *ngIf="item.required"
-            class="text-danger">*</label>
-          <input type="file" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}" autocomplete="off">
-          <small class="form-text text-danger">(File can't be uploaded right now)</small>
-        </div>
-        <div *ngIf="item.type=='paragraph'">
-          <p class="form-text">{{item.description}}</p>
-        </div>
-        <div *ngIf="item.type=='autocomplete'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <select class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
-            [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
-          </select>
-        </div>
-        <div *ngIf="item.type=='checkbox'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <div *ngFor="let v of item.values" class="inline-form-group">
-            <label class="cust-check-bx">
-              <input type="checkbox" [value]="v.value" name="{{item.name}}" (click)="toggleValue(v)"> {{v.label}}
-              <span class="checkmark"></span>
-            </label>
-          </div>
-        </div>
-        <div *ngIf="item.type=='radio'">
-          <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
-          <div *ngFor="let v of item.values" class="inline-form-group">
-            <label class="cust-check-bx">
-              <input type="radio" [value]="v.value" name="{{item.name}}" [(ngModel)]="item.value"
-                [ngModelOptions]="{standalone: true}"> {{v.label}}
-              <span class="checkmark"></span>
-            </label>
-          </div>
+      </div>
+      <div *ngIf="item.type=='file'">
+        <label>{{item.label}} (File can't be uploaded right now)</label> <label *ngIf="item.required"
+          class="text-danger">*</label>
+        <input type="file" class="form-control" id="{{item.name}}" [(ngModel)]="item.value"
+          [ngModelOptions]="{standalone: true}" autocomplete="off">
+        <small class="form-text text-danger">(File can't be uploaded right now)</small>
+      </div>
+      <div *ngIf="item.type=='paragraph'">
+        <p class="form-text">{{item.description}}</p>
+      </div>
+      <div *ngIf="item.type=='autocomplete'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <select class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
+        </select>
+      </div>
+      <div *ngIf="item.type=='checkbox'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <div *ngFor="let v of item.values" class="inline-form-group">
+          <label class="cust-check-bx">
+            <input type="checkbox" [value]="v.value" name="{{item.name}}" (click)="toggleValue(v)"> {{v.label}}
+            <span class="checkmark"></span>
+          </label>
         </div>
       </div>
+      <div *ngIf="item.type=='radio'">
+        <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+        <div *ngFor="let v of item.values" class="inline-form-group">
+          <label class="cust-check-bx">
+            <input type="radio" [value]="v.value" name="{{item.name}}" [(ngModel)]="item.value"
+              [ngModelOptions]="{standalone: true}"> {{v.label}}
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
 
-      <div class="mt-3">
-        <button class="btn btn-success" *ngIf="model.pageType == 'List'">Remove</button>
-        <button class="btn btn-success pull-right" *ngIf="model.pageType == 'List'">Save</button>
-      </div>
-      <div class="mt-1">
-        <hr style="background-color:aquamarine;" />
-      </div>
-      <div class="mt-1">
-        <button class="btn btn-success pull-right">Continue</button>
-      </div>
-
+    <div class="mt-3">
+      <button class="btn btn-danger" *ngIf="pageDetail.pageType == 'List'">Remove</button>
+      <button class="btn btn-success pull-right" *ngIf="pageDetail.pageType == 'List'">Save</button>
+    </div>
+    <div class="mt-1">
+      <hr style="background-color:aquamarine;" />
+    </div>
+    <div class="mt-1">
+      <button class="btn btn-success pull-right">Continue</button>
     </div>
   </div>
 </div>
