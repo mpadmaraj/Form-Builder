@@ -1,5 +1,7 @@
 .nav {
 	background: #000;
+	position: relative;
+	top: -25px;
 }
 
 ul,
@@ -66,4 +68,9 @@ li a {
 .arrow::after {
 	top: 50%;
 	transform: skew(-20deg);
+}
+
+.page-detail {
+	max-height: 54vh;
+	overflow-y: scroll;
 }

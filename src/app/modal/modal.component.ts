@@ -17,6 +17,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {
     if(this.size) {
+      console.log("size =",this.size)
       this.modalClass += this.size;
     } else {
       this.modalClass += "lg"

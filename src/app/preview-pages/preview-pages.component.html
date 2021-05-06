@@ -13,12 +13,10 @@
 </ul>
 
 
-<div class="row">
-  <div class="col-12 mt-3">
-    <h4>{{pageDetail.name}}</h4>
-  </div>
-  <div class="col-5">
+<div class="row mt-2 page-detail">
+  <div class="col-4">
     <div *ngFor="let item of pageDetail.leftPanel" class="form-group">
+      <h4>{{pageDetail.name}}</h4>
       <div *ngIf="item.type=='text'">
         <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
         <input type="text" class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [required]="item.required"
@@ -92,7 +90,8 @@
       </div>
     </div>
   </div>
-  <div class="col-6">
+    <div class="col-1"></div>
+    <div class="col-6">
     <div *ngFor="let item of pageDetail.rightPanel" class="form-group">
       <div *ngIf="item.type=='2in1row' || item.type=='3in1row'">
         <div class="row">
