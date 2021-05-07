@@ -1,0 +1,76 @@
+.nav {
+	background: #000;
+	position: relative;
+	top: -25px;
+}
+
+ul,
+li {
+	display: flex;
+	justify-content: space-between;
+}
+
+button.nav-link {
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+div:last-child .separator {
+	display: none;
+}
+
+ul div:last-child {
+	background-color: #ffcc33;
+}
+
+li a {
+	text-align: center;
+}
+
+.page-name {
+	color: #fff;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 18px;
+	white-space: pre-wrap;
+}
+
+.page-time {
+	font-size: 10px;
+	color: #fff;
+}
+
+.arrow {
+	display: inline-block;
+	position: relative;
+	height: 100%;
+	width: 2px;
+	opacity: 0.8;
+}
+
+.arrow::before,
+.arrow::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 50%;
+	background: #d8d8d8;
+	z-index: 1;
+}
+
+.arrow::before {
+	top: 0;
+	transform: skew(20deg);
+}
+
+.arrow::after {
+	top: 50%;
+	transform: skew(-20deg);
+}
+
+.page-detail {
+	max-height: 54vh;
+	overflow-y: scroll;
+}

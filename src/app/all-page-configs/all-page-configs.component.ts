@@ -28,6 +28,7 @@ export class AllPageConfigsComponent implements OnInit {
   allPages: PageDetail[] = [];
 
   isPageUpdate = false;
+  showPreview = false;
   showAddPageModal = false;
   modalTitle = "";
   fileModalTitle = "Upload JSON file";
@@ -42,9 +43,14 @@ export class AllPageConfigsComponent implements OnInit {
   }
 
   onModalClose() {
+    this.showPreview = false;
     this.showAddPageModal = false;
     this.showUploadJsonModal = false;
     this.modalTitle = "";
+  }
+
+  preview() {
+    this.showPreview = true;
   }
 
   addPage() {
@@ -53,6 +59,7 @@ export class AllPageConfigsComponent implements OnInit {
     this.showAddPageModal = true;
     this.modalTitle = "Add New Page";
     this.isPageUpdate = false;
+    this.updatePageDetail = null;
     // this.allPages.push(JSON.parse(JSON.stringify(this.page)));
   }
 
@@ -70,6 +77,7 @@ export class AllPageConfigsComponent implements OnInit {
     }
     this.allPages.sort(this.compare);
     this.dataStoreService.allPages.next(this.allPages);
+    this.updatePageDetail = null;
   }
 
   editPage(page: PageDetail) {
@@ -112,12 +120,78 @@ export class AllPageConfigsComponent implements OnInit {
   }
 
   exportFieldConfigs() {
-    let fieldConfigs = this.dataStoreService.getFieldConfigs();
+    let leftPanelOrder = 10;
+    let rightPanelOrder = 10;
+    const fieldConfigs = [];
+    for (const page of this.allPages) {
+      let fieldConfig: any = {};
+      page.leftPanel.forEach(element => {
+        fieldConfig = {};
+        fieldConfig.name = element.label;
+        fieldConfig.description = element.description;
+        fieldConfig.regex = element.regex;
+        fieldConfig.notes = element.notes;
+        fieldConfig.apiName = element.apiName;
+        fieldConfig.displayOrder = 'Left Panel';
+        fieldConfig.pageName = page.name;
+        fieldConfig.columnOrder = 10;
+        fieldConfig.leftPanelStyles = element.leftPanelStyles;
+        fieldConfig.Hide_on_Finalize = true;
+        fieldConfig.Do_not_show_on_PDF = true;
+        fieldConfig.order = leftPanelOrder;
+        leftPanelOrder = leftPanelOrder + 10;
+        fieldConfigs.push(fieldConfig);
+      });
+
+      page.rightPanel.forEach(element => {
+        fieldConfig = {};
+        if ((element.type === '2in1row') || (element.type === '3in1row')) {
+          element.subFields.forEach((subElement, colOrder) => {
+            fieldConfig.order = rightPanelOrder;
+            fieldConfig.columnOrder = ((colOrder + 1) * 10);
+            fieldConfig.pageName = page.name;
+            fieldConfig.name = subElement.label;
+            fieldConfig.notes = subElement.notes;
+            fieldConfig.apiName = subElement.apiName;
+            fieldConfig.displayOrder = 'Right Panel';
+            fieldConfig.Hide_on_Finalize = subElement.hideOnFinalize;
+            fieldConfig.Do_not_show_on_PDF = subElement.doNotShowOnPdf;
+            fieldConfigs.push(fieldConfig);
+          });
+          rightPanelOrder = rightPanelOrder + 10;
+        } else {
+          fieldConfig.pageName = page.name;
+          fieldConfig.order = rightPanelOrder;
+          rightPanelOrder = rightPanelOrder + 10;
+          fieldConfig.columnOrder = 10;
+          fieldConfig.name = element.label;
+          fieldConfig.regex = element.regex;
+          fieldConfig.notes = element.notes;
+          fieldConfig.apiName = element.apiName;
+          fieldConfig.headingType = element.headingType;
+          fieldConfig.displayOrder = 'Right Panel';
+          fieldConfig.Do_not_show_on_PDF = element.doNotShowOnPdf;
+          fieldConfig.Hide_on_Finalize = element.hideOnFinalize;
+          fieldConfigs.push(fieldConfig);
+        }
+      });
+    }
+    console.log("fieldConfigs = ", fieldConfigs);
     this.exportToCsv(fieldConfigs, 'FieldConfig');
   }
 
   exportPageConfigs() {
-    let pageConfigs = this.dataStoreService.getPageConfigs();
+    const pageConfigs = [];
+    for (const page of this.allPages) {
+      let pageConfig: any = {};
+      pageConfig.name = page.name;
+      pageConfig.pageType = page.pageType;
+      pageConfig.pageOrder = page.pageOrder;
+      pageConfig.minTime = page.minTime;
+      pageConfig.maxTime = page.maxTime;
+      pageConfig.minMaxTimeUnit = page.minMaxTimeUnit;
+      pageConfigs.push(pageConfig);
+    }
     this.exportToCsv(pageConfigs, 'PageConfig');
   }
 

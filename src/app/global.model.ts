@@ -129,9 +129,9 @@ export interface PageDetail {
   name: String;
   pageType: String;
   pageOrder: Number;
-  minTime: Number;
-  maxTime: Number;
-  minMaxTimeUnit: String;
+  minTime?: Number;
+  maxTime?: Number;
+  minMaxTimeUnit?: String;
   show?: boolean;
   activeStatus?: String;
   leftPanel?: any;
