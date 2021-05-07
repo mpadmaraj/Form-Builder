@@ -12,6 +12,9 @@ export class DataStoreService {
   allFieldConfigs:any = [];
   soaFields:any = [];
   listFields:any = [];
+  soaFieldsUsed:any = {};
+  listFieldsUsed:any = {};
+  referenceFieldsUsed:any = {};
 
   allPages = new BehaviorSubject<PageDetail[]>([]);
 
@@ -52,5 +55,24 @@ export class DataStoreService {
     return this.allPageConfigs;
   }
 
+  updateApiNamesUsed (name, pageType, apiName) {
+    if (pageType === 'Custom') {
+      this.soaFieldsUsed[name] = apiName;
+      let apisUsedArray = Object.values(this.soaFieldsUsed);
+      this.soaFields.forEach(element => {
+        if (apisUsedArray.indexOf(element.APIName) !== -1) {
+          element.apiUsed = true;
+        }
+      });
+    } else if (pageType === 'List') {
+      this.listFieldsUsed[name] = apiName;
+      let apisUsedArray = Object.values(this.listFieldsUsed);
+      this.listFieldsUsed.forEach(element => {
+        if (apisUsedArray.indexOf(element.APIName) !== -1) {
+          element.apiUsed = true;
+        }
+      });
+    }
+  }
   
 }

@@ -250,13 +250,13 @@
                   </label>
                   <select class="form-control" *ngIf="pageDetail.pageType === 'Custom'" [(ngModel)]="subField.apiName"
                     (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
-                    <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.used">
+                    <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed">
                       {{field.FieldLabel}}
                       ({{field.Type}})</option>
                   </select>
                   <select class="form-control" *ngIf="pageDetail.pageType === 'List' " [(ngModel)]="subField.apiName"
                     (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
-                    <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.used">
+                    <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed" >
                       {{field.FieldLabel}} ({{field.Type}})
                     </option>
                   </select>
@@ -288,13 +288,13 @@
               </label>
               <select class="form-control" *ngIf="pageDetail.pageType === 'Custom'" [(ngModel)]="item2.apiName"
                 (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
-                <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.used">
+                <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed" >
                   {{field.FieldLabel}}
                   ({{field.Type}})</option>
               </select>
               <select class="form-control" *ngIf="pageDetail.pageType === 'List' " [(ngModel)]="item2.apiName"
                 (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
-                <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.used">
+                <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed" >
                   {{field.FieldLabel}} ({{field.Type}})
                 </option>
               </select>

@@ -1,10 +1,18 @@
 <div>
   <button class="btn btn-primary" (click)="addPage()">Add Page</button>
+  <div class="pull-right">
+    <button class="btn btn-primary ml-2" (click)="showUploadJsonModal = true">Upload Json</button>
+  </div>
   <div class="pull-right" *ngIf="allPages.length > 0">
     <button class="btn btn-primary ml-3" (click)="exportFieldConfigs()">Export Field Configs</button>
     <button class="btn btn-primary ml-4" (click)="exportPageConfigs()">Export Page Configs</button>
+    <button class="btn btn-primary ml-2" (click)="exportAsJson()">Export Json</button>
   </div>
 </div>
+
+<app-modal *ngIf="showUploadJsonModal" [title]="fileModalTitle" (close)="onModalClose()" size="md" >
+  <app-file-upload (modalClose)="onModalClose()" (gotJsonDataEvent)="jsonDataUploaded($event)"></app-file-upload>
+</app-modal>
 
 <app-modal *ngIf="showAddPageModal" [title]="modalTitle" (close)="onModalClose()" size="md">
   <app-page-detail (modalClose)="onModalClose()" (pageDetails)="savePageDetails($event)" (removePageDetail)="removePageDetail()" [updatePageDetail]="updatePageDetail"></app-page-detail>

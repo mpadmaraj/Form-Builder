@@ -14,8 +14,6 @@ export class PageConfigComponent implements OnInit {
 
   @Input() pageDetail: PageDetail;
 
-  @Output() pageNameChangeEvent = new EventEmitter<string>();
-  @Output() pageOrderUpdatedEvent = new EventEmitter<string>();
   @Output() savePageEvent = new EventEmitter<any>();
 
   value: value = {
@@ -395,10 +393,6 @@ export class PageConfigComponent implements OnInit {
     this.savePageEvent.emit();
   }
 
-  updatePageName(name) {
-    this.pageNameChangeEvent.emit(name);
-  }
-
   mandatoryUpdated (i, name, apiName, pageType) {
     let count = 0;
     this.pageDetail.rightPanel.forEach((element, index) => {
@@ -411,12 +405,26 @@ export class PageConfigComponent implements OnInit {
       }
     });
 
-    // if (count === this.model.rightPanel.length) {
-    //   this.enableSaveButton = true;
-    // }
-
-    // this.fieldNameApiMapping[pageType][name] = apiName;
-    // this.dataStoreService.updateAPINames(name, apiName, pageType);
+    if (this.fieldNameApiMapping[pageType] === undefined) {
+      this.fieldNameApiMapping[pageType] = {};
+    } else {
+      this.fieldNameApiMapping[pageType][name] = apiName;
+      console.log(this.fieldNameApiMapping);
+    }
+    this.dataStoreService.updateApiNamesUsed(name, pageType, apiName);
+    if (pageType === 'Custom') {
+      this.applicationFields.forEach(element => {
+        if (element.APIName === apiName) {
+          element.apiUsed = true;
+        }
+      });
+    } else if (pageType === 'List') {
+      this.listFields.forEach(element => {
+        if (element.APIName === apiName) {
+          element.apiUsed = true;
+        }
+      });
+    }
   }
 
   preview() {
@@ -425,10 +433,6 @@ export class PageConfigComponent implements OnInit {
 
   scroll(el: HTMLElement) {
     el.scrollIntoView();
-  }
-
-  pageOrderUpdate(pageOrder) {
-    this.pageOrderUpdatedEvent.emit(pageOrder);
   }
 
 }

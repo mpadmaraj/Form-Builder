@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // import { ExportService } from '../export.service';
-import {DataStoreService} from '../data-store.service';
+import { DataStoreService } from '../data-store.service';
 import * as FileSaver from 'file-saver';
-import {PageDetail} from '../global.model';
+import { field, PageDetail } from '../global.model';
 import swal from 'sweetalert2';
 
 @Component({
@@ -30,6 +30,8 @@ export class AllPageConfigsComponent implements OnInit {
   isPageUpdate = false;
   showAddPageModal = false;
   modalTitle = "";
+  fileModalTitle = "Upload JSON file";
+  showUploadJsonModal = false;
 
   constructor(private dataStoreService: DataStoreService) { }
 
@@ -41,6 +43,7 @@ export class AllPageConfigsComponent implements OnInit {
 
   onModalClose() {
     this.showAddPageModal = false;
+    this.showUploadJsonModal = false;
     this.modalTitle = "";
   }
 
@@ -148,6 +151,46 @@ export class AllPageConfigsComponent implements OnInit {
     this.allPages.sort(this.compare);
   }
 
+  exportAsJson() {
+    let allJson = JSON.parse(localStorage.getItem("allPages"));
+    const blob = new Blob([JSON.stringify(allJson)], { type: 'application/json' });
+    FileSaver.saveAs(blob, 'FormBuilder_' + (+new Date()) + '.json');
+  }
+
+  jsonDataUploaded(data) {
+    console.log('in json data uploaded');
+    console.log(data);
+    var reader = new FileReader();
+    let fileData = [];
+    reader.onload = () => {
+      fileData = JSON.parse((reader.result).toString());
+      if (Array.isArray(fileData) && (typeof fileData[0] === 'object')) {
+        let keys = Object.keys(fileData[0]);
+        if ((keys.indexOf('leftPanel') !== -1) && ((keys.indexOf('rightPanel') !== -1))) {
+          swal({
+            title: 'Are you sure?',
+            text: "Your changes will be lost if any.",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00B96F',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, remove!'
+          }).then((result) => {
+            if (result.value) {
+              this.allPages = fileData;
+              localStorage.setItem("allPages", JSON.stringify(this.allPages));
+            }
+          });
+        } else {
+          swal('Error', 'Uploaded JSON not in expected format!!!');
+        }
+      } else {
+        swal('Error', 'Uploaded JSON not in expected format!');
+      }
+    };
+    reader.readAsText(data);
+  }
+
   /**
  * Saves the file on the client's machine via FileSaver library.
  *
@@ -156,7 +199,7 @@ export class AllPageConfigsComponent implements OnInit {
  * @param fileType File type to save as.
  */
   private saveAsFile(buffer: any, fileName: string, fileType: string): void {
-    const data: Blob = new Blob([buffer], {type: fileType});
+    const data: Blob = new Blob([buffer], { type: fileType });
     FileSaver.saveAs(data, fileName);
   }
 

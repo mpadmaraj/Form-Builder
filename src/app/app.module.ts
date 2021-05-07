@@ -12,6 +12,7 @@ import { AllPageConfigsComponent } from './all-page-configs/all-page-configs.com
 import { ModalComponent } from './modal/modal.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
 import { PreviewPagesComponent } from './preview-pages/preview-pages.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 const appRoutes: Routes = [
   { path: '', component: AllPageConfigsComponent },
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
     AllPageConfigsComponent,
     ModalComponent,
     PageDetailComponent,
-    PreviewPagesComponent
+    PreviewPagesComponent,
+    FileUploadComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

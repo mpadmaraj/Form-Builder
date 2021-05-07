@@ -1,4 +1,4 @@
-<div class="modal-container">
+<div class="modal-container" (gotJsonDataEvent)="jsonDataUploaded($event)">
     <div class="backdrop" (click)="onClose()"></div>
     <div [ngClass]="modalClass" tabindex="-1" role="dialog">
         <div class="modal-header">
