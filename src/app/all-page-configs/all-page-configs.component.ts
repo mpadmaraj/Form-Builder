@@ -4,6 +4,7 @@ import { DataStoreService } from '../data-store.service';
 import * as FileSaver from 'file-saver';
 import { field, PageDetail } from '../global.model';
 import swal from 'sweetalert2';
+import { StaticPagesService } from '../static-pages.service';
 
 @Component({
   selector: 'app-all-page-configs',
@@ -33,8 +34,9 @@ export class AllPageConfigsComponent implements OnInit {
   modalTitle = "";
   fileModalTitle = "Upload JSON file";
   showUploadJsonModal = false;
+  showUseTemplatesModal = false;
 
-  constructor(private dataStoreService: DataStoreService) { }
+  constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService) { }
 
   ngOnInit() {
     this.dataStoreService.allPages.subscribe((pages: PageDetail[]) => {
@@ -46,6 +48,7 @@ export class AllPageConfigsComponent implements OnInit {
     this.showPreview = false;
     this.showAddPageModal = false;
     this.showUploadJsonModal = false;
+    this.showUseTemplatesModal = false;
     this.modalTitle = "";
   }
 
@@ -120,13 +123,14 @@ export class AllPageConfigsComponent implements OnInit {
   }
 
   exportFieldConfigs() {
-    let leftPanelOrder = 10;
-    let rightPanelOrder = 10;
     const fieldConfigs = [];
     for (const page of this.allPages) {
+      let leftPanelOrder = 10;
+      let rightPanelOrder = 10;
       let fieldConfig: any = {};
       page.leftPanel.forEach(element => {
         fieldConfig = {};
+        fieldConfig.type = element.fieldConfigType;
         fieldConfig.name = element.label;
         fieldConfig.description = element.description;
         fieldConfig.regex = element.regex;
@@ -150,12 +154,13 @@ export class AllPageConfigsComponent implements OnInit {
             fieldConfig.order = rightPanelOrder;
             fieldConfig.columnOrder = ((colOrder + 1) * 10);
             fieldConfig.pageName = page.name;
+            fieldConfig.type = subElement.fieldConfigType;
             fieldConfig.name = subElement.label;
             fieldConfig.notes = subElement.notes;
             fieldConfig.apiName = subElement.apiName;
             fieldConfig.displayOrder = 'Right Panel';
-            fieldConfig.Hide_on_Finalize = subElement.hideOnFinalize;
-            fieldConfig.Do_not_show_on_PDF = subElement.doNotShowOnPdf;
+            fieldConfig.Hide_on_Finalize = subElement.hideOnFinalize ? subElement.hideOnFinalize : 'FALSE';
+            fieldConfig.Do_not_show_on_PDF = subElement.doNotShowOnPdf ? subElement.doNotShowOnPdf : 'FALSE';
             fieldConfigs.push(fieldConfig);
           });
           rightPanelOrder = rightPanelOrder + 10;
@@ -164,19 +169,19 @@ export class AllPageConfigsComponent implements OnInit {
           fieldConfig.order = rightPanelOrder;
           rightPanelOrder = rightPanelOrder + 10;
           fieldConfig.columnOrder = 10;
+          fieldConfig.type = element.fieldConfigType;
           fieldConfig.name = element.label;
           fieldConfig.regex = element.regex;
           fieldConfig.notes = element.notes;
           fieldConfig.apiName = element.apiName;
           fieldConfig.headingType = element.headingType;
           fieldConfig.displayOrder = 'Right Panel';
-          fieldConfig.Do_not_show_on_PDF = element.doNotShowOnPdf;
-          fieldConfig.Hide_on_Finalize = element.hideOnFinalize;
+          fieldConfig.Do_not_show_on_PDF = element.doNotShowOnPdf ? element.doNotShowOnPdf : 'FALSE';
+          fieldConfig.Hide_on_Finalize = element.hideOnFinalize ? element.hideOnFinalize : 'FALSE';
           fieldConfigs.push(fieldConfig);
         }
       });
     }
-    console.log("fieldConfigs = ", fieldConfigs);
     this.exportToCsv(fieldConfigs, 'FieldConfig');
   }
 
@@ -225,6 +230,16 @@ export class AllPageConfigsComponent implements OnInit {
     this.allPages.sort(this.compare);
   }
 
+  templateSelected (data) {
+    this.showUseTemplatesModal = false;
+    let page = this.staticPagesService.getTemplate(data);
+    page.id = Math.floor(Date.now() / 1000);
+    this.allPages.push(page);
+    this.allPages.sort(this.compare);
+    this.dataStoreService.allPages.next(this.allPages);
+    this.updatePageDetail = null;
+  }
+
   exportAsJson() {
     let allJson = JSON.parse(localStorage.getItem("allPages"));
     const blob = new Blob([JSON.stringify(allJson)], { type: 'application/json' });
@@ -232,8 +247,6 @@ export class AllPageConfigsComponent implements OnInit {
   }
 
   jsonDataUploaded(data) {
-    console.log('in json data uploaded');
-    console.log(data);
     var reader = new FileReader();
     let fileData = [];
     reader.onload = () => {
@@ -251,8 +264,9 @@ export class AllPageConfigsComponent implements OnInit {
             confirmButtonText: 'Yes, remove!'
           }).then((result) => {
             if (result.value) {
-              this.allPages = fileData;
-              localStorage.setItem("allPages", JSON.stringify(this.allPages));
+              // this.allPages = fileData;
+              this.dataStoreService.allPages.next(fileData);
+              localStorage.setItem("allPages", JSON.stringify(fileData));
             }
           });
         } else {

@@ -15,8 +15,8 @@
 
 <div class="row mt-2 page-detail">
   <div class="col-4">
+    <h4>{{pageDetail.name}}</h4>
     <div *ngFor="let item of pageDetail.leftPanel" class="form-group">
-      <h4>{{pageDetail.name}}</h4>
       <div *ngIf="item.type=='text'">
         <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
         <input type="text" class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [required]="item.required"

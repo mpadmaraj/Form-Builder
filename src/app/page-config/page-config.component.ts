@@ -27,6 +27,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "text",
+      "fieldConfigType": "Field",
       "icon": "fa-font",
       "label": "Text",
       "description": "Enter your name",
@@ -39,6 +40,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "email",
+      "fieldConfigType": "Field",
       "icon": "fa-envelope",
       "label": "Email",
       "description": "Enter your email",
@@ -52,6 +54,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "phone",
+      "fieldConfigType": "Field",
       "icon": "fa-phone",
       "label": "Phone",
       "description": "Enter your phone",
@@ -65,6 +68,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "number",
+      "fieldConfigType": "Field",
       "label": "Number",
       "icon": "fa-html5",
       "description": "Age",
@@ -77,6 +81,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "date",
+      "fieldConfigType": "Field",
       "icon": "fa-calendar",
       "label": "Date",
       "className": "red-border"
@@ -92,6 +97,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "paragraph",
+      "fieldConfigType": "Long Display Field",
       "icon": "fa-paragraph",
       "label": "Paragraph",
       "className": "green-border",
@@ -101,6 +107,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "checkbox",
+      "fieldConfigType": "Field",
       "label": "Checkbox",
       "icon": "fa-list",
       "description": "Checkbox",
@@ -117,6 +124,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "radio",
+      "fieldConfigType": "Radio",
       "icon": "fa-list-ul",
       "label": "Radio",
       "className": "red-border",
@@ -136,6 +144,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "autocomplete",
+      "fieldConfigType": "Field",
       "icon": "fa-bars",
       "label": "Select",
       "description": "Select",
@@ -159,6 +168,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "file",
+      "fieldConfigType": "Document",
       "icon": "fa-file",
       "label": "File Upload",
       "subtype": "file",
@@ -168,6 +178,7 @@ export class PageConfigComponent implements OnInit {
       "apiName": "",
       "notes": "",
       "type": "header",
+      "fieldConfigType": "Header",
       "icon": "fa-header",
       "label": "Header",
       "className": "red-border"
@@ -188,12 +199,14 @@ export class PageConfigComponent implements OnInit {
         {
           label: 'Text',
           apiName: '',
-          required: false
+          required: false,
+          fieldConfigType: "Field"
         },
         {
           label: 'Text',
           apiName: '',
-          required: false
+          required: false,
+          fieldConfigType: "Field"
         }
       ]
     },
@@ -213,17 +226,20 @@ export class PageConfigComponent implements OnInit {
         {
           label: 'Text',
           apiName: '',
-          required: false
+          required: false,
+          fieldConfigType: "Field"
         },
         {
           label: 'Text',
           apiName: '',
-          required: false
+          required: false,
+          fieldConfigType: "Field"
         },
         {
           label: 'Text',
           apiName: '',
-          required: false
+          required: false,
+          fieldConfigType: "Field"
         }
       ]
     },
@@ -249,7 +265,7 @@ export class PageConfigComponent implements OnInit {
   ];
 
   headingTypes = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
-  leftPanelStyles = ['Left-Panel-Desc-Large', 'Left-Panel-Desc-Large', 'Left-Panel-Desc-Large'];
+  leftPanelStyles = ['Left-Panel-Desc-Large', 'Left-Panel-Desc-Small', 'Left-Panel-Video-Desc'];
 
   constructor(private dataStoreService: DataStoreService, private staticPagesService: StaticPagesService) { }
   applicationFields = this.dataStoreService.soaFields;
@@ -315,6 +331,20 @@ export class PageConfigComponent implements OnInit {
       confirmButtonText: 'Yes, remove!'
     }).then((result) => {
       if (result.value) {
+        this.dataStoreService.updateApiNamesUsed(this.pageDetail[displayOrder][i].name, this.pageDetail[displayOrder][i].pageType, '');
+        if (this.pageDetail[displayOrder][i].pageType === 'Custom') {
+          this.applicationFields.forEach(element => {
+            if (element.APIName === this.pageDetail[displayOrder][i].apiName) {
+              element.apiUsed = false;
+            }
+          });
+        } else if (this.pageDetail[displayOrder][i].pageType === 'List') {
+          this.listFields.forEach(element => {
+            if (element.APIName === this.pageDetail[displayOrder][i].apiName) {
+              element.apiUsed = false;
+            }
+          });
+        }
         this.pageDetail[displayOrder].splice(i, 1);
       }
     });
@@ -343,10 +373,8 @@ export class PageConfigComponent implements OnInit {
 
     if (this.fieldNameApiMapping[pageType] === undefined) {
       this.fieldNameApiMapping[pageType] = {};
-    } else {
-      this.fieldNameApiMapping[pageType][name] = apiName;
-      console.log(this.fieldNameApiMapping);
     }
+    this.fieldNameApiMapping[pageType][name] = apiName;
     this.dataStoreService.updateApiNamesUsed(name, pageType, apiName);
     if (pageType === 'Custom') {
       this.applicationFields.forEach(element => {

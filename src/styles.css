@@ -50,7 +50,7 @@
 }
 
 .dndDropArea.empty{
-    min-height:400px;
+    min-height:200px;
     border: dotted #ddd 2px;
 }
 

@@ -1,0 +1,120 @@
+{
+  "name": "Personal Information",
+  "pageType": "Custom",
+  "pageOrder": 10,
+  "minTime": 5,
+  "maxTime": 10,
+  "minMaxTimeUnit": "Minutes",
+  "leftPanel": [
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "paragraph",
+      "fieldConfigType": "Long Display Field",
+      "icon": "fa-paragraph",
+      "label": "Paragraph",
+      "className": "green-border",
+      "description": "To get started, please select your program of interest and complete the required fields to continue. After completing this first section, you may complete the application process in any order you desire.",
+      "name": "paragraph-1620703888798",
+      "toggle": false,
+      "leftPanelStyles": "Left-Panel-Desc-Large"
+    },
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "paragraph",
+      "fieldConfigType": "Long Display Field",
+      "icon": "fa-paragraph",
+      "label": "Paragraph",
+      "className": "green-border",
+      "description": "Once you have completed the required fields, we will contact you by phone and email to assist you with the online application. You will be able to opt-out or unsubscribe at any time.",
+      "name": "paragraph-1620703890893",
+      "toggle": false,
+      "leftPanelStyles": "Left-Panel-Desc-Small"
+    }
+  ],
+  "rightPanel": [
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "header",
+      "fieldConfigType": "Header",
+      "icon": "fa-header",
+      "label": "Select a Program",
+      "className": "green-border",
+      "name": "header-1620709800123",
+      "toggle": false,
+      "headingType": "H3"
+    },
+    {
+      "apiName": "DeltakSRP__Academic_Program__c",
+      "notes": "",
+      "type": "autocomplete",
+      "fieldConfigType": "Field",
+      "icon": "fa-bars",
+      "label": "Degree Program",
+      "description": "Select",
+      "className": "green-border",
+      "values": [
+        {
+          "label": "Option 1",
+          "value": "option-1"
+        },
+        {
+          "label": "Option 2",
+          "value": "option-2"
+        },
+        {
+          "label": "Option 3",
+          "value": "option-3"
+        }
+      ],
+      "name": "autocomplete-1620709828458",
+      "toggle": false
+    },
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "header",
+      "fieldConfigType": "Header",
+      "icon": "fa-header",
+      "label": "Applicant Information",
+      "className": "green-border",
+      "name": "header-1620709874910",
+      "toggle": false,
+      "headingType": "H3"
+    },
+    {
+      "apiName": "",
+      "notes": "",
+      "type": "2in1row",
+      "icon": "fa-font",
+      "label": "2in1row",
+      "description": "Enter your name",
+      "className": "green-border",
+      "subtype": "text",
+      "regex": "",
+      "handle": true,
+      "subClassName": "col-6",
+      "subFields": [
+        {
+          "label": "Prefix",
+          "apiName": "Prefix_List__c",
+          "required": false,
+          "fieldConfigType": "Field"
+        },
+        {
+          "label": "First Name",
+          "apiName": "DeltakSRP__First_Name__c",
+          "required": false,
+          "fieldConfigType": "Field"
+        }
+      ],
+      "name": "2in1row-1620709901147",
+      "toggle": false
+    }
+  ],
+  "id": 1620630616,
+  "show": false,
+  "activeStatus": "inactive"
+}

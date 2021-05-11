@@ -22,6 +22,7 @@ export class field {
   apiName?: any;
   subFields?: any;
   subClassName?: any;
+  fieldConfigType?: any;
 }
 
 export class value {

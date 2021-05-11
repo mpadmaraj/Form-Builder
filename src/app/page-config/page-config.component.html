@@ -232,7 +232,7 @@
         <div *ngIf="item2.toggle" class="toggle-Wrapper">
           <div *ngIf=" item2.type === '2in1row' || item2.type === '3in1row' ">
             <div class="row">
-              <div [ngClass]="item2.subClassName" *ngFor="let subField of item2.subFields">
+              <div [ngClass]="item2.subClassName" *ngFor="let subField of item2.subFields;let subIndex = index;">
                 <div class="form-group">
                   <label>Required</label>
                   <i *ngIf="subField.required" (click)="subField.required=false" class="fa fa-toggle-on red"></i>
@@ -249,13 +249,13 @@
                     <span class="red font-weight-bold">*</span>
                   </label>
                   <select class="form-control" *ngIf="pageDetail.pageType === 'Custom'" [(ngModel)]="subField.apiName"
-                    (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
+                    (ngModelChange)="mandatoryUpdated(itemIndex, (item2.name+subIndex), subField.apiName, pageDetail.pageType, subIndex)">
                     <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed">
                       {{field.FieldLabel}}
                       ({{field.Type}})</option>
                   </select>
                   <select class="form-control" *ngIf="pageDetail.pageType === 'List' " [(ngModel)]="subField.apiName"
-                    (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
+                    (ngModelChange)="mandatoryUpdated(itemIndex, (item2.name+subIndex), subField.apiName, pageDetail.pageType, subIndex)">
                     <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed" >
                       {{field.FieldLabel}} ({{field.Type}})
                     </option>

@@ -1,5 +1,4 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-file-upload',

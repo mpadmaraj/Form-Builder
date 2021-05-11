@@ -13,6 +13,7 @@ import { ModalComponent } from './modal/modal.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
 import { PreviewPagesComponent } from './preview-pages/preview-pages.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ExistingTemplatesComponent } from './existing-templates/existing-templates.component';
 
 const appRoutes: Routes = [
   { path: '', component: AllPageConfigsComponent },
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     ModalComponent,
     PageDetailComponent,
     PreviewPagesComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    ExistingTemplatesComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

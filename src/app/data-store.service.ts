@@ -67,7 +67,7 @@ export class DataStoreService {
     } else if (pageType === 'List') {
       this.listFieldsUsed[name] = apiName;
       let apisUsedArray = Object.values(this.listFieldsUsed);
-      this.listFieldsUsed.forEach(element => {
+      this.listFields.forEach(element => {
         if (apisUsedArray.indexOf(element.APIName) !== -1) {
           element.apiUsed = true;
         }
