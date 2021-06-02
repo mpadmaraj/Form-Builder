@@ -28,12 +28,12 @@ export class DataStoreService {
     let temp2 = JSON.parse(JSON.stringify(studentOnlineApplicationListFields));
 
     temp1.forEach(element => {
-      if (element.Type !== 'Formula') {
+      if ((element.Type !== 'Formula') && (element.Type !== 'Lookup')) {
         this.soaFields.push(element);
       }
     });
     temp2.forEach(element => {
-      if (element.Type !== 'Formula') {
+      if ((element.Type !== 'Formula') && (element.Type !== 'Lookup')) {
         this.listFields.push(element);
       }
     });

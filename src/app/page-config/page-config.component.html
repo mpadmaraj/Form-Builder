@@ -103,10 +103,10 @@
             <i *ngIf="!item.required" (click)="item.required=true" class="fa fa-toggle-off"></i>
             <span class="pull-right ucfirst">{{item.type}}</span>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group" >
             <label>Label</label>
             <input class="form-control" type="text" [(ngModel)]="item.label" />
-          </div>
+          </div> -->
           <div class="form-group">
             <label>Description</label>
             <input class="form-control" type="text" [(ngModel)]="item.description" />
@@ -117,10 +117,10 @@
               <option [value]="opt" *ngFor="let opt of leftPanelStyles">{{opt}}</option>
             </select>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Regex</label>
             <input class="form-control" type="text" [(ngModel)]="item.regex" />
-          </div>
+          </div> -->
         </div>
       </div>
       <!--optional placeholder element for dropzone-->
@@ -260,6 +260,18 @@
                       {{field.FieldLabel}} ({{field.Type}})
                     </option>
                   </select>
+                </div>
+                <div class="form-group">
+                  <label class="cust-check-bx">
+                    <input type="checkbox" [(ngModel)]="subField.doNotShowOnPdf"> Do Not Show in Print
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="cust-check-bx">
+                    <input type="checkbox" [(ngModel)]="subField.hideOnFinalize"> Hide on Finalize
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
                 <div class="form-group">
                   <label>Notes</label>

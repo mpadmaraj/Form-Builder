@@ -35,6 +35,11 @@ export class AllPageConfigsComponent implements OnInit {
   fileModalTitle = "Upload JSON file";
   showUploadJsonModal = false;
   showUseTemplatesModal = false;
+  
+  fieldApiMapping = {
+    Custom: {},
+    List: {}
+  };
 
   constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService) { }
 
@@ -131,7 +136,8 @@ export class AllPageConfigsComponent implements OnInit {
       page.leftPanel.forEach(element => {
         fieldConfig = {};
         fieldConfig.type = element.fieldConfigType;
-        fieldConfig.name = element.label;
+        fieldConfig.name = element.name;
+        fieldConfig.fieldLabel = element.label;
         fieldConfig.description = element.description;
         fieldConfig.regex = element.regex;
         fieldConfig.notes = element.notes;
@@ -151,11 +157,13 @@ export class AllPageConfigsComponent implements OnInit {
         fieldConfig = {};
         if ((element.type === '2in1row') || (element.type === '3in1row')) {
           element.subFields.forEach((subElement, colOrder) => {
+            fieldConfig = {};
             fieldConfig.order = rightPanelOrder;
             fieldConfig.columnOrder = ((colOrder + 1) * 10);
             fieldConfig.pageName = page.name;
             fieldConfig.type = subElement.fieldConfigType;
             fieldConfig.name = subElement.label;
+            fieldConfig.fieldLabel = subElement.label;
             fieldConfig.notes = subElement.notes;
             fieldConfig.apiName = subElement.apiName;
             fieldConfig.displayOrder = 'Right Panel';
@@ -170,7 +178,8 @@ export class AllPageConfigsComponent implements OnInit {
           rightPanelOrder = rightPanelOrder + 10;
           fieldConfig.columnOrder = 10;
           fieldConfig.type = element.fieldConfigType;
-          fieldConfig.name = element.label;
+          fieldConfig.name = element.name;
+          fieldConfig.fieldLabel = element.label;
           fieldConfig.regex = element.regex;
           fieldConfig.notes = element.notes;
           fieldConfig.apiName = element.apiName;
@@ -182,8 +191,15 @@ export class AllPageConfigsComponent implements OnInit {
         }
       });
     }
+    // this.checkForDuplicates(fieldConfigs);
     this.exportToCsv(fieldConfigs, 'FieldConfig');
   }
+
+  // checkForDuplicates (fieldConfigs) {
+  //   fieldConfigs.forEach(element => {
+      
+  //   });
+  // }
 
   exportPageConfigs() {
     const pageConfigs = [];

@@ -200,13 +200,17 @@ export class PageConfigComponent implements OnInit {
           label: 'Text',
           apiName: '',
           required: false,
-          fieldConfigType: "Field"
+          fieldConfigType: "Field",
+          doNotShowOnPdf: false,
+          hideOnFinalize: false
         },
         {
           label: 'Text',
           apiName: '',
           required: false,
-          fieldConfigType: "Field"
+          fieldConfigType: "Field",
+          doNotShowOnPdf: false,
+          hideOnFinalize: false
         }
       ]
     },
@@ -227,19 +231,25 @@ export class PageConfigComponent implements OnInit {
           label: 'Text',
           apiName: '',
           required: false,
-          fieldConfigType: "Field"
+          fieldConfigType: "Field",
+          doNotShowOnPdf: false,
+          hideOnFinalize: false
         },
         {
           label: 'Text',
           apiName: '',
           required: false,
-          fieldConfigType: "Field"
+          fieldConfigType: "Field",
+          doNotShowOnPdf: false,
+          hideOnFinalize: false
         },
         {
           label: 'Text',
           apiName: '',
           required: false,
-          fieldConfigType: "Field"
+          fieldConfigType: "Field",
+          doNotShowOnPdf: false,
+          hideOnFinalize: false
         }
       ]
     },
