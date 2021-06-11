@@ -15,8 +15,10 @@ export class ExistingTemplatesComponent implements OnInit {
     'Basic Information',
     'Education History',
     'Professional Experience',
-    'Test Scores',
-    'Refer a Friend'
+    'Reference Requirements',
+    'Refer a Friend',
+    'Letter of Recommendation',
+    'Personal Statement'
   ];
   selectedTemplate = '';
 
