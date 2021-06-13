@@ -6,6 +6,7 @@ import { field, PageDetail } from '../global.model';
 import swal from 'sweetalert2';
 import { StaticPagesService } from '../static-pages.service';
 
+
 @Component({
   selector: 'app-all-page-configs',
   templateUrl: './all-page-configs.component.html',
@@ -32,23 +33,28 @@ export class AllPageConfigsComponent implements OnInit {
   showPreview = false;
   showAddPageModal = false;
   modalTitle = "";
-  fileModalTitle = "Upload JSON file";
+  fileModalTitle = "Upload Worksheet Config";
+  templateTitle = "Select Page Template";
   showUploadJsonModal = false;
   showUseTemplatesModal = false;
-  
+  menuCheckBox = false;
   fieldApiMapping = {
     Custom: {},
     List: {}
   };
-
+  menuClicked=false;
   constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService) { }
 
   ngOnInit() {
     this.dataStoreService.allPages.subscribe((pages: PageDetail[]) => {
       this.allPages = pages || [];
     });
+    this.showThisPage(0);
   }
 
+  enableMenu(){
+      this.menuClicked = !this.menuClicked;
+  }
   onModalClose() {
     this.showPreview = false;
     this.showAddPageModal = false;
@@ -97,7 +103,7 @@ export class AllPageConfigsComponent implements OnInit {
 
   removePageDetail() {
     swal({
-      title: 'Are you sure?',
+      title: 'Delete current tab',
       text: "Do you want to remove page?",
       type: 'warning',
       showCancelButton: true,
@@ -108,6 +114,7 @@ export class AllPageConfigsComponent implements OnInit {
       if (result.value) {
         this.allPages = this.allPages.filter(page => page.id !== this.updatePageDetail.id);
         this.dataStoreService.allPages.next(this.allPages);
+        this.showThisPage(0);
         this.updatePageDetail = null;
         this.showAddPageModal = false;
         this.modalTitle = "";
@@ -115,6 +122,24 @@ export class AllPageConfigsComponent implements OnInit {
     });
   }
 
+  startFromScratch(){
+       swal({
+      title: 'Reset Worksheet',
+      text: "You are about to delete your current worksheet. Do you want to continue?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove!'
+    }).then((result) => {
+      if (result.value) {
+        this.dataStoreService.allPages.next(null);       
+        this.updatePageDetail = null;
+        this.showAddPageModal = false;
+        this.modalTitle = "";
+      }
+    });
+  }
   savePage(page) {
     this.allPages = this.allPages.filter(p => page.id === p.id ? page : p);
     this.dataStoreService.allPages.next(this.allPages);

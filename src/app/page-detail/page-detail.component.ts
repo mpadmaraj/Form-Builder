@@ -56,7 +56,7 @@ export class PageDetailComponent implements OnInit {
       this.btnSaveClass += " btn-warning";
       this.saveButton = "Update Page";
     } else {
-      this.btnSaveClass += " btn-success";
+      this.btnSaveClass += " btn-primary";
     }
   }
 

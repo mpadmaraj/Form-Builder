@@ -22,7 +22,8 @@ div:last-child .separator {
 }
 
 ul div:last-child {
-	background-color: #ffcc33;
+    background-color: #ffcc33;
+    color: #000;
 }
 
 li a {
@@ -71,6 +72,18 @@ li a {
 }
 
 .page-detail {
-	max-height: 54vh;
+	max-height: 65vh;
 	overflow-y: scroll;
+}
+.modal{
+    top: 0em !important;
+    height: 100vh !important;
+}
+.btn.btn-primary {
+    color: #fff;
+    background-color: #075b81;
+    border-color: #075b81;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: 600;
 }

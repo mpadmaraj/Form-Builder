@@ -1,17 +1,28 @@
-<div>
-  <button class="btn btn-primary" (click)="addPage()">Add Page</button>
-  <button class="btn btn-primary ml-1" (click)="showUseTemplatesModal = true">Use Templates</button>
-  <div class="pull-right">
-    <button class="btn btn-primary ml-2" (click)="showUploadJsonModal = true">Upload Json</button>
-  </div>
-  <div class="pull-right" *ngIf="allPages.length > 0">
-    <button class="btn btn-primary ml-3" (click)="exportFieldConfigs()">Export Field Configs</button>
-    <button class="btn btn-primary ml-2" (click)="exportPageConfigs()">Export Page Configs</button>
-    <button class="btn btn-primary ml-2" (click)="exportAsJson()">Export Json</button>
-  </div>
+<div class="actions">
+  <div class="dropdown"  (click)="enableMenu()">
+        <div class="dd-button">
+            Select an action
+        </div>
+        <input title="menu" type="checkbox" class="dd-input" id="test"  [ngModel]="menuClicked"/>
+
+        <ul class="dd-menu">
+            <li (click)="showUseTemplatesModal = true">Use Template for page</li>
+            <li (click)="addPage()">Add a blank page</li>
+            <li class="divider"></li>
+            <li (click)="preview()">Preview</li>
+            <li class="divider"></li>
+            <li (click)="exportPageConfigs()">Export Page Config</li>
+            <li (click)="exportFieldConfigs()">Export Field Config</li>
+            <li class="divider"></li>
+            <li (click)="showUploadJsonModal = true">Upload Worksheet Config</li>
+            <li (click)="exportAsJson()">Export Worksheet Config</li>
+            <li class="divider"></li>
+            <li (click)="startFromScratch()">Reset Worksheet</li>
+        </ul>    
+    </div>
 </div>
 
-<app-modal *ngIf="showUseTemplatesModal" [title]="fileModalTitle" (close)="onModalClose()" size="md" >
+<app-modal *ngIf="showUseTemplatesModal" [title]="templateTitle" (close)="onModalClose()" size="md" >
   <app-existing-templates (modalClose)="onModalClose()" (templateSelectedEvent)="templateSelected($event)"></app-existing-templates>
 </app-modal>
 
@@ -24,7 +35,7 @@
     (removePageDetail)="removePageDetail()" [updatePageDetail]="updatePageDetail"></app-page-detail>
 </app-modal>
 
-<div style="padding-bottom: 2rem;">
+<div class="main-tabs">
   <ul class="nav nav-tabs mt-2">
     <li class="nav-item" *ngFor="let page of allPages;let i=index">
       <a class="nav-link" [ngClass]="page.activeStatus" href="#" (click)="showThisPage(i)">{{page.name}}
@@ -38,8 +49,6 @@
   </div>
 </div>
 
-<button class="btn btn-warning" *ngIf="allPages.length > 0" (click)="preview()">Preview pages</button>
-<hr>
 <app-modal *ngIf="showPreview" (close)="onModalClose()">
   <app-preview-pages></app-preview-pages>
 </app-modal>

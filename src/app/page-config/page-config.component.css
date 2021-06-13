@@ -1,5 +1,6 @@
 .fields {
   padding-top: 2rem;
+  display: table;
 }
 
 .page-config-component {
@@ -10,6 +11,7 @@
   display: flex;
   justify-content: space-around;
   align-content: flex-start;
+  border-bottom: 1px solid lightgrey;
 }
 
 .dark-modal .modal-content {
@@ -25,4 +27,12 @@
 
 .save-btn {
   display: flow-root;
+}
+.btn.btn-primary {
+    color: #fff;
+    background-color: #075b81;
+    border-color: #075b81;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: 600;
 }
