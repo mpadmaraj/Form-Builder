@@ -1,0 +1,53 @@
+{
+    "name": "Personal Statement",
+    "pageType": "Statement",
+    "pageOrder": 60,
+    "minTime": 10,
+    "maxTime": 30,
+    "minMaxTimeUnit": "Minutes",
+    "leftPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "The next step in the application process is writing a personal statement or statement of purpose. It's your chance to communicate your strengths and what makes you an ideal candidate for admission. It's also a chance to demonstrate your writing capabilities",
+            "name": "paragraph-1620710677784",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Large"
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "Some programs may require you to address specific questions within your personal statement, so be sure to read all instructions thoroughly before writing.",
+            "name": "paragraph-1620710708115",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Small"
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "The essay should address the following:        Brief description of the applicant background, training, and experienceStatement indicating the career goals of the applicant and his or her reasons for seeking admission to the programDescription of the areas the applicant considers to be his or her strengths and areas in which the applicant wishes to develop greater strengths and abilities If your cumulative GPA from your undergraduate degree falls below a 2.75, please outline detailed reasoning and adjustments you will make for success in a graduate program.Personal information the applicant wishes to share      The document should contain:              Cover sheet with the following information:      Name and Contact InformationCandidate for program of interestPersonal EssayDate      1 to 2, typed, double-spaced pages12 font, Times New Roman preferred",
+            "name": "paragraph-1620710708115",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Small"
+        }
+    ],
+    "rightPanel": [],
+    "id": 1620710624,
+    "show": false,
+    "activeStatus": "inactive"
+}

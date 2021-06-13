@@ -1,0 +1,189 @@
+{
+    "name": "Professional Experience",
+    "pageType": "List",
+    "pageOrder": 30,
+    "minTime": 5,
+    "maxTime": 10,
+    "minMaxTimeUnit": "Minutes",
+    "leftPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "Please provide your work history. Once you have completed all the necessary fields, click save before adding another employer.",
+            "name": "paragraph-1620710677784",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Large"
+        }
+    ],
+    "rightPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Add a Professional Experience",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "Company_Name__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "COMPANY NAME",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "Address_1__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "STREET",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "City",
+                    "apiName": "City__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "State",
+                    "apiName": "State__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620710751916",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "Country",
+                    "apiName": "ProfessionExp_Country__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "Zip Code",
+                    "apiName": "Postal_Code__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620710751916",
+            "toggle": false
+        },
+        {
+            "apiName": "Position__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "POSITION HELD",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "Start Date",
+                    "apiName": "Dates_of_Employment_Start__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "End Date",
+                    "apiName": "Dates_of_Employment_End__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620710751916",
+            "toggle": false
+        },
+        {
+            "apiName": "Current_Employer__c",
+            "notes": "",
+            "type": "checkbox",
+            "fieldConfigType": "Field",
+            "label": "",
+            "icon": "fa-list",
+            "description": "Checkbox",
+            "inline": true,
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "I am currently employed here",
+                    "value": "option"
+                }
+            ]
+        }
+    ],
+    "id": 1620710624,
+    "show": false,
+    "activeStatus": "inactive"
+}

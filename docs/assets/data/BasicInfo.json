@@ -1,0 +1,798 @@
+{
+    "name": "Personal Information",
+    "pageType": "Custom",
+    "pageOrder": 10,
+    "minTime": 5,
+    "maxTime": 10,
+    "minMaxTimeUnit": "Minutes",
+    "leftPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "To get started, please select your program of interest and complete the required fields to continue. After completing this first section, you may complete the application process in any order you desire.",
+            "name": "paragraph-1620703888798",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Large"
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "Once you have completed the required fields, we will contact you by phone and email to assist you with the online application. You will be able to opt-out or unsubscribe at any time.",
+            "name": "paragraph-1620703890893",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Small"
+        }
+    ],
+    "rightPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Select a Program",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "DeltakSRP__Academic_Program__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "ACADEMIC PROGRAM",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Applicant Information",
+            "className": "green-border",
+            "name": "header-1620709874910",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "Prefix",
+                    "apiName": "Prefix_List__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "First Name",
+                    "apiName": "DeltakSRP__First_Name__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "PREFERRED FIRST NAME",
+                    "apiName": "Nickname__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "MIDDLE NAME",
+                    "apiName": "Middle_Name__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "LAST NAME",
+                    "apiName": "Last_Name__c",
+                    "required": true,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "SUFFIX",
+                    "apiName": "Suffix__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "LAST NAME",
+                    "apiName": "Last_Name__c",
+                    "required": true,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "SUFFIX",
+                    "apiName": "Suffix__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "Maiden__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Former Name",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "Mobile Phone",
+                    "apiName": "Mobile_Phone__c",
+                    "required": true,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "Alternate Phone",
+                    "apiName": "Home_Phone__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "Email_Address__c",
+            "notes": "",
+            "type": "email",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Email Address",
+            "description": "Enter your email",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "Date_of_Birth__c",
+            "notes": "",
+            "type": "date",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Date of Birth",
+            "description": "Enter your DOB",
+            "className": "green-border",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "Gender",
+                    "apiName": "Gender__c",
+                    "required": true,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "Marital Status",
+                    "apiName": "Marital_Status__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Mailing Address",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "Address_Line_1__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Address Line 1",
+            "description": "Enter your Address",
+            "className": "green-border",
+            "regex": "",
+            "handle": true,
+            "subtype": "text",
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "Address_Line_2__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Address Line 2",
+            "description": "Enter your Address",
+            "className": "green-border",
+            "regex": "",
+            "handle": true,
+            "subtype": "text",
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "3in1row",
+            "icon": "fa-font",
+            "label": "3in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-4",
+            "subFields": [
+                {
+                    "label": "CITY",
+                    "apiName": "City__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "STATE ABBREVIATION",
+                    "apiName": "State_Province__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "ZIP CODE",
+                    "apiName": "Zip_Postal_Code__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "3in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "Country__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "Country",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Citizenship & Ethnicity",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "Citizenship_Status__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "CITIZEN STATUS",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "Hispanic_Latino__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "WHAT IS YOUR ETHNICITY?",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "Ethnicity_multi__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "WHAT IS YOUR RACE? MARK ONE OR MORE RACES.",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "Household_Parent_Guardian_Highest_Level__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "HOUSEHOLD PARENT/GUARDIAN HIGHEST LEVEL OF EDUCATION COMPLETED",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "Is_English_1st__c",
+            "notes": "",
+            "type": "radio",
+            "fieldConfigType": "Radio",
+            "icon": "fa-list-ul",
+            "label": "IS ENGLISH YOUR FIRST LANGUAGE?",
+            "className": "red-border",
+            "description": "Radio boxes",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                }
+            ]
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "NATIVE LANGUAGE",
+                    "apiName": "Primary_Language__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "HOUSEHOLD LANGUAGE",
+                    "apiName": "Household_Language__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620709901147",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Disciplinary History",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "Disciplined_for_academic_performance__c",
+            "notes": "",
+            "type": "radio",
+            "fieldConfigType": "Radio",
+            "icon": "fa-list-ul",
+            "label": "Have You Ever Been Placed On Academic Suspension/Dismissal From Any Institution?",
+            "className": "red-border",
+            "description": "Radio boxes",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                }
+            ]
+        },
+        {
+            "apiName": "Explanation_for_academic_performance__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Explanation",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "Convicted_of_Felony__c",
+            "notes": "",
+            "type": "radio",
+            "fieldConfigType": "Radio",
+            "icon": "fa-list-ul",
+            "label": "Do You Have A Felony Charge Pending Or Have You Been Convicted Of a Felony?",
+            "className": "red-border",
+            "description": "Radio boxes",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                }
+            ]
+        },
+        {
+            "apiName": "Explanation_Felony__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "PLEASE GIVE THE APPROXIMATE DATE OF EACH INCIDENT AND EXPLAIN THE CIRCUMSTANCES.",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Additional Information",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "How_Heard__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "HOW DID YOU HEAR ABOUT GEORGE MASON UNIVERSITY?",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "Previously_Applied__c",
+            "notes": "",
+            "type": "radio",
+            "fieldConfigType": "Radio",
+            "icon": "fa-list-ul",
+            "label": "Have you previously applied to George Mason University?",
+            "className": "red-border",
+            "description": "Radio boxes",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                }
+            ]
+        },
+        {
+            "apiName": "Attended_Before__c",
+            "notes": "",
+            "type": "radio",
+            "fieldConfigType": "Radio",
+            "icon": "fa-list-ul",
+            "label": "HAVE YOU PREVIOUSLY ATTENDED GEORGE MASON UNIVERSITY?",
+            "className": "red-border",
+            "description": "Radio boxes",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                }
+            ]
+        },
+        {
+            "apiName": "How_will_you_finance_your_education__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "How do you plan to finance your education?",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "FAFSA_Filed__c",
+            "notes": "",
+            "type": "radio",
+            "fieldConfigType": "Radio",
+            "icon": "fa-list-ul",
+            "label": "HAVE YOU FILED FOR FAFSA?",
+            "className": "red-border",
+            "description": "Radio boxes",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                }
+            ]
+        },
+        {
+            "apiName": "Awards_Activities_Experience__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "List other relevant activities, achievements that might enhance your Application",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        }
+    ],
+    "id": 1620630616,
+    "show": false,
+    "activeStatus": "inactive"
+}

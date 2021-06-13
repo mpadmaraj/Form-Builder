@@ -1,0 +1,40 @@
+{
+    "name": "Letter of Recommendation",
+    "pageType": "References",
+    "pageOrder": 50,
+    "minTime": 5,
+    "maxTime": 10,
+    "minMaxTimeUnit": "Minutes",
+    "leftPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "Letters of recommendation help differentiate you from other applicants. They highlight your strengths in a way your grades and resume alone cannot.",
+            "name": "paragraph-1620710677784",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Large"
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "These letters should be written by someone who can speak to your character, strengths, traits and abilities. It's a chance for former or current employers, instructors, community leaders, and respected peers to advocate and endorse your candidacy. Please note that reference relationships must be professional or academic in nature. We are unable to accept friend, family, or classmate relationships for reference purposes.Once you've determined who to ask for a recommendation complete the form with their name and email. We'll send them a short message on your behalf that outlines all the specific details.",
+            "name": "paragraph-1620710708115",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Small"
+        }
+    ],
+    "rightPanel": [],
+    "id": 1620710624,
+    "show": false,
+    "activeStatus": "inactive"
+}

@@ -1,0 +1,122 @@
+{
+    "name": "Reference Requirements",
+    "pageType": "Custom",
+    "pageOrder": 40,
+    "minTime": 2,
+    "maxTime": 3,
+    "minMaxTimeUnit": "Minutes",
+    "leftPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "On the next page, provide the names and email addresses of individuals whom you would like to complete a Letter of Recommendation for you. Please note that reference relationships must be professional or academic in nature. We are unable to accept friend, family, or classmate relationships for reference.",
+            "name": "paragraph-1620710677784",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Large"
+        }
+    ],
+    "rightPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "The Family Educational Rights and Privacy Act of 1974 (Buckley Amendment)",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "Allows you to access your educational records if you enroll at George Mason University. You may waive your right of access to this specific report if you so choose. Your decision to waive or not to waive your right of access will have no bearing on the handling of your application."
+        },
+        {
+            "apiName": "I_waive_my_right_to_access_this_report__c",
+            "notes": "",
+            "type": "radio",
+            "fieldConfigType": "Radio",
+            "icon": "fa-list-ul",
+            "label": "I WAIVE MY RIGHT TO ACCESS THIS REPORT.",
+            "className": "green-border",
+            "description": "Radio boxes",
+            "values": [
+                {
+                    "label": "Yes",
+                    "value": "option-1"
+                },
+                {
+                    "label": "No",
+                    "value": "option-2"
+                }
+            ]
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "In place of your signature, please type your full legal name:",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H4"
+        },
+        {
+            "apiName": "LOR_Waive_Selection_Signature__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Signature",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "DISCLAIMER",
+            "className": "green-border",
+            "description": "Upon sending this form to your recommender, you will no longer be able to change your decision about whether to waive your right. I confirm that I did not write any portion of this recommendation, either in whole or in part, or have any involvement in its drafting or submission."
+        },
+        {
+            "apiName": "LOR_Attestation_Signature__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "SIGNATURE",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        }
+    ],
+    "id": 1620710624,
+    "show": false,
+    "activeStatus": "inactive"
+}

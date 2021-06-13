@@ -1,0 +1,253 @@
+{
+    "name": "Education History",
+    "pageType": "List",
+    "pageOrder": 20,
+    "minTime": 5,
+    "maxTime": 10,
+    "minMaxTimeUnit": "Minutes",
+    "leftPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "Please list all the colleges and universities you have attended. We are interested in your background, so please include all military, civilian technical, and correspondence schools.",
+            "name": "paragraph-1620710677784",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Large"
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "paragraph",
+            "fieldConfigType": "Long Display Field",
+            "icon": "fa-paragraph",
+            "label": "Paragraph",
+            "className": "green-border",
+            "description": "Once you have completed all the necessary fields, click save before adding another university. List the colleges or universities you have attended (Most recent first)",
+            "name": "paragraph-1620710708115",
+            "toggle": false,
+            "leftPanelStyles": "Left-Panel-Desc-Small"
+        }
+    ],
+    "rightPanel": [
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "header",
+            "fieldConfigType": "Header",
+            "icon": "fa-header",
+            "label": "Add a College/University",
+            "className": "green-border",
+            "name": "header-1620709800123",
+            "toggle": false,
+            "headingType": "H3"
+        },
+        {
+            "apiName": "college_name__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "Name of the college",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "Education_Street_Address__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "STREET ADDRESS",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "City",
+                    "apiName": "college_city__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "State",
+                    "apiName": "College_City_State__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620710751916",
+            "toggle": false
+        },
+        {
+            "apiName": "College_Country__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "Country",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "Education_Zipcode__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "ZIP CODE",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "",
+            "notes": "",
+            "type": "2in1row",
+            "icon": "fa-font",
+            "label": "2in1row",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "subClassName": "col-6",
+            "subFields": [
+                {
+                    "label": "Start Date",
+                    "apiName": "College_Start_Date__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                },
+                {
+                    "label": "End Date",
+                    "apiName": "College_End_Date__c",
+                    "required": false,
+                    "fieldConfigType": "Field"
+                }
+            ],
+            "name": "2in1row-1620710751916",
+            "toggle": false
+        },
+        {
+            "apiName": "Student_Id__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "STUDENT ID",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "College_Major__c",
+            "notes": "",
+            "type": "text",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "MAJOR OR FIELD OF STUDY",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        },
+        {
+            "apiName": "College_Degree_Earned_List__c",
+            "notes": "",
+            "type": "autocomplete",
+            "fieldConfigType": "Field",
+            "icon": "fa-bars",
+            "label": "DEGREE AWARDED",
+            "description": "Select",
+            "className": "green-border",
+            "values": [
+                {
+                    "label": "Option 1",
+                    "value": "option-1"
+                },
+                {
+                    "label": "Option 2",
+                    "value": "option-2"
+                },
+                {
+                    "label": "Option 3",
+                    "value": "option-3"
+                }
+            ],
+            "name": "autocomplete-1620709828458",
+            "toggle": false
+        },
+        {
+            "apiName": "College_GPA__c",
+            "notes": "",
+            "type": "number",
+            "fieldConfigType": "Field",
+            "icon": "fa-font",
+            "label": "GPA (ESTIMATED)",
+            "description": "Enter your name",
+            "className": "green-border",
+            "subtype": "text",
+            "regex": "",
+            "handle": true,
+            "name": "text-1620710730992",
+            "toggle": false
+        }
+    ],
+    "id": 1620710624,
+    "show": false,
+    "activeStatus": "inactive"
+}
