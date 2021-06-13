@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "publish":"ng build --prod=true --outputPath=docs --baseHref=/FOrm-Builder/",
+    "publish":"ng build --prod=true --outputPath=docs --baseHref=/Form-Builder/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
