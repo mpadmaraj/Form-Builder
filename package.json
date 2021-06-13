@@ -21,7 +21,6 @@
     "@angular/router": "~7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^9.1.0",
     "@toverux/ngx-sweetalert2": "3.3.1",
-    "angular-cli-ghpages": "^1.0.0-rc.2",
     "bootstrap": "^4.6.0",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.5",
