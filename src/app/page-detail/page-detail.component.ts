@@ -53,7 +53,7 @@ export class PageDetailComponent implements OnInit {
   ngOnInit() {
     if (this.updatePageDetail) {
       this.page = this.updatePageDetail;
-      this.btnSaveClass += " btn-warning";
+      this.btnSaveClass += " btn-primary";
       this.saveButton = "Update Page";
     } else {
       this.btnSaveClass += " btn-primary";

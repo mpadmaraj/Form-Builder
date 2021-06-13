@@ -18,3 +18,11 @@
     font-size: 1em;
     font-weight: 600;
 }
+.btn.btn-danger{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: 600;
+}

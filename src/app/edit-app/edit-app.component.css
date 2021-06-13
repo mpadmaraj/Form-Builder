@@ -6,3 +6,29 @@
     font-size: 1em;
     font-weight: 600;
 }
+.field-arrows{
+    display: inline-table;
+    width: 30%;
+    padding-left: 4em;
+    /* font-size: 2em; */
+    height: 10px;
+}
+.field-arrows:hover{
+    cursor: pointer;
+}
+.field-delete{
+    display: inline-table;
+    width: 30%;
+}
+.field-delete{
+    cursor: pointer;
+}
+label.api-name {
+    display: block;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: #adadad;
+}
+label {
+    margin-bottom: 0px;
+}

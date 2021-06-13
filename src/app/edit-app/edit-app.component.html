@@ -132,9 +132,9 @@
                   </div>
           </div>
           <div class="col-4">
-            <i *ngIf="item.toggle" (click)="item.toggle=false" class="fa fa-chevron-up pull-right"></i>
-            <i *ngIf="!item.toggle" (click)="item.toggle=true" class="fa fa-chevron-down pull-right"></i>
-            <i (click)="removeField(i)" class="fa fa-trash pull-right"></i>
+            <i *ngIf="item.toggle" (click)="item.toggle=false" class="fa fa-chevron-up field-arrows"></i>
+            <i *ngIf="!item.toggle" (click)="item.toggle=true" class="fa fa-chevron-down field-arrows"></i>
+            <i (click)="removeField(i)" class="fa fa-trash field-delete"></i>
           </div>
         </div>
         <div *ngIf="item.toggle" class="toggle-Wrapper">

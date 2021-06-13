@@ -8,6 +8,9 @@
   </div>
 </div>
 
+<div class="m-2 save-btn">
+  <button class="btn btn-primary pull-right" (click)="savePage(pageDetail)">Save this page</button>
+</div>
 <div class="row page-config-component">
   <div class="col-4">
     <!--a dropzone-->
@@ -91,9 +94,9 @@
             </div>
           </div>
           <div class="col-4">
-            <i *ngIf="item.toggle" (click)="item.toggle=false" class="fa fa-chevron-up pull-right"></i>
-            <i *ngIf="!item.toggle" (click)="item.toggle=true" class="fa fa-chevron-down pull-right"></i>
-            <i (click)="removeField(i, 'leftPanel')" class="fa fa-trash pull-right"></i>
+            <i *ngIf="item.toggle" (click)="item.toggle=false" class="fa fa-chevron-up field-arrows"></i>
+            <i *ngIf="!item.toggle" (click)="item.toggle=true" class="fa fa-chevron-down field-arrows"></i>
+            <i (click)="removeField(i, 'leftPanel')" class="fa fa-trash field-delete"></i>
           </div>
         </div>
         <div *ngIf="item.toggle" class="toggle-Wrapper">
@@ -146,6 +149,7 @@
               <div class="row">
                 <div [ngClass]="item2.subClassName" *ngFor="let subField of item2.subFields">
                   <label>{{subField.label}}</label>
+                  <label class="api-name">{{subField.apiName}}</label>
                   <input type="text" class="form-control">
                 </div>
               </div>
@@ -224,9 +228,9 @@
             </div>
           </div>
           <div class="col-3">
-            <i *ngIf="item2.toggle" (click)="item2.toggle=false" class="fa fa-chevron-up pull-right"></i>
-            <i *ngIf="!item2.toggle" (click)="item2.toggle=true" class="fa fa-chevron-down pull-right"></i>
-            <i (click)="removeField(i, 'rightPanel')" class="fa fa-trash pull-right"></i>
+            <i *ngIf="item2.toggle" (click)="item2.toggle=false" class="fa fa-chevron-up field-arrows"></i>
+            <i *ngIf="!item2.toggle" (click)="item2.toggle=true" class="fa fa-chevron-down field-arrows"></i>
+            <i (click)="removeField(i, 'rightPanel')" class="fa fa-trash field-delete"></i>
           </div>
         </div>
         <div *ngIf="item2.toggle" class="toggle-Wrapper">
@@ -360,7 +364,3 @@
 
   </div>
 </div>
-
-<!--<div class="m-2 save-btn">
-  <button class="btn btn-success pull-right" (click)="savePage(pageDetail)">Save this page</button>
-</div>-->

@@ -14,7 +14,7 @@
             <li (click)="exportPageConfigs()">Export Page Config</li>
             <li (click)="exportFieldConfigs()">Export Field Config</li>
             <li class="divider"></li>
-            <li (click)="showUploadJsonModal = true">Upload Worksheet Config</li>
+            <li (click)="showUploadJsonModal = true">Import Worksheet Config</li>
             <li (click)="exportAsJson()">Export Worksheet Config</li>
             <li class="divider"></li>
             <li (click)="startFromScratch()">Reset Worksheet</li>
@@ -43,7 +43,7 @@
       </a>
     </li>
   </ul>
-  <div *ngFor="let page of allPages;let i=index" class="border-left border-right border-bottom">
+  <div *ngFor="let page of allPages;let i=index" class="border-left border-right border-bottom border-top">
     <app-page-config [hidden]="!page.show" [pageDetail]="page" (pageOrderUpdatedEvent)="pageOrderUpdated($event, i)"
       (pageNameChangeEvent)="pageNameUpdated($event, i)" (savePageEvent)="savePage(page)"></app-page-config>
   </div>

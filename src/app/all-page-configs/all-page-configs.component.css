@@ -124,6 +124,7 @@ a.nav-link.inactive {
 .main-tabs{
     display: inline-block;
     padding-top: 20px;
+    width: 100%;
 }
 li.nav-item i:hover {
     color: #075b81;
