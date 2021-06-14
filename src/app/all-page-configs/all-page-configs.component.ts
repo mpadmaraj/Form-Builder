@@ -50,7 +50,7 @@ export class AllPageConfigsComponent implements OnInit {
   constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService, private _eref: ElementRef) { }
 
   onClick(event) {
-   if (!this._eref.nativeElement.contains(event.target)){
+   if (event.target.innerHTML != 'Select an action'){
        this.menuClicked = false;
    } 
 
@@ -67,12 +67,12 @@ export class AllPageConfigsComponent implements OnInit {
       this.menuClicked = !this.menuClicked;
   }
   disableMenu(){
-    if(!this.justEnabled){        
+/*    if(!this.justEnabled){        
         this.menuClicked = false;
     }
-    this.justEnabled = false;
+    this.justEnabled = false; */
   }
-  
+
   onModalClose() {
     this.showPreview = false;
     this.showAddPageModal = false;
