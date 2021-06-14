@@ -67,12 +67,12 @@ export class AllPageConfigsComponent implements OnInit {
       this.menuClicked = !this.menuClicked;
   }
   disableMenu(){
-    if(!this.justEnabled){        
+/*    if(!this.justEnabled){        
         this.menuClicked = false;
     }
-    this.justEnabled = false;
+    this.justEnabled = false; */
   }
-  
+
   onModalClose() {
     this.showPreview = false;
     this.showAddPageModal = false;
