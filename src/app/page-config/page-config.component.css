@@ -38,8 +38,8 @@
 }
 .field-arrows{
     display: inline-table;
-    width: 30%;
-    padding-left: 4em;
+    width: 25%;
+    padding-left: 3.5em;
     /* font-size: 2em; */
     height: 10px;
 }

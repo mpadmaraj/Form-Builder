@@ -1,7 +1,7 @@
 <div class="actions">
   <div class="dropdown"  (click)="enableMenu()">
         <div class="dd-button">
-            Select an action
+            <b>Select an action</b>
         </div>
         <input title="menu" type="checkbox" class="dd-input" id="test"  [ngModel]="menuClicked"/>
 
@@ -31,7 +31,7 @@
 </app-modal>
 
 <app-modal *ngIf="showAddPageModal" [title]="modalTitle" (close)="onModalClose()" size="md">
-  <app-page-detail (modalClose)="onModalClose()" (pageDetails)="savePageDetails($event)"
+  <app-page-detail (modalClose)="onModalClose()" (pageDetails)="savePageDetails($event)" 
     (removePageDetail)="removePageDetail()" [updatePageDetail]="updatePageDetail"></app-page-detail>
 </app-modal>
 
@@ -45,8 +45,10 @@
   </ul>
   <div *ngFor="let page of allPages;let i=index" class="border-left border-right border-bottom border-top">
     <app-page-config [hidden]="!page.show" [pageDetail]="page" (pageOrderUpdatedEvent)="pageOrderUpdated($event, i)"
+        (closeMenu)="disableMenu()"
       (pageNameChangeEvent)="pageNameUpdated($event, i)" (savePageEvent)="savePage(page)"></app-page-config>
   </div>
+  <div class= "start-new" *ngIf="allPages == null || allPages.length == 0"><h1>Start creating new worksheet!</h1></div>
 </div>
 
 <app-modal *ngIf="showPreview" (close)="onModalClose()">

@@ -91,7 +91,7 @@
     width: 100%;
     /* height: 30px; */
     text-align: center;
-    font-size: 18px;
+    font-size: 1.4em;
     vertical-align: middle;
 
 }
@@ -128,7 +128,7 @@
     border: none;
 }
 .red-border {
-    border: 1px dashed red;
+    border: 1px solid red;
 }
 .btn-primary{
     background-color: #e55800;

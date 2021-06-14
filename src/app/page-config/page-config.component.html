@@ -23,7 +23,7 @@
         (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(item, pageDetail.leftPanel, 'move')"
         [dndEffectAllowed]="'all'" [dndDraggable]="item">
         <div class="row form-group">
-          <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+          <div class="col-1"><i class="fa fa-arrows dndHandle" dndHandle></i></div>
           <div class="col-7">
             <div *ngIf="item.type=='text'">
               <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
@@ -143,7 +143,7 @@
         (dndStart)="onDragStart($event)" (dndCanceled)="onDragCanceled($event)"
         (dndMoved)="onDragged(item2, pageDetail.rightPanel, 'move')" [dndEffectAllowed]="'all'" [dndDraggable]="item2">
         <div class="row form-group" [ngClass]="item2.className">
-          <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+          <div class="col-1"><i class="fa fa-arrows dndHandle" dndHandle></i></div>
           <div class="col-8">
             <div *ngIf="item2.type=='2in1row' || item2.type=='3in1row'">
               <div class="row">

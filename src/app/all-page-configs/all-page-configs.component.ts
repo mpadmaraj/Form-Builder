@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 // import { ExportService } from '../export.service';
 import { DataStoreService } from '../data-store.service';
 import * as FileSaver from 'file-saver';
@@ -10,7 +10,10 @@ import { StaticPagesService } from '../static-pages.service';
 @Component({
   selector: 'app-all-page-configs',
   templateUrl: './all-page-configs.component.html',
-  styleUrls: ['./all-page-configs.component.css']
+  styleUrls: ['./all-page-configs.component.css'],
+  host: {
+    '(document:click)': 'onClick($event)',
+  }
 })
 export class AllPageConfigsComponent implements OnInit {
 
@@ -43,8 +46,15 @@ export class AllPageConfigsComponent implements OnInit {
     List: {}
   };
   menuClicked=false;
-  constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService) { }
+  justEnabled = true;
+  constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService, private _eref: ElementRef) { }
 
+  onClick(event) {
+   if (!this._eref.nativeElement.contains(event.target)){
+       this.menuClicked = false;
+   } 
+
+  }
   ngOnInit() {
     this.dataStoreService.allPages.subscribe((pages: PageDetail[]) => {
       this.allPages = pages || [];
@@ -53,8 +63,16 @@ export class AllPageConfigsComponent implements OnInit {
   }
 
   enableMenu(){
+      this.justEnabled = true;
       this.menuClicked = !this.menuClicked;
   }
+  disableMenu(){
+    if(!this.justEnabled){        
+        this.menuClicked = false;
+    }
+    this.justEnabled = false;
+  }
+  
   onModalClose() {
     this.showPreview = false;
     this.showAddPageModal = false;
@@ -140,6 +158,7 @@ export class AllPageConfigsComponent implements OnInit {
       }
     });
   }
+  
   savePage(page) {
     this.allPages = this.allPages.filter(p => page.id === p.id ? page : p);
     this.dataStoreService.allPages.next(this.allPages);
@@ -262,6 +281,17 @@ export class AllPageConfigsComponent implements OnInit {
     });
   }
 
+   showThisPageById(id) {
+    this.allPages.forEach((element, index) => {
+      if (this.allPages[index].id == id) {
+        element.show = true;
+        element.activeStatus = 'active';
+      } else {
+        element.show = false;
+        element.activeStatus = 'inactive';
+      }
+    });
+  }
   pageOrderUpdated(pageOrder, i) {
     this.allPages.forEach((element, index) => {
       if (index === i) {
@@ -279,6 +309,7 @@ export class AllPageConfigsComponent implements OnInit {
     this.allPages.sort(this.compare);
     this.dataStoreService.allPages.next(this.allPages);
     this.updatePageDetail = null;
+    this.showThisPageById(page.id);
   }
 
   exportAsJson() {

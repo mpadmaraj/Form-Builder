@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input, ElementRef} from '@angular/core';
 import {DndDropEvent, DropEffect} from 'ngx-drag-drop';
 import {field, PageDetail, value} from '../global.model';
 import swal from 'sweetalert2';
@@ -8,13 +8,18 @@ import {StaticPagesService} from '../static-pages.service';
 @Component({
   selector: 'app-page-config',
   templateUrl: './page-config.component.html',
-  styleUrls: ['./page-config.component.css']
+  styleUrls: ['./page-config.component.css'],
+  host: {
+    '(document:click)': 'onClick($event)',
+  }
 })
 export class PageConfigComponent implements OnInit {
 
   @Input() pageDetail: PageDetail;
 
   @Output() savePageEvent = new EventEmitter<any>();
+
+  @Output() closeMenu = new EventEmitter<any>();
 
   value: value = {
     label: "",
@@ -277,7 +282,7 @@ export class PageConfigComponent implements OnInit {
   headingTypes = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
   leftPanelStyles = ['Left-Panel-Desc-Large', 'Left-Panel-Desc-Small', 'Left-Panel-Video-Desc'];
 
-  constructor(private dataStoreService: DataStoreService, private staticPagesService: StaticPagesService) { }
+  constructor(private dataStoreService: DataStoreService, private staticPagesService: StaticPagesService, private _eref: ElementRef) { }
   applicationFields = this.dataStoreService.soaFields;
   listFields = this.dataStoreService.listFields;
   
@@ -286,6 +291,9 @@ export class PageConfigComponent implements OnInit {
 
   }
 
+  onClick(event) {
+   this.closeMenu.emit(); 
+  }
   onDragStart(event: DragEvent) {
     console.log("drag started", JSON.stringify(event, null, 2));
   }
