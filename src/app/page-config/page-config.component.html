@@ -156,30 +156,37 @@
             </div>
             <div *ngIf="item2.type=='text'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <input type="text" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='email'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <input type="email" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='phone'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <input type="text" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='number'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <input type="number" class="form-control" id="{{item2.name}}" min="{{item2.min}}" max="{{item2.max}}">
             </div>
             <div *ngIf="item2.type=='date'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <input type="date" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='datetime-local'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <input type="datetime-local" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='textarea'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <textarea class="form-control" id="{{item2.name}}">
                     </textarea>
             </div>
@@ -199,6 +206,7 @@
             </div>
             <div *ngIf="item2.type=='autocomplete'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <select class="form-control" id="{{item2.name}}">
                 <option *ngFor="let v of item2.values" [value]="v.value">{{v.label}}</option>
               </select>
@@ -206,6 +214,7 @@
             </div>
             <div *ngIf="item2.type=='checkbox'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <div *ngFor="let v of item2.values" class="inline-form-group">
                 <label class="cust-check-bx">
                   <input type="checkbox" [value]="v.value" name="{{item2.name}}" (click)="toggleValue(v)"> {{v.label}}
@@ -215,6 +224,7 @@
             </div>
             <div *ngIf="item2.type=='radio'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
+              <label class="api-name">{{item2.apiName}}</label>
               <div *ngFor="let v of item2.values" class="inline-form-group">
                 <label class="cust-check-bx">
                   <input type="radio" [value]="v.value" name="{{item2.name}}"> {{v.label}}
