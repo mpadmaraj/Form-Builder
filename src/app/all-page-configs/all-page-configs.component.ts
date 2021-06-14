@@ -50,7 +50,7 @@ export class AllPageConfigsComponent implements OnInit {
   constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService, private _eref: ElementRef) { }
 
   onClick(event) {
-   if (!this._eref.nativeElement.contains(event.target)){
+   if (event.target.innerHTML != 'Select an action'){
        this.menuClicked = false;
    } 
 
