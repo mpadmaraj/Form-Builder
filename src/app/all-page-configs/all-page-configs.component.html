@@ -1,10 +1,10 @@
 <div class="actions">
   <div class="row" style="width: 80%;margin-left:10%;">
-    <div class="col-4">
+    <div class="col-4" *ngIf="allPages.length > 0">
       <label for="ConfigName">Configuration Sheet Name</label>
       <input id="ConfigName" name="ConfigName" type="text" class="form-control" [(ngModel)]="configSheet.Name" (ngModelChange)="configSheetDetailsUpdated()">
     </div>
-    <div class="col-4">
+    <div class="col-4" *ngIf="allPages.length > 0">
       <label for="ConfigId">Configuration Sheet Id</label>
       <input id="ConfigId" name="ConfigId" type="text" class="form-control" [(ngModel)]="configSheet.Id" (ngModelChange)="configSheetDetailsUpdated()">
     </div>
