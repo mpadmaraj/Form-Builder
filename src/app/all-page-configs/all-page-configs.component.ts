@@ -54,6 +54,7 @@ export class AllPageConfigsComponent implements OnInit {
   };
   configSheetName = '';
   sheetDetails;
+  showNextStep = false;
   constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService, private _eref: ElementRef) { }
 
   onClick(event) {
@@ -65,6 +66,9 @@ export class AllPageConfigsComponent implements OnInit {
   ngOnInit() {
     this.dataStoreService.allPages.subscribe((pages: PageDetail[]) => {
       this.allPages = pages || [];
+      if(this.allPages.length > 0){
+          this.showNextStep = true;
+      }
     });
     this.showThisPage(0);
     this.sheetDetails = JSON.parse(localStorage.getItem("configSheet"));
@@ -74,8 +78,11 @@ export class AllPageConfigsComponent implements OnInit {
   }
 
   enableMenu(){
-      this.justEnabled = true;
-      this.menuClicked = !this.menuClicked;
+      if(this.showNextStep){
+        this.justEnabled = true;
+        this.menuClicked = !this.menuClicked;
+      }
+      
   }
   disableMenu(){
 /*    if(!this.justEnabled){        
@@ -84,6 +91,9 @@ export class AllPageConfigsComponent implements OnInit {
     this.justEnabled = false; */
   }
 
+save(){
+    this.showNextStep = true;
+}
   onModalClose() {
     this.showPreview = false;
     this.showAddPageModal = false;
@@ -121,6 +131,7 @@ export class AllPageConfigsComponent implements OnInit {
     this.allPages.sort(this.compare);
     this.dataStoreService.allPages.next(this.allPages);
     this.updatePageDetail = null;
+    this.showThisPageById(page.id);
   }
 
   editPage(page: PageDetail) {
@@ -167,6 +178,7 @@ export class AllPageConfigsComponent implements OnInit {
         this.showAddPageModal = false;
         this.modalTitle = "";
         localStorage.clear();
+        this.showNextStep = false;
       }
     });
   }

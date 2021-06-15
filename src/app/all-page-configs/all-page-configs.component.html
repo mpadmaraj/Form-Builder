@@ -1,5 +1,5 @@
 <div class="actions">
-  <div class="row" style="width: 80%;margin-left:10%;">
+  <div class="row name" >
     <div class="col-4">
       <label for="ConfigName" *ngIf="allPages.length > 0">Configuration Sheet Name</label>
       <input id="ConfigName" name="ConfigName" type="text" class="form-control" [(ngModel)]="configSheet.Name" (ngModelChange)="configSheetDetailsUpdated()" *ngIf="allPages.length > 0">
@@ -13,7 +13,7 @@
         <div class="dd-button">
             <b>Select an action</b>
         </div>
-        <input title="menu" type="checkbox" class="dd-input" id="test"  [ngModel]="menuClicked"/>
+        <input title="menu" type="checkbox" class="dd-input" id="test"  [disabled]="showNextStep==true" [ngModel]="menuClicked"/>
 
         <ul class="dd-menu">
             <li (click)="showUseTemplatesModal = true">Use Template for page</li>
@@ -61,16 +61,24 @@
       (pageNameChangeEvent)="pageNameUpdated($event, i)" (savePageEvent)="savePage(page)"></app-page-config>
   </div>
   <div class= "start-new" *ngIf="allPages == null || allPages.length == 0">
-    <h1>Start creating new worksheet!</h1>
-    <br/>
-    <div class="row" style="width: 80%;margin-left:10%;">
-      <div class="col-6">
+    <h1 *ngIf="showNextStep == false">Start creating new worksheet!</h1>
+    
+    <h5 class="show-finger" *ngIf="showNextStep == true">Great!! Now you can start adding pages and fields to this worksheet from above menu</h5>
+    <div class="row worksheet-info">
+      <div class="col-8">
         <label for="ConfigName">Configuration Sheet Name</label>
         <input id="ConfigName" name="ConfigName" type="text" class="form-control" [(ngModel)]="configSheet.Name" (ngModelChange)="configSheetDetailsUpdated()">
       </div>
-      <div class="col-6">
+      <div class="col-8">
         <label for="ConfigId">Configuration Sheet Id</label>
         <input id="ConfigId" name="ConfigId" type="text" class="form-control" [(ngModel)]="configSheet.Id" (ngModelChange)="configSheetDetailsUpdated()">
+      </div>
+      <div class="col-8">
+          <div class="error">
+                <h6 class="danger">Please provide a name for the worksheet</h6>
+          </div>
+          
+        <button class="btn btn-primary pull-right" (click)="save()">Save</button>
       </div>
     </div>
   </div>
