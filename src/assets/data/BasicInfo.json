@@ -172,35 +172,6 @@
       "toggle": false
     },
     {
-      "apiName": "",
-      "notes": "",
-      "type": "2in1row",
-      "icon": "fa-font",
-      "label": "2in1row",
-      "description": "Enter your name",
-      "className": "green-border",
-      "subtype": "text",
-      "regex": "",
-      "handle": true,
-      "subClassName": "col-6",
-      "subFields": [
-        {
-          "label": "LAST NAME",
-          "apiName": "Last_Name__c",
-          "required": true,
-          "fieldConfigType": "Field"
-        },
-        {
-          "label": "SUFFIX",
-          "apiName": "Suffix__c",
-          "required": false,
-          "fieldConfigType": "Field"
-        }
-      ],
-      "name": "2in1row-1620709901147",
-      "toggle": false
-    },
-    {
       "apiName": "Maiden__c",
       "notes": "",
       "type": "text",
