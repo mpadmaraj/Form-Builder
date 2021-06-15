@@ -198,6 +198,7 @@ export class AllPageConfigsComponent implements OnInit {
         fieldConfig.regex = element.regex;
         fieldConfig.notes = element.notes;
         fieldConfig.apiName = element.apiName;
+        fieldConfig.priority_options = element.priority_options;
         fieldConfig.displayOrder = 'Left Panel';
         fieldConfig.pageName = page.name;
         fieldConfig.pageConfigId = page.pageConfigId;
@@ -224,6 +225,7 @@ export class AllPageConfigsComponent implements OnInit {
             fieldConfig.fieldLabel = subElement.label;
             fieldConfig.notes = subElement.notes;
             fieldConfig.apiName = subElement.apiName;
+            fieldConfig.priority_options = subElement.priority_options;
             fieldConfig.displayOrder = 'Right Panel';
             fieldConfig.Hide_on_Finalize = subElement.hideOnFinalize ? subElement.hideOnFinalize : 'FALSE';
             fieldConfig.Do_not_show_on_PDF = subElement.doNotShowOnPdf ? subElement.doNotShowOnPdf : 'FALSE';
@@ -243,6 +245,7 @@ export class AllPageConfigsComponent implements OnInit {
           fieldConfig.notes = element.notes;
           fieldConfig.apiName = element.apiName;
           fieldConfig.headingType = element.headingType;
+          fieldConfig.priority_options = element.priority_options;
           fieldConfig.displayOrder = 'Right Panel';
           fieldConfig.Do_not_show_on_PDF = element.doNotShowOnPdf ? element.doNotShowOnPdf : 'FALSE';
           fieldConfig.Hide_on_Finalize = element.hideOnFinalize ? element.hideOnFinalize : 'FALSE';
