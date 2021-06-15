@@ -38,6 +38,7 @@ export class PageDetailComponent implements OnInit {
     name: '',
     pageType: 'Custom',
     pageOrder: null,
+    pageConfigId:'',
     minTime: 5,
     maxTime: 10,
     minMaxTimeUnit: 'Minutes',

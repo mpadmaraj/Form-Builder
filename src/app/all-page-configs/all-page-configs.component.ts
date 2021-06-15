@@ -20,6 +20,7 @@ export class AllPageConfigsComponent implements OnInit {
   page: PageDetail = {
     name: 'Page Name...',
     pageType: '',
+    pageConfigId: '',
     pageOrder: null,
     minTime: null,
     maxTime: null,
@@ -47,6 +48,12 @@ export class AllPageConfigsComponent implements OnInit {
   };
   menuClicked=false;
   justEnabled = true;
+  configSheet = {
+    Id: '',
+    Name: ''
+  };
+  configSheetName = '';
+  sheetDetails;
   constructor(private dataStoreService: DataStoreService, private staticPagesService:StaticPagesService, private _eref: ElementRef) { }
 
   onClick(event) {
@@ -60,6 +67,10 @@ export class AllPageConfigsComponent implements OnInit {
       this.allPages = pages || [];
     });
     this.showThisPage(0);
+    this.sheetDetails = JSON.parse(localStorage.getItem("configSheet"));
+    if (this.sheetDetails) {
+      this.configSheet = this.sheetDetails;
+    }
   }
 
   enableMenu(){
@@ -155,6 +166,7 @@ export class AllPageConfigsComponent implements OnInit {
         this.updatePageDetail = null;
         this.showAddPageModal = false;
         this.modalTitle = "";
+        localStorage.clear();
       }
     });
   }
@@ -188,6 +200,7 @@ export class AllPageConfigsComponent implements OnInit {
         fieldConfig.apiName = element.apiName;
         fieldConfig.displayOrder = 'Left Panel';
         fieldConfig.pageName = page.name;
+        fieldConfig.pageConfigId = page.pageConfigId;
         fieldConfig.columnOrder = 10;
         fieldConfig.leftPanelStyles = element.leftPanelStyles;
         fieldConfig.Hide_on_Finalize = true;
@@ -205,6 +218,7 @@ export class AllPageConfigsComponent implements OnInit {
             fieldConfig.order = rightPanelOrder;
             fieldConfig.columnOrder = ((colOrder + 1) * 10);
             fieldConfig.pageName = page.name;
+            fieldConfig.pageConfigId = page.pageConfigId;
             fieldConfig.type = subElement.fieldConfigType;
             fieldConfig.name = subElement.label;
             fieldConfig.fieldLabel = subElement.label;
@@ -218,6 +232,7 @@ export class AllPageConfigsComponent implements OnInit {
           rightPanelOrder = rightPanelOrder + 10;
         } else {
           fieldConfig.pageName = page.name;
+          fieldConfig.pageConfigId = page.pageConfigId;
           fieldConfig.order = rightPanelOrder;
           rightPanelOrder = rightPanelOrder + 10;
           fieldConfig.columnOrder = 10;
@@ -236,7 +251,8 @@ export class AllPageConfigsComponent implements OnInit {
       });
     }
     // this.checkForDuplicates(fieldConfigs);
-    this.exportToCsv(fieldConfigs, 'FieldConfig');
+    const fileNamePrefix = this.configSheetName + 'FieldConfig';
+    this.exportToCsv(fieldConfigs, fileNamePrefix);
   }
 
   // checkForDuplicates (fieldConfigs) {
@@ -255,9 +271,12 @@ export class AllPageConfigsComponent implements OnInit {
       pageConfig.minTime = page.minTime;
       pageConfig.maxTime = page.maxTime;
       pageConfig.minMaxTimeUnit = page.minMaxTimeUnit;
+      pageConfig.pageConfigId = page.pageConfigId;
+      pageConfig.onlineAppConfigId = this.configSheet.Id;
       pageConfigs.push(pageConfig);
     }
-    this.exportToCsv(pageConfigs, 'PageConfig');
+    const fileNamePrefix = this.configSheetName + 'PageConfig';
+    this.exportToCsv(pageConfigs, fileNamePrefix);
   }
 
   pageNameUpdated(pageName, i) {
@@ -408,5 +427,10 @@ export class AllPageConfigsComponent implements OnInit {
       return 1;
     }
     return 0;
+  }
+
+  configSheetDetailsUpdated() {
+    localStorage.setItem('configSheet', JSON.stringify(this.configSheet));
+    this.configSheetName = this.configSheet.Name ? (this.configSheet.Name + '__') : '';
   }
 }

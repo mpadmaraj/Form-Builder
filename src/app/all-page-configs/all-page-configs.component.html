@@ -1,5 +1,15 @@
 <div class="actions">
-  <div class="dropdown"  (click)="enableMenu()">
+  <div class="row" style="width: 80%;margin-left:10%;">
+    <div class="col-4">
+      <label for="ConfigName">Configuration Sheet Name</label>
+      <input id="ConfigName" name="ConfigName" type="text" class="form-control" [(ngModel)]="configSheet.Name" (ngModelChange)="configSheetDetailsUpdated()">
+    </div>
+    <div class="col-4">
+      <label for="ConfigId">Configuration Sheet Id</label>
+      <input id="ConfigId" name="ConfigId" type="text" class="form-control" [(ngModel)]="configSheet.Id" (ngModelChange)="configSheetDetailsUpdated()">
+    </div>
+    <div class="col-4">
+      <div class="dropdown"  (click)="enableMenu()">
         <div class="dd-button">
             <b>Select an action</b>
         </div>
@@ -20,6 +30,8 @@
             <li (click)="startFromScratch()">Reset Worksheet</li>
         </ul>    
     </div>
+    </div>
+  </div>
 </div>
 
 <app-modal *ngIf="showUseTemplatesModal" [title]="templateTitle" (close)="onModalClose()" size="md" >
@@ -48,7 +60,20 @@
         (closeMenu)="disableMenu()"
       (pageNameChangeEvent)="pageNameUpdated($event, i)" (savePageEvent)="savePage(page)"></app-page-config>
   </div>
-  <div class= "start-new" *ngIf="allPages == null || allPages.length == 0"><h1>Start creating new worksheet!</h1></div>
+  <div class= "start-new" *ngIf="allPages == null || allPages.length == 0">
+    <h1>Start creating new worksheet!</h1>
+    <br/>
+    <div class="row" style="width: 80%;margin-left:10%;">
+      <div class="col-6">
+        <label for="ConfigName">Configuration Sheet Name</label>
+        <input id="ConfigName" name="ConfigName" type="text" class="form-control" [(ngModel)]="configSheet.Name" (ngModelChange)="configSheetDetailsUpdated()">
+      </div>
+      <div class="col-6">
+        <label for="ConfigId">Configuration Sheet Id</label>
+        <input id="ConfigId" name="ConfigId" type="text" class="form-control" [(ngModel)]="configSheet.Id" (ngModelChange)="configSheetDetailsUpdated()">
+      </div>
+    </div>
+  </div>
 </div>
 
 <app-modal *ngIf="showPreview" (close)="onModalClose()">

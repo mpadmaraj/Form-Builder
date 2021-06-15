@@ -129,6 +129,7 @@ export interface PageDetail {
   id?: Number;
   name: String;
   pageType: String;
+  pageConfigId: String;
   pageOrder: Number;
   minTime?: Number;
   maxTime?: Number;

@@ -68,7 +68,6 @@
               <select class="form-control" id="{{item.name}}">
                 <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
               </select>
-              <!-- <small class="form-text text-muted">{{item.description}}</small> -->
             </div>
             <div *ngIf="item.type=='checkbox'">
               <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
@@ -357,6 +356,10 @@
             <div class="form-group" *ngIf=" item2.type !== 'header' ">
               <label>Regex</label>
               <input class="form-control" type="text" [(ngModel)]="item2.regex" />
+            </div>
+            <div class="form-group" *ngIf=" item2.type === 'autocomplete' ">
+              <label>Priority options(Semi colon seperated)</label>
+              <input class="form-control" type="text" [(ngModel)]="item2.priority_options" />
             </div>
             <div class="form-group">
               <label>Notes</label>

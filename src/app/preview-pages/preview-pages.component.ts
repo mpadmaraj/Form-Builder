@@ -16,7 +16,7 @@ export class PreviewPagesComponent implements OnInit {
   constructor(private dataService: DataStoreService) { }
 
   ngOnInit() {
-    let arr = [{id: 1, name: "Finalize Application", pageOrder: 1000, pageType: "Custom"}];
+    let arr = [{id: 1, name: "Finalize Application", pageOrder: 1000, pageType: "Custom", pageConfigId: ''}];
     this.dataService.allPages.subscribe(pages => {
       this.allPages = pages.concat(arr);
       this.allPages.forEach(page => {
