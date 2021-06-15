@@ -139,9 +139,9 @@
       [ngClass]="{'empty':(pageDetail.rightPanel && pageDetail.rightPanel.length) == 0}">
 
       <div class="field" *ngFor="let item2 of pageDetail.rightPanel;let i= index;let itemIndex=index;"
-        (dndStart)="onDragStart($event)" (dndCanceled)="onDragCanceled($event)"
+        (dndStart)="onDragStart($event)" (dndCanceled)="onDragCanceled($event)" [ngClass]="item2.className"
         (dndMoved)="onDragged(item2, pageDetail.rightPanel, 'move')" [dndEffectAllowed]="'all'" [dndDraggable]="item2">
-        <div class="row form-group" [ngClass]="item2.className">
+        <div class="row form-group" >
           <div class="col-1"><i class="fa fa-arrows dndHandle" dndHandle></i></div>
           <div class="col-8">
             <div *ngIf="item2.type=='2in1row' || item2.type=='3in1row'">
