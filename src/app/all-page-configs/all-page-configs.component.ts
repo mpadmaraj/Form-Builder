@@ -334,7 +334,7 @@ export class AllPageConfigsComponent implements OnInit {
   exportAsJson() {
     let allJson = JSON.parse(localStorage.getItem("allPages"));
     const blob = new Blob([JSON.stringify(allJson)], { type: 'application/json' });
-    FileSaver.saveAs(blob, 'FormBuilder_' + (+new Date()) + '.json');
+    FileSaver.saveAs(blob, this.configSheetName +'FormBuilder_' + (+new Date()) + '.json');
   }
 
   jsonDataUploaded(data) {
@@ -347,12 +347,12 @@ export class AllPageConfigsComponent implements OnInit {
         if ((keys.indexOf('leftPanel') !== -1) && ((keys.indexOf('rightPanel') !== -1))) {
           swal({
             title: 'Are you sure?',
-            text: "Your changes will be lost if any.",
+            text: "",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#00B96F',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, remove!'
+            confirmButtonText: 'Yes!'
           }).then((result) => {
             if (result.value) {
               // this.allPages = fileData;

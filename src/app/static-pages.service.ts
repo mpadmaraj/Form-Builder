@@ -27,26 +27,26 @@ export class StaticPagesService implements OnInit {
 
   getTemplate (data):PageDetail {
     if (data === 'Basic Information') {
-      this.basicInfoTemplate = BasicInfoData;
-      console.log(BasicInfoData);
+      this.basicInfoTemplate = JSON.parse(JSON.stringify(BasicInfoData));
+      // console.log(BasicInfoData);
       return this.basicInfoTemplate.default;
     } else if (data === 'Education History') {
-      this.educationHistoryTemplate = EducationHistoryData;
+      this.educationHistoryTemplate = JSON.parse(JSON.stringify(EducationHistoryData));
       return this.educationHistoryTemplate.default;
     } else if (data === 'Professional Experience') {
-      this.profExpTemplate = ProfExpData;
+      this.profExpTemplate = JSON.parse(JSON.stringify(ProfExpData));
       return this.profExpTemplate.default;
     } else if (data === 'Reference Requirements') {
-      this.referenceRequirementsTemplate = ReferenceRequirementsData;
+      this.referenceRequirementsTemplate = JSON.parse(JSON.stringify(ReferenceRequirementsData));
       return this.referenceRequirementsTemplate.default;
     } else if (data === 'Refer a Friend') {
-      this.referAFriendTemplate = ReferAFriendData;
+      this.referAFriendTemplate = JSON.parse(JSON.stringify(ReferAFriendData));
       return this.referAFriendTemplate.default;
     } else if (data === 'Letter of Recommendation') {
-      this.lorTemplate = LORData;
+      this.lorTemplate = JSON.parse(JSON.stringify(LORData));
       return this.lorTemplate.default;
     } else if (data === 'Personal Statement') {
-      this.personalStatementTemplate = PersonalStatementData;
+      this.personalStatementTemplate = JSON.parse(JSON.stringify(PersonalStatementData));
       return this.personalStatementTemplate.default;
     }
   }
