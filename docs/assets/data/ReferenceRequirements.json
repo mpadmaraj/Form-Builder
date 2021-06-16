@@ -41,7 +41,7 @@
             "icon": "fa-paragraph",
             "label": "Paragraph",
             "className": "green-border",
-            "description": "Allows you to access your educational records if you enroll at George Mason University. You may waive your right of access to this specific report if you so choose. Your decision to waive or not to waive your right of access will have no bearing on the handling of your application."
+            "description": "Allows you to access your educational records if you enroll at our University. You may waive your right of access to this specific report if you so choose. Your decision to waive or not to waive your right of access will have no bearing on the handling of your application."
         },
         {
             "apiName": "I_waive_my_right_to_access_this_report__c",

@@ -641,7 +641,7 @@
       "type": "autocomplete",
       "fieldConfigType": "Field",
       "icon": "fa-bars",
-      "label": "HOW DID YOU HEAR ABOUT GEORGE MASON UNIVERSITY?",
+      "label": "HOW DID YOU HEAR ABOUT OUR UNIVERSITY?",
       "description": "Select",
       "className": "green-border",
       "values": [
@@ -667,7 +667,7 @@
       "type": "radio",
       "fieldConfigType": "Radio",
       "icon": "fa-list-ul",
-      "label": "Have you previously applied to George Mason University?",
+      "label": "Have you previously applied to our University?",
       "className": "green-border",
       "description": "Radio boxes",
       "values": [
@@ -687,7 +687,7 @@
       "type": "radio",
       "fieldConfigType": "Radio",
       "icon": "fa-list-ul",
-      "label": "HAVE YOU PREVIOUSLY ATTENDED GEORGE MASON UNIVERSITY?",
+      "label": "HAVE YOU PREVIOUSLY ATTENDED OUR UNIVERSITY?",
       "className": "green-border",
       "description": "Radio boxes",
       "values": [
