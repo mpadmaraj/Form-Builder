@@ -359,6 +359,7 @@
       "label": "Country",
       "description": "Select",
       "className": "green-border",
+      "priority_options":"United States; Canada; Mexico",
       "values": [
         {
           "label": "Option 1",
