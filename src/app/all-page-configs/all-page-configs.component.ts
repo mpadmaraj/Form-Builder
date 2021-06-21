@@ -259,6 +259,7 @@ save(){
           fieldConfig.apiName = element.apiName;
           if(fieldConfig.apiName == 'DeltakSRP__Academic_Program__c'){
                 fieldConfig.type = 'Academic Program';
+                fieldConfig.name = 'Degree Program';
           } else {
               fieldConfig.type = element.fieldConfigType;
           }
