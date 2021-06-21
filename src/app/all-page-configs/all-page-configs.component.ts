@@ -219,6 +219,7 @@ save(){
         fieldConfig.Hide_on_Finalize = true;
         fieldConfig.Do_not_show_on_PDF = true;
         fieldConfig.order = leftPanelOrder;
+        fieldConfig.headingType = element.headingType;
         leftPanelOrder = leftPanelOrder + 10;
         fieldConfigs.push(fieldConfig);
       });
@@ -241,6 +242,7 @@ save(){
             fieldConfig.displayOrder = 'Right Panel';
             fieldConfig.Hide_on_Finalize = subElement.hideOnFinalize ? subElement.hideOnFinalize : 'FALSE';
             fieldConfig.Do_not_show_on_PDF = subElement.doNotShowOnPdf ? subElement.doNotShowOnPdf : 'FALSE';
+            fieldConfig.headingType = subElement.headingType;
             fieldConfigs.push(fieldConfig);
           });
           rightPanelOrder = rightPanelOrder + 10;
@@ -250,17 +252,22 @@ save(){
           fieldConfig.order = rightPanelOrder;
           rightPanelOrder = rightPanelOrder + 10;
           fieldConfig.columnOrder = 10;
-          fieldConfig.type = element.fieldConfigType;
           fieldConfig.name = element.name;
           fieldConfig.fieldLabel = element.label;
           fieldConfig.regex = element.regex;
           fieldConfig.notes = element.notes;
           fieldConfig.apiName = element.apiName;
+          if(fieldConfig.apiName == 'DeltakSRP__Academic_Program__c'){
+                fieldConfig.type = 'Academic Program';
+          } else {
+              fieldConfig.type = element.fieldConfigType;
+          }
           fieldConfig.headingType = element.headingType;
           fieldConfig.priority_options = element.priority_options;
           fieldConfig.displayOrder = 'Right Panel';
           fieldConfig.Do_not_show_on_PDF = element.doNotShowOnPdf ? element.doNotShowOnPdf : 'FALSE';
           fieldConfig.Hide_on_Finalize = element.hideOnFinalize ? element.hideOnFinalize : 'FALSE';
+          fieldConfig.headingType = element.headingType;
           fieldConfigs.push(fieldConfig);
         }
       });
