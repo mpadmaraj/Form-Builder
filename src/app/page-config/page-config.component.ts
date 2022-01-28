@@ -128,6 +128,27 @@ export class PageConfigComponent implements OnInit {
     {
       "apiName": "",
       "notes": "",
+      "type": "checkbox",
+      "fieldConfigType": "Field",
+      "label": "Multi Checkbox",
+      "icon": "fa-list",
+      "description": "Checkbox",
+      "inline": true,
+      "className": "red-border",
+      "values": [
+        {
+          "label": "Option",
+          "value": "option"
+        },
+        {
+          "label": "Option",
+          "value": "option"
+        }
+      ]
+    },
+    {
+      "apiName": "",
+      "notes": "",
       "type": "radio",
       "fieldConfigType": "Radio",
       "icon": "fa-list-ul",

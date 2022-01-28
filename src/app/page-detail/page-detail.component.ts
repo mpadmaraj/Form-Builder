@@ -43,7 +43,8 @@ export class PageDetailComponent implements OnInit {
     maxTime: 10,
     minMaxTimeUnit: 'Minutes',
     leftPanel: this.leftPanelModelFields,
-    rightPanel: this.rightPanelModelFields
+    rightPanel: this.rightPanelModelFields,
+    notes:'',
   };
 
   saveButton = "Create New Page";

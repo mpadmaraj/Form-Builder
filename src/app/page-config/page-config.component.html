@@ -354,6 +354,10 @@
               <input class="form-control" type="text" [(ngModel)]="item2.description" />
             </div>
             <div class="form-group" *ngIf=" item2.type !== 'header' ">
+              <label>Tooltip Description</label>
+              <textarea class="form-control" [(ngModel)]="item2.tooltipDescription" autocomplete="off"></textarea>
+            </div>
+            <div class="form-group" *ngIf=" item2.type !== 'header' ">
               <label>Regex</label>
               <input class="form-control" type="text" [(ngModel)]="item2.regex" />
             </div>

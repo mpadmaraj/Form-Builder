@@ -1,4 +1,5 @@
 export class field {
+  tooltipDescription?:any;
   notes?: any;
   _id?: any;
   name?: any;
@@ -138,4 +139,5 @@ export interface PageDetail {
   activeStatus?: String;
   leftPanel?: any;
   rightPanel?: any;
+  notes?:String;
 }

@@ -243,6 +243,7 @@ save(){
             fieldConfig.Hide_on_Finalize = subElement.hideOnFinalize ? subElement.hideOnFinalize : 'FALSE';
             fieldConfig.Do_not_show_on_PDF = subElement.doNotShowOnPdf ? subElement.doNotShowOnPdf : 'FALSE';
             fieldConfig.headingType = subElement.headingType;
+            fieldConfig.required=subElement.required;
             fieldConfigs.push(fieldConfig);
           });
           rightPanelOrder = rightPanelOrder + 10;
@@ -269,6 +270,8 @@ save(){
           fieldConfig.Do_not_show_on_PDF = element.doNotShowOnPdf ? element.doNotShowOnPdf : 'FALSE';
           fieldConfig.Hide_on_Finalize = element.hideOnFinalize ? element.hideOnFinalize : 'FALSE';
           fieldConfig.headingType = element.headingType;
+          fieldConfig.required=element.required;
+          fieldConfig.tooltipDescription=element.tooltipDescription;
           fieldConfigs.push(fieldConfig);
         }
       });
@@ -296,6 +299,7 @@ save(){
       pageConfig.minMaxTimeUnit = page.minMaxTimeUnit;
       pageConfig.pageConfigId = page.pageConfigId;
       pageConfig.onlineAppConfigId = this.configSheet.Id;
+      pageConfig.note=page.notes;
       pageConfigs.push(pageConfig);
     }
     const fileNamePrefix = this.configSheetName + 'PageConfig';
