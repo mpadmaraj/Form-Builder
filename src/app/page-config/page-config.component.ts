@@ -260,6 +260,56 @@ export class PageConfigComponent implements OnInit {
     },
   ];
 
+  defaultStatementFielldsLeftPanel=[
+    {
+      "apiName": "",
+      "className": "green-border",
+      "description": "The next step in the application process is writing a personal statement or statement of purpose. It's your chance to communicate your strengths and what makes you an ideal candidate for admission. It's also a chance to demonstrate your writing capabilities.",
+      "fieldConfigType": "Long Display Field",
+      "icon": "fa-paragraph",
+      "label": "Personal Statement text - 1",
+      "name": "",
+      "notes": "",
+      "type": "paragraph",
+    },
+    {
+      "apiName": "",
+      "className": "green-border",
+      "description": "The best personal statements are just that, personal. They tell a story and help paint a picture of who you are, your interests, goals, and long term aspirations. It's an opportunity to show the admissions team what makes you unique. Some programs may require you to address specific questions within your personal statement, so be sure to read all instructions thoroughly before writing.",
+      "fieldConfigType": "Long Display Field",
+      "icon": "fa-paragraph",
+      "label": "Personal Statement text - 2",
+      "name": "",
+      "notes": "",
+      "type": "paragraph",
+    }
+  ]
+
+  defaultStatementFielldsRightPanel=[
+    {
+      "apiName": "",
+      "className": "green-border",
+      "description": "",
+      "fieldConfigType": "Rich Text With File Upload",
+      "icon": "fa-font",
+      "label": "Personal Statement",
+      "name": "",
+      "notes": "",
+      "type": "text",
+    },
+    {
+      "apiName": "",
+      "className": "green-border",
+      "description": "Additional Resources    Â     There are tools available on the web to check spelling, grammar and readability.   Also, please contact us at any time for assistance.",
+      "fieldConfigType": "Rich Text Display Field",
+      "icon": "fa-paragraph",
+      "label": "Additional Resources",
+      "name": "",
+      "notes": "",
+      "type": "paragraph",
+    }
+  ]
+
   leftPanelModelFields: Array<field> = [];
   rightPanelModelFields: Array<field> = [];
 
@@ -288,7 +338,19 @@ export class PageConfigComponent implements OnInit {
   
   fieldNameApiMapping = {};
   ngOnInit() {
-
+    if(this.pageDetail.pageType == 'Statement')
+    {
+      this.defaultStatementFielldsLeftPanel.forEach(element => {
+        if(!JSON.stringify(this.pageDetail.leftPanel).includes(JSON.stringify(element),0)){
+          this.pageDetail.leftPanel=this.pageDetail.leftPanel.concat(element);
+        }
+      });
+      this.defaultStatementFielldsRightPanel.forEach(element => {
+        if(!JSON.stringify(this.pageDetail.rightPanel).includes(JSON.stringify(element),0)){
+          this.pageDetail.rightPanel=this.pageDetail.rightPanel.concat(element);
+        }
+      });
+    }
   }
 
   onClick(event) {

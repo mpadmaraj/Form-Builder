@@ -1,4 +1,7 @@
 export class field {
+  tooltipDescription?:any;
+  autocompleteLookupField?:any;
+  autocompleteLookupObject?:any;
   notes?: any;
   _id?: any;
   name?: any;
@@ -20,6 +23,7 @@ export class field {
   value?: any;
   values?: Array<value>;
   apiName?: any;
+  otherApiName?:any;
   subFields?: any;
   subClassName?: any;
   fieldConfigType?: any;
@@ -138,4 +142,5 @@ export interface PageDetail {
   activeStatus?: String;
   leftPanel?: any;
   rightPanel?: any;
+  notes?:String;
 }

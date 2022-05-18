@@ -92,3 +92,66 @@ li a {
     font-weight: 600;
     text-transform: uppercase;
 }
+/* tooltip */
+.question-circle-onlabel:hover+.tooltip-onlabel
+{
+    opacity: 1;
+    display:block;
+}
+
+.question-circle-onlabel {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color:#364dbe;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    /* padding:4px 6px; */
+    margin: 3px;
+}
+
+.question-circle-onlabel .svg-icon__question {
+    fill: #ffff;
+    width: 8px;
+    margin-left: 3px;
+    margin-bottom: 10px;
+}
+
+.tooltip-wrap
+{
+    position:relative;
+}
+
+.tooltip-onlabel {
+    position: absolute;
+    bottom: 40px; 
+    color: #ffff;
+    font-size: 16px;
+    background-color:#364dbe;
+    padding: 24px 25px;
+    opacity: 0;
+    display:none;
+    z-index: 100;
+    transition: all 0.5 ease-in-out;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: normal;
+    line-height: normal;
+    float: left;
+    width:600px;
+    /* max-width: 100%; */
+    word-wrap: break-word;
+    --tooltip-arrow-left:50px;
+    --tooltip-arrow-top:100%;
+}
+
+.tooltip-onlabel:before {
+    content: "";
+    border: 14px solid transparent;
+    border-color:#364dbe transparent transparent transparent;
+    position: absolute;
+    left:var(--tooltip-arrow-left);
+    top: var(--tooltip-arrow-top);
+}

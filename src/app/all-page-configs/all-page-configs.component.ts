@@ -204,12 +204,12 @@ save(){
       page.leftPanel.forEach(element => {
         fieldConfig = {};
         fieldConfig.type = element.fieldConfigType;
-        fieldConfig.name = element.name;
+        fieldConfig.name = element.label.length>80?element.label.subString(0,80):element.label;
         fieldConfig.fieldLabel = element.label;
         fieldConfig.description = element.description;
         fieldConfig.regex = element.regex;
         fieldConfig.notes = element.notes;
-        fieldConfig.apiName = element.apiName;
+        fieldConfig.apiName = element.apiName=='Other'?element.otherApiName:element.apiName;
         fieldConfig.priority_options = element.priority_options;
         fieldConfig.displayOrder = 'Left Panel';
         fieldConfig.pageName = page.name;
@@ -218,6 +218,7 @@ save(){
         fieldConfig.leftPanelStyles = element.leftPanelStyles;
         fieldConfig.Hide_on_Finalize = true;
         fieldConfig.Do_not_show_on_PDF = true;
+        fieldConfig.Has_Conditional_Field=true;
         fieldConfig.order = leftPanelOrder;
         fieldConfig.headingType = element.headingType;
         leftPanelOrder = leftPanelOrder + 10;
@@ -234,15 +235,20 @@ save(){
             fieldConfig.pageName = page.name;
             fieldConfig.pageConfigId = page.pageConfigId;
             fieldConfig.type = subElement.fieldConfigType;
-            fieldConfig.name = subElement.label;
+            fieldConfig.name = subElement.label.length>80?subElement.label.subString(0,80):subElement.label;
             fieldConfig.fieldLabel = subElement.label;
             fieldConfig.notes = subElement.notes;
-            fieldConfig.apiName = subElement.apiName;
+            fieldConfig.apiName = subElement.apiName =='Other'?subElement.otherApiName:subElement.apiName;
             fieldConfig.priority_options = subElement.priority_options;
             fieldConfig.displayOrder = 'Right Panel';
             fieldConfig.Hide_on_Finalize = subElement.hideOnFinalize ? subElement.hideOnFinalize : 'FALSE';
             fieldConfig.Do_not_show_on_PDF = subElement.doNotShowOnPdf ? subElement.doNotShowOnPdf : 'FALSE';
+            fieldConfig.Has_Conditional_Field = subElement.hasConditionalField ? subElement.hasConditionalField : 'FALSE';
             fieldConfig.headingType = subElement.headingType;
+            fieldConfig.required=subElement.required;
+            fieldConfig.Tooltip_Description=subElement.tooltipDescription;
+            fieldConfig.autocompleteLookupField=subElement.autocompleteLookupField;
+            fieldConfig.autocompleteLookupObject=subElement.autocompleteLookupObject;
             fieldConfigs.push(fieldConfig);
           });
           rightPanelOrder = rightPanelOrder + 10;
@@ -252,11 +258,11 @@ save(){
           fieldConfig.order = rightPanelOrder;
           rightPanelOrder = rightPanelOrder + 10;
           fieldConfig.columnOrder = 10;
-          fieldConfig.name = element.name;
+          fieldConfig.name = element.label.length>80?element.label.subString(0,80):element.label;
           fieldConfig.fieldLabel = element.label;
           fieldConfig.regex = element.regex;
           fieldConfig.notes = element.notes;
-          fieldConfig.apiName = element.apiName;
+          fieldConfig.apiName = element.apiName=='Other'?element.otherApiName:element.apiName;
           if(fieldConfig.apiName == 'DeltakSRP__Academic_Program__c'){
                 fieldConfig.type = 'Academic Program';
                 fieldConfig.name = 'Degree Program';
@@ -268,7 +274,12 @@ save(){
           fieldConfig.displayOrder = 'Right Panel';
           fieldConfig.Do_not_show_on_PDF = element.doNotShowOnPdf ? element.doNotShowOnPdf : 'FALSE';
           fieldConfig.Hide_on_Finalize = element.hideOnFinalize ? element.hideOnFinalize : 'FALSE';
+          fieldConfig.Has_Conditional_Field = element.hasConditionalField ? element.hasConditionalField : 'FALSE';
           fieldConfig.headingType = element.headingType;
+          fieldConfig.required=element.required;
+          fieldConfig.Tooltip_Description=element.tooltipDescription;
+          fieldConfig.autocompleteLookupField=element.autocompleteLookupField;
+          fieldConfig.autocompleteLookupObject=element.autocompleteLookupObject;
           fieldConfigs.push(fieldConfig);
         }
       });
@@ -296,6 +307,7 @@ save(){
       pageConfig.minMaxTimeUnit = page.minMaxTimeUnit;
       pageConfig.pageConfigId = page.pageConfigId;
       pageConfig.onlineAppConfigId = this.configSheet.Id;
+      pageConfig.note=page.notes;
       pageConfigs.push(pageConfig);
     }
     const fileNamePrefix = this.configSheetName + 'PageConfig';

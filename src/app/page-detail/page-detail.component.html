@@ -38,6 +38,11 @@
       <label for="order">Page Order</label>
       <input id="order" name="order" class="form-control" type="number" [(ngModel)]="page.pageOrder" step="10" required />
     </div>
+    <div class="col-6">
+      <label>Notes</label>
+      <textarea id="notes" name="notes" class="form-control" autocomplete="off" [(ngModel)]="page.notes">
+      </textarea>
+    </div>
   </div>
   <div class="row">
     <div class="col-12">

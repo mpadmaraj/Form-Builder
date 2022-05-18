@@ -148,44 +148,44 @@
               <div class="row">
                 <div [ngClass]="item2.subClassName" *ngFor="let subField of item2.subFields">
                   <label>{{subField.label}}</label>
-                  <label class="api-name">{{subField.apiName}}</label>
+                  <label class="api-name">{{subField.apiName == 'Other' ? subField.otherApiName : subField.apiName }}</label>
                   <input type="text" class="form-control">
                 </div>
               </div>
             </div>
             <div *ngIf="item2.type=='text'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <input type="text" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='email'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <input type="email" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='phone'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <input type="text" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='number'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <input type="number" class="form-control" id="{{item2.name}}" min="{{item2.min}}" max="{{item2.max}}">
             </div>
             <div *ngIf="item2.type=='date'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <input type="date" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='datetime-local'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <input type="datetime-local" class="form-control" id="{{item2.name}}">
             </div>
             <div *ngIf="item2.type=='textarea'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <textarea class="form-control" id="{{item2.name}}">
                     </textarea>
             </div>
@@ -205,7 +205,7 @@
             </div>
             <div *ngIf="item2.type=='autocomplete'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <select class="form-control" id="{{item2.name}}">
                 <option *ngFor="let v of item2.values" [value]="v.value">{{v.label}}</option>
               </select>
@@ -213,7 +213,7 @@
             </div>
             <div *ngIf="item2.type=='checkbox'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <div *ngFor="let v of item2.values" class="inline-form-group">
                 <label class="cust-check-bx">
                   <input type="checkbox" [value]="v.value" name="{{item2.name}}" (click)="toggleValue(v)"> {{v.label}}
@@ -223,7 +223,7 @@
             </div>
             <div *ngIf="item2.type=='radio'">
               <label>{{item2.label}}</label> <label *ngIf="item2.required" class="text-danger">*</label>
-              <label class="api-name">{{item2.apiName}}</label>
+              <label class="api-name">{{item2.apiName == 'Other' ? item2.otherApiName : item2.apiName}}</label>
               <div *ngFor="let v of item2.values" class="inline-form-group">
                 <label class="cust-check-bx">
                   <input type="radio" [value]="v.value" name="{{item2.name}}"> {{v.label}}
@@ -266,13 +266,19 @@
                     <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed">
                       {{field.FieldLabel}}
                       ({{field.Type}})</option>
+                      <option value="Other">Other</option>
                   </select>
                   <select class="form-control" *ngIf="pageDetail.pageType === 'List' " [(ngModel)]="subField.apiName"
                     (ngModelChange)="mandatoryUpdated(itemIndex, (item2.name+subIndex), subField.apiName, pageDetail.pageType, subIndex)">
                     <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed" >
                       {{field.FieldLabel}} ({{field.Type}})
                     </option>
+                    <option value="Other">Other</option>
                   </select>
+                </div>
+                <div class="form-group" *ngIf=" subField.apiName == 'Other' ">
+                  <label>Other API Name<span class="red font-weight-bold">*</span></label>
+                  <input class="form-control" type="text" ngModel [(ngModel)]="subField.otherApiName" />
                 </div>
                 <div class="form-group">
                   <label class="cust-check-bx">
@@ -285,6 +291,24 @@
                     <input type="checkbox" [(ngModel)]="subField.hideOnFinalize"> Hide on Finalize
                     <span class="checkmark"></span>
                   </label>
+                </div>
+                <div class="form-group">
+                  <label class="cust-check-bx">
+                    <input type="checkbox" [(ngModel)]="subField.hasConditionalField"> Has Conditional Field
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="form-group" *ngIf="subField.type !== 'header' ">
+                  <label>Tooltip Description</label>
+                  <textarea class="form-control" [(ngModel)]="subField.tooltipDescription" autocomplete="off"></textarea>
+                </div>
+                <div class="form-group" *ngIf=" subField.type !== 'header' ">
+                  <label>Autocomplete Lookup Object</label>
+                  <input class="form-control" type="text" [(ngModel)]="subField.autocompleteLookupObject" />
+                </div>
+                <div class="form-group" *ngIf=" subField.type !== 'header' ">
+                  <label>Autocomplete Lookup Field</label>
+                  <input class="form-control" type="text" [(ngModel)]="subField.autocompleteLookupField" />
                 </div>
                 <div class="form-group">
                   <label>Notes</label>
@@ -311,18 +335,25 @@
                 API Name
                 <span class="red font-weight-bold">*</span>
               </label>
-              <select class="form-control" *ngIf="pageDetail.pageType === 'Custom'" [(ngModel)]="item2.apiName"
+              <select class="form-control" *ngIf="pageDetail.pageType === 'Custom' || 'Statement'" [(ngModel)]="item2.apiName"
                 (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
                 <option [value]="field.APIName" *ngFor="let field of applicationFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed" >
-                  {{field.FieldLabel}}
-                  ({{field.Type}})</option>
+                  {{field.FieldLabel}} ({{field.Type}})
+                </option>
+                  <option value="Other">Other</option>
               </select>
               <select class="form-control" *ngIf="pageDetail.pageType === 'List' " [(ngModel)]="item2.apiName"
                 (ngModelChange)="mandatoryUpdated(itemIndex, item2.name, item2.apiName, pageDetail.pageType)">
                 <option [value]="field.APIName" *ngFor="let field of listFields" [disabled]="field.apiUsed" [hidden]="field.apiUsed" >
                   {{field.FieldLabel}} ({{field.Type}})
                 </option>
+                <option value="Other">Other</option>
               </select>
+              
+            </div>
+            <div class="form-group" *ngIf=" item2.apiName == 'Other' ">
+              <label>Other API Name<span class="red font-weight-bold">*</span></label>
+              <input class="form-control" type="text" ngModel [(ngModel)]="item2.otherApiName" />
             </div>
             <div class="form-group">
               <div class="row">
@@ -335,6 +366,12 @@
                 <div class="col-6">
                   <label class="cust-check-bx">
                     <input type="checkbox" [(ngModel)]="item2.hideOnFinalize"> Hide on Finalize
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="col-6">
+                  <label class="cust-check-bx">
+                    <input type="checkbox" [(ngModel)]="item2.hasConditionalField"> Has Conditional Field
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -352,6 +389,18 @@
             <div class="form-group" *ngIf=" item2.type !== 'header' ">
               <label>Description</label>
               <input class="form-control" type="text" [(ngModel)]="item2.description" />
+            </div>
+            <div class="form-group" *ngIf=" item2.type !== 'header' ">
+              <label>Autocomplete Lookup Object</label>
+              <input class="form-control" type="text" [(ngModel)]="item2.autocompleteLookupObject" />
+            </div>
+            <div class="form-group" *ngIf=" item2.type !== 'header' ">
+              <label>Autocomplete Lookup Field</label>
+              <input class="form-control" type="text" [(ngModel)]="item2.autocompleteLookupField" />
+            </div>
+            <div class="form-group" *ngIf=" item2.type !== 'header' ">
+              <label>Tooltip Description</label>
+              <textarea class="form-control" [(ngModel)]="item2.tooltipDescription" autocomplete="off"></textarea>
             </div>
             <div class="form-group" *ngIf=" item2.type !== 'header' ">
               <label>Regex</label>
